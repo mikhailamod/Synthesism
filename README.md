@@ -1,1 +1,4 @@
 Synthesis
+
+
+Our capstone project
