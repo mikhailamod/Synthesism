@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour {
 
-	// Use this for initialization
+	//Get Access to CarMovement Script
 	private CarMovement car; 
 
 	void Start () {
+		//actually gets access to the instance of the class so you can use its methods
 		car = GetComponent<CarMovement>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
+		//Retrieve left or right input
 		if(Input.GetButtonDown("Horizontal")){
 			car.MoveHorizontal();
 		}
+		//Retrieves up or down input
 		else if(Input.GetButtonDown("Vertical")){
 			car.MoveVertical();
 		}
