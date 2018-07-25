@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CarMovement))]
 public class CarController : MonoBehaviour {
 
 	//Get Access to CarMovement Script

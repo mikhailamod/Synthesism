@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class CarMovement: MonoBehaviour {
 
 	//Speed of the vehicle as a slider
