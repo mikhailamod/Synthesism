@@ -28,7 +28,7 @@ public class CarMovement: MonoBehaviour {
 		car.AddForce(transform.forward * speed * Time.deltaTime * GetAxisMovement(Input.GetAxis("Vertical")), ForceMode.Acceleration);
 	}
 
-	//singleton to determine which direction under vertical/horizontal the force needs to be applied
+	//Direction (vertical/horizontal) the force needs to be applied
 	int GetAxisMovement(float axis) {
 		return axis>0?1:-1;
 	}

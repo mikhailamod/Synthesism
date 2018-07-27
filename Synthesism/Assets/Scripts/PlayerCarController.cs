@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CarMovement))]
-public class CarController : MonoBehaviour {
+public class PlayerCarController : MonoBehaviour {
 
 	//Get Access to CarMovement Script
 	private CarMovement car; 
@@ -14,13 +14,16 @@ public class CarController : MonoBehaviour {
 	}
 	
 	void Update () {
-		
+		MoveVehicle();
+	}
+
+	void MoveVehicle() {
 		//Retrieve left or right input
-		if(Input.GetButtonDown("Horizontal")){
+		if(Input.GetButton("Horizontal")){
 			car.MoveHorizontal();
 		}
 		//Retrieves up or down input
-		else if(Input.GetButtonDown("Vertical")){
+		else if(Input.GetButton("Vertical")){
 			car.MoveVertical();
 		}
 	}
