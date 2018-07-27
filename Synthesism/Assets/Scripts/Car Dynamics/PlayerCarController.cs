@@ -1,18 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[RequireComponent(typeof(CarMovement))]
+//TODO: Inherit from CarController base class
 public class PlayerCarController : MonoBehaviour {
 
 	//Get Access to CarMovement Script
-	private CarMovement car; 
-
-	void Start () {
-		//actually gets access to the instance of the class so you can use its methods
-		car = GetComponent<CarMovement>();
-	}
-	
+    [Header("Movement Properties")]
+	public CarMovement carMovementProperties;
+    
 	void Update () {
 		MoveVehicle();
 	}
@@ -20,11 +15,11 @@ public class PlayerCarController : MonoBehaviour {
 	void MoveVehicle() {
 		//Retrieve left or right input
 		if(Input.GetButton("Horizontal")){
-			car.MoveHorizontal();
+            carMovementProperties.MoveHorizontal();
 		}
 		//Retrieves up or down input
 		else if(Input.GetButton("Vertical")){
-			car.MoveVertical();
+            carMovementProperties.MoveVertical();
 		}
 	}
 
