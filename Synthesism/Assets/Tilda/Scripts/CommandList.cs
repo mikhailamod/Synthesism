@@ -2,7 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandList : MonoBehaviour
+[CreateAssetMenu(fileName = "CustomCommandList", menuName = "Tilda/Create Custom Command List")]
+public class CommandList : ScriptableObject
 {
-    public Dictionary<string, ICommand> custom_commands = new Dictionary<string, ICommand>();
+    public List<CustomCommand> commandList;
+}
+
+[System.Serializable]
+public class CustomCommand
+{
+    public string alias;
+    public string commandClass;
 }

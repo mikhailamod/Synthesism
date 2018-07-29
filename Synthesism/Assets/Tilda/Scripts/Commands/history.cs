@@ -15,7 +15,7 @@ public class history : ICommand
         command_history = commandHistory;
     }
 
-    public object executeCommand(string[] args)
+    public override object executeCommand(string[] args)
     {
         if(args.Length == 1)
         {
@@ -36,7 +36,7 @@ public class history : ICommand
         return "Error: history takes no arguements. Usage: 'history'";
     }
 
-    public string help()
+    public override string help()
     {
         return help_string;
     }
