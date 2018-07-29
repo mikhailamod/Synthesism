@@ -130,6 +130,46 @@ public class RoadPath
     }
 
     /// <summary>
+    /// Split the selected segment in two
+    /// </summary>
+    /// <param name="index">Index of the segment that will be split</param>
+    public void divideSegment(int index)
+    {
+        Vector3[] selectedSegment = getSegment(index);
+        Vector3 newAnchorPos = (selectedSegment[0] + selectedSegment[3]) * 0.5f;
+
+        points.InsertRange(index * 3 + 2, new Vector3[] { newAnchorPos + Vector3.forward, newAnchorPos, newAnchorPos, newAnchorPos + Vector3.back });
+
+    }
+
+    /// <summary>
+    /// Removes a segment from the road
+    /// </summary>
+    /// <param name="index">The index of the segment that will be removed</param>
+    public void removeSegment(int index)
+    {
+        if(SegmentCount > 2 || !closed && SegmentCount > 1)
+        {
+            if(index == 0)
+            {
+                if(closed)
+                {
+                    points[points.Count-1] = points[2];
+                }
+                points.RemoveRange(0, 3);
+            }
+            else if( index == points.Count - 1 && !closed)
+            {
+                points.RemoveRange(index - 2, 3);
+            }
+            else
+            {
+                points.RemoveRange(index - 1, 3);
+            }
+        }
+    }
+
+    /// <summary>
     /// Returns a segment (4 Vector3s) from the road path.
     /// </summary>
     /// <param name="i">The segment returned.</param>
@@ -137,6 +177,60 @@ public class RoadPath
     public Vector3[] getSegment(int i)
     {
         return new Vector3[] { points[i * 3], points[i * 3 + 1], points[i * 3 + 2], points[wrapIndex(i * 3 + 3)] };
+    }
+
+    /// <summary>
+    /// Returns a Vector3 that corresponds to a position along the curve
+    /// </summary>
+    /// <param name="segmentIndex">Segment index.</param>
+    /// <param name="t">value from [0,1] indicating the distance along the curve</param>
+    /// <returns></returns>
+    public Vector3 getPoint(int segmentIndex, float t)
+    {
+        Vector3[] pts = getSegment(segmentIndex);
+
+        float omt = 1f - t;
+        float omt2 = omt * omt;
+        float t2 = t * t;
+        return pts[0] * (omt2 * omt) +
+                pts[1] * (3f * omt2 * t) +
+                pts[2] * (3f * omt * t2) +
+                pts[3] * (t2 * t);
+    }
+
+    public Vector3[] getRoadPathPoints(float spacing, float resolution = 1)
+    {
+        List<Vector3> pointsToReturn = new List<Vector3>();
+        pointsToReturn.Add(points[0]);
+        Vector3 previousPoint = points[0];
+
+        float dstFromLastPoint = 0;
+
+        for(int i =0; i < SegmentCount; i++)
+        {
+            float t = 0;
+            
+            while (t <= 1)
+            {
+                t += 0.1f;
+                Vector3 calcPoint = getPoint(i, t);
+                dstFromLastPoint += Vector3.Distance(previousPoint, calcPoint);
+
+                while(dstFromLastPoint > spacing)
+                {
+                    float fixDistance = dstFromLastPoint - spacing;
+                    Vector3 fixPos = calcPoint + (previousPoint - calcPoint).normalized * fixDistance;
+                    pointsToReturn.Add(fixPos);
+                    dstFromLastPoint = fixDistance;
+                    previousPoint = fixPos;
+                }
+
+                previousPoint = calcPoint;
+            }
+             
+        }
+
+        return pointsToReturn.ToArray();
     }
 
     private int wrapIndex(int index)
