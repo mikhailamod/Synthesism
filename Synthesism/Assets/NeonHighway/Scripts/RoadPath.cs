@@ -7,7 +7,8 @@ public class RoadPath
 {
     [SerializeField, HideInInspector]
     List<Vector3> points;
-
+    [SerializeField, HideInInspector]
+    bool closed;
 
     public RoadPath(Vector3 centre)
     {
@@ -45,6 +46,30 @@ public class RoadPath
     }
 
     /// <summary>
+    /// Whether the raod is closed or not
+    /// </summary>
+    public bool Closed
+    {
+        get
+        {
+            return closed;
+        }
+        set
+        {
+            closed = value;
+            if(closed)
+            {
+                points.Add(points[points.Count - 1] * 2 - points[points.Count - 2]);
+                points.Add(points[0] * 2 - points[1]);
+            }
+            else
+            {
+                points.RemoveRange(points.Count - 2, 2);
+            }
+        }
+    }
+
+    /// <summary>
     /// Gets the point at index specified
     /// </summary>
     /// <param name="index">The index of the point that will be returned</param>
@@ -64,14 +89,14 @@ public class RoadPath
             //Is point an anchor
             if (index % 3 == 0)
             {
-                if(index + 1 < points.Count)
+                if(index + 1 < points.Count || closed)
                 {
-                    points[index + 1] += deltaMove;
+                    points[wrapIndex(index + 1)] += deltaMove;
                 }
 
-                if(index - 1 >= 0)
+                if(index - 1 >= 0 || closed)
                 {
-                    points[index - 1] += deltaMove;
+                    points[wrapIndex(index - 1)] += deltaMove;
                 }
             }
             else //Handle Point
@@ -81,11 +106,11 @@ public class RoadPath
                 int coupleControlPoint = (nextPointIsAnchor)? index + 2 : index - 2;
                 int coupleAnchorPoint = (nextPointIsAnchor) ? index + 1 : index - 1;
 
-                if(coupleControlPoint >= 0 && coupleControlPoint < points.Count)
+                if(coupleControlPoint >= 0 && coupleControlPoint < points.Count || closed)
                 {
-                    float distance = (points[coupleAnchorPoint] - points[coupleControlPoint]).magnitude;
-                    Vector3 direction = (points[coupleAnchorPoint] - points[index]).normalized;
-                    points[coupleControlPoint] = points[coupleAnchorPoint] + direction * distance;
+                    float distance = (points[wrapIndex(coupleAnchorPoint)] - points[wrapIndex(coupleControlPoint)]).magnitude;
+                    Vector3 direction = (points[wrapIndex(coupleAnchorPoint)] - points[index]).normalized;
+                    points[wrapIndex(coupleControlPoint)] = points[wrapIndex(coupleAnchorPoint)] + direction * distance;
                 }
 
             }
@@ -111,8 +136,12 @@ public class RoadPath
     /// <returns></returns>
     public Vector3[] getSegment(int i)
     {
-        return new Vector3[] { points[i * 3], points[i * 3 + 1], points[i * 3 + 2], points[i * 3 + 3] };
+        return new Vector3[] { points[i * 3], points[i * 3 + 1], points[i * 3 + 2], points[wrapIndex(i * 3 + 3)] };
     }
 
+    private int wrapIndex(int index)
+    {
+        return (index + points.Count) % points.Count;
+    }
 
 }

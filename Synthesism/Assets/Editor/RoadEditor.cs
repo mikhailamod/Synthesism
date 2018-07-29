@@ -50,7 +50,6 @@ public class RoadEditor : Editor
             Handles.color = lineColor;
             Handles.DrawLine(segment[0], segment[1]);
             Handles.DrawLine(segment[3], segment[2]);
-
             Handles.DrawBezier(segment[0], segment[3], segment[1], segment[2], curveColor, null, curveWidth);
 
         }
@@ -68,6 +67,8 @@ public class RoadEditor : Editor
             road.roadPath.addSegment(mouseToWorldSpace);
         }
 
+
+
     }
 
     public override void OnInspectorGUI()
@@ -79,6 +80,13 @@ public class RoadEditor : Editor
         lineColor = EditorGUILayout.ColorField("Line Color: ", lineColor);
         curveColor = EditorGUILayout.ColorField("Curve Color: ", curveColor);
         curveWidth = EditorGUILayout.Slider("Curve Width",curveWidth, 4, 10);
+        EditorGUILayout.LabelField("Road Properties");
+        bool isClosed = EditorGUILayout.Toggle("Close road", road.roadPath.Closed);
+        if(isClosed != road.roadPath.Closed)
+        {
+            road.roadPath.Closed = isClosed;
+            SceneView.RepaintAll();
+        }
         base.DrawDefaultInspector();
     }
 
