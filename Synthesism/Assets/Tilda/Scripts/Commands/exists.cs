@@ -8,7 +8,7 @@ public class exists : ICommand
 
     private string help_string = "exists:\nDetermines if a GameObject exists in the game world\nUsage: exists <obj_name> || exists -help";
 
-    public object executeCommand(string[] args)
+    public override object executeCommand(string[] args)
     {
         if(args.Length > 1)
         {
@@ -37,7 +37,7 @@ public class exists : ICommand
         return false;
     }
 
-    public string help()
+    public override string help()
     {
         return help_string;
     }

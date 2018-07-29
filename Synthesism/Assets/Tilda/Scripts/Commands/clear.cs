@@ -14,7 +14,7 @@ public class clear : ICommand {
         this.ui = ui;
     }
 
-    public object executeCommand(string[] args)
+    public override object executeCommand(string[] args)
     {
         if(args.Length > 2)
         {
@@ -34,7 +34,7 @@ public class clear : ICommand {
         }
     }
 
-    public string help()
+    public override string help()
     {
         return help_string;
     }

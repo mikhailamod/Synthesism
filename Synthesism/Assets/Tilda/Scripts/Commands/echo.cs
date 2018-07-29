@@ -8,7 +8,7 @@ public class echo : ICommand
 
     private static string help_string = "echo:\nPrints a message to the console.\nUsage: 'echo <message to echo>' || 'echo -help'";
 
-    public object executeCommand(string[] args)
+    public override object executeCommand(string[] args)
     {
 
         if(args.Length == 1)
@@ -30,7 +30,7 @@ public class echo : ICommand
         }
     }
 
-    public string help()
+    public override string help()
     {
         return help_string;
     }
