@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class RoadMeshCreator
 {
-    public float roadSize;
+    public float roadWidth;
 
     public Vector3[] getPointsForward(Point[] points, bool closed = false)
     {
@@ -84,6 +84,45 @@ public class RoadMeshCreator
     public Vector3 getPointNormal(Vector3 forward, Vector3 binormal)
     {
         return Vector3.Cross(forward, binormal);
+    }
+
+    public Vector3[] getMeshVertices(Point[] points, Vector3 up, bool closed = false)
+    {
+        List<Vector3> vertices = new List<Vector3>();
+
+        Vector3[] binormals = getPointsBinormal(points, up, closed);
+        for(int i = 0; i < binormals.Length; i++)
+        {
+            Vector3 rightVertex = points[i].Position + binormals[i] * roadWidth * 0.5f;
+            Vector3 leftVertex = points[i].Position - binormals[i] * roadWidth * 0.5f;
+
+            vertices.Add(leftVertex); vertices.Add(rightVertex);
+
+        }
+        return vertices.ToArray();
+    }
+
+    public int[] getMeshTris(int vertexCount, bool closed = false)
+    {
+        List<int> tris = new List<int>();
+
+        for(int i = 0; i < vertexCount/2; i++)
+        {
+            if (i != vertexCount/2 - 1 || closed)
+            {
+                //First Triangle
+                tris.Add(i * 2);
+                tris.Add(loopIndex((i+1) * 2, vertexCount));
+                tris.Add((i * 2) + 1);
+                //Second Triangle
+                tris.Add((i * 2) + 1);
+                tris.Add(loopIndex((i + 1) * 2, vertexCount));
+                tris.Add(loopIndex(((i + 1) * 2) + 1, vertexCount));
+            }
+        }
+
+        return tris.ToArray();
+
     }
 
     private int loopIndex(int index, int totalSize)

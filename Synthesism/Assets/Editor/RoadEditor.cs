@@ -16,6 +16,7 @@ public class RoadEditor : Editor
     public Color nodeForwardColor = Color.white;
     public Color nodeBinormalColor = Color.cyan;
     public Color nodeNormalColor = Color.black;
+    public Color vertexColor = Color.white;
     public float curveWidth = 4;
     public float nodeSize = 1;
     public float nodeArrowSize = 1;
@@ -26,6 +27,10 @@ public class RoadEditor : Editor
     public bool showPointForwards = false;
     public bool showPointBinormals = false;
     public bool showPointNormals = false;
+
+    public bool showVertices = false;
+    public bool showTris = false;
+
 
     void OnEnable()
     {
@@ -68,7 +73,7 @@ public class RoadEditor : Editor
 
         }
 
-        if(showPoints || showPointForwards || showPointBinormals || showPointNormals)
+        if(showPoints || showPointForwards || showPointBinormals || showPointNormals || showVertices || showTris)
         {
             Point[] roadPoints = road.roadPath.getRoadPathPoints(spacing);
             Vector3[] forwardDir = road.meshCreator.getPointsForward(roadPoints, road.roadPath.Closed);
@@ -114,10 +119,33 @@ public class RoadEditor : Editor
                     Handles.ArrowHandleCap(1, roadPoints[i].Position, Quaternion.LookRotation(normals[i]), nodeArrowSize, EventType.Repaint);
                 }
             }
-        }
 
-        
-
+            if (showVertices || showTris)
+            {
+                Vector3[] vertices = road.meshCreator.getMeshVertices(roadPoints, Vector3.up, road.roadPath.Closed);
+                int[] tris = road.meshCreator.getMeshTris(vertices.Length, road.roadPath.Closed);
+                if (showVertices)
+                {
+                    Handles.color = vertexColor;
+                    foreach (Vector3 vertexPos in vertices)
+                    {
+                        Handles.SphereHandleCap(1, vertexPos, Quaternion.identity, size, EventType.Repaint);
+                    }
+                }
+                    
+                if (showTris)
+                {
+                    Handles.color = Color.green;
+                    for(int i = 0; i < tris.Length/3; i++)
+                    {
+                        int index = 3 * i;
+                        Handles.DrawLine(vertices[tris[index]], vertices[tris[index + 1]]);
+                        Handles.DrawLine(vertices[tris[index + 1]], vertices[tris[index + 2]]);
+                        Handles.DrawLine(vertices[tris[index + 2]], vertices[tris[index]]);
+                    }
+                }
+            }
+        }   
     }
 
     private void manageInput()
@@ -176,7 +204,7 @@ public class RoadEditor : Editor
             SceneView.RepaintAll();
         }
 
-        EditorGUILayout.LabelField("Road Properties");
+        EditorGUILayout.LabelField("Path Properties");
         bool isClosed = EditorGUILayout.Toggle("Close road", road.roadPath.Closed);
         if(isClosed != road.roadPath.Closed)
         {
@@ -235,6 +263,33 @@ public class RoadEditor : Editor
             SceneView.RepaintAll();
         }
 
+        EditorGUILayout.LabelField("Mesh Properties");
+
+        float tempRoadWidth =  EditorGUILayout.Slider("Road Width", road.meshCreator.roadWidth, 0.1f, 10.0f);
+        if(tempRoadWidth != road.meshCreator.roadWidth)
+        {
+            road.meshCreator.roadWidth = tempRoadWidth;
+            SceneView.RepaintAll();
+        }
+
+        bool tempShowVertices = EditorGUILayout.Toggle("Show Vertices", showVertices);
+        if (showVertices != tempShowVertices)
+        {
+            showVertices = tempShowVertices;
+            SceneView.RepaintAll();
+        }
+
+        bool tempShowTris = EditorGUILayout.Toggle("Show Triangles", showTris);
+        if (showTris != tempShowTris)
+        {
+            showTris = tempShowTris;
+            SceneView.RepaintAll();
+        }
+
+        if(GUILayout.Button("Generate Mesh"))
+        {
+            Debug.Log("Generating Mesh");
+        }
     }
 
     void OnSceneGUI()
