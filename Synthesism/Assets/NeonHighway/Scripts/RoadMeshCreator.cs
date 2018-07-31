@@ -125,6 +125,61 @@ public class RoadMeshCreator
 
     }
 
+    public Vector3[] pointToMeshNormals(Point[] points, Vector3 up, bool closed = false)
+    {
+        Vector3[] normals = getPointsNormal(points, up, closed);
+
+        Vector3[] meshNormals = new Vector3[normals.Length * 2];
+        for(int i = 0; i < meshNormals.Length; i++)
+        {
+            meshNormals[i] = normals[i / 2];
+        }
+
+        return meshNormals;
+    }
+
+    //Will have a bug
+    public Vector2[] getMeshUV(int vertexCount)
+    {
+        Vector2[] uvs = new Vector2[vertexCount];
+
+        for(int i = 0; i < vertexCount/2; i++)
+        {
+            int index = i * 2;
+            float percentageComplete = i / (float)vertexCount * 2;
+            uvs[index] = new Vector2(0, percentageComplete);
+            uvs[index + 1] = new Vector2(1, percentageComplete);
+        }
+
+        return uvs;
+
+    }
+
+    public void generateRoadMesh(Point[] points, Vector3 up, bool closed = false)
+    {
+        GameObject meshObj = new GameObject("Generate Road Mesh");
+        MeshFilter mf = meshObj.AddComponent<MeshFilter>();
+        meshObj.AddComponent<MeshRenderer>();
+
+        if (mf.sharedMesh == null)
+            mf.sharedMesh = new Mesh();
+
+        Mesh mesh = mf.sharedMesh;
+
+        Vector3[] vertices = getMeshVertices(points, up, closed);
+        Vector3[] normals = pointToMeshNormals(points, up, closed);
+        Vector2[] UVs = getMeshUV(vertices.Length);
+        int[] tris = getMeshTris(vertices.Length, closed);
+
+        mesh.Clear();
+        mesh.vertices = vertices;
+        mesh.normals = normals;
+        mesh.uv = UVs;
+        mesh.triangles = tris;
+
+
+    }
+
     private int loopIndex(int index, int totalSize)
     {
         return (index + totalSize) % totalSize;

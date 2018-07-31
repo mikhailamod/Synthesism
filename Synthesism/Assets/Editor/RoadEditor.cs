@@ -30,7 +30,8 @@ public class RoadEditor : Editor
 
     public bool showVertices = false;
     public bool showTris = false;
-
+    public bool showMeshNormals = false;
+    public bool showUVs = false;
 
     void OnEnable()
     {
@@ -73,7 +74,7 @@ public class RoadEditor : Editor
 
         }
 
-        if(showPoints || showPointForwards || showPointBinormals || showPointNormals || showVertices || showTris)
+        if(showPoints || showPointForwards || showPointBinormals || showPointNormals || showVertices || showTris || showPointNormals)
         {
             Point[] roadPoints = road.roadPath.getRoadPathPoints(spacing);
             Vector3[] forwardDir = road.meshCreator.getPointsForward(roadPoints, road.roadPath.Closed);
@@ -120,10 +121,11 @@ public class RoadEditor : Editor
                 }
             }
 
-            if (showVertices || showTris)
+            if (showVertices || showTris || showPointNormals || showUVs)
             {
                 Vector3[] vertices = road.meshCreator.getMeshVertices(roadPoints, Vector3.up, road.roadPath.Closed);
                 int[] tris = road.meshCreator.getMeshTris(vertices.Length, road.roadPath.Closed);
+
                 if (showVertices)
                 {
                     Handles.color = vertexColor;
@@ -142,6 +144,26 @@ public class RoadEditor : Editor
                         Handles.DrawLine(vertices[tris[index]], vertices[tris[index + 1]]);
                         Handles.DrawLine(vertices[tris[index + 1]], vertices[tris[index + 2]]);
                         Handles.DrawLine(vertices[tris[index + 2]], vertices[tris[index]]);
+                    }
+                }
+
+                if(showMeshNormals)
+                {
+                    Handles.color = Color.white;
+                    Vector3[] vertexNormals = road.meshCreator.pointToMeshNormals(roadPoints, Vector3.up, road.roadPath.Closed);
+                    
+                    for (int i = 0; i < vertexNormals.Length; i++)
+                    {
+                        Handles.ArrowHandleCap(1, vertices[i], Quaternion.LookRotation(vertexNormals[i]), nodeArrowSize, EventType.Repaint);
+                    }
+                }
+
+                if(showUVs)
+                {
+                    Vector2[] UVs = road.meshCreator.getMeshUV(vertices.Length);
+                    for(int i = 0; i < UVs.Length; i++)
+                    {
+                        Handles.Label(vertices[i], UVs[i].ToString());
                     }
                 }
             }
@@ -286,9 +308,23 @@ public class RoadEditor : Editor
             SceneView.RepaintAll();
         }
 
-        if(GUILayout.Button("Generate Mesh"))
+        bool tempShowMeshNormals = EditorGUILayout.Toggle("Show Mesh Normals", showMeshNormals);
+        if (showMeshNormals != tempShowMeshNormals)
         {
-            Debug.Log("Generating Mesh");
+            showMeshNormals = tempShowMeshNormals;
+            SceneView.RepaintAll();
+        }
+
+        bool tempShowUVs = EditorGUILayout.Toggle("Show UVs", showUVs);
+        if (showUVs != tempShowUVs)
+        {
+            showUVs = tempShowUVs;
+            SceneView.RepaintAll();
+        }
+
+        if (GUILayout.Button("Generate Mesh"))
+        {
+            road.meshCreator.generateRoadMesh(road.roadPath.getRoadPathPoints(spacing), Vector3.up, road.roadPath.Closed);
         }
     }
 
