@@ -11,49 +11,40 @@ public class PlayerCarController : MonoBehaviour {
     [Header("Movement Properties")]
 	public CarMovement carMovementProperties;
 
-    private Rigidbody rigid;
+    private Rigidbody rigid; 
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
     }
 
-    void Update () {
+    void FixedUpdate () {
 		MoveVehicle();
 	}
 
 	void MoveVehicle()
     {
-		//Retrieve left or right input
-        carMovementProperties.MoveHorizontal(Input.GetAxis("Horizontal"));
-
-        /*
-         * If getAxis() > 0 wants to go forward else backwards or none.
-         * Look at previous to determine function
-         * 
-        */
-        if (Input.GetKey(KeyCode.LeftShift))
-            carMovementProperties.boost(rigid, transform.forward);
-        else
-            carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
-		
-        if(Input.GetKey(KeyCode.Space))
-        {
-            carMovementProperties.brake(rigid);
-        }
-
-        if(Input.GetKeyUp(KeyCode.Space))
-        {
-            carMovementProperties.setBrakeTorque(0);
-        }
+        //gets inital values to determine how the vehicle should move
+        float speed = carMovementProperties.GetSpeed();
+        float inputSpeed = Input.GetAxis("Vertical");
         
+		//Retrieve left or right input
+        carMovementProperties.MoveHorizontal(Input.GetAxis("Horizontal"));      
+
+        //looks for appropriate case to move the car otherwise the brake is applied
+        if((inputSpeed > 0 && speed >= 0) || (inputSpeed < 0 && speed <= 0)) {
+            carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
+        }
+        else {
+            carMovementProperties.brake();
+        }
+		
+        //Force break
+        if(Input.GetButton("Handbrake"))
+        {
+            carMovementProperties.brake();
+        }
+
+        carMovementProperties.RotateWheels();
     }
-
-}
-
-enum MoveStates
-{
-    FORWARDS,
-    BACKWARDS,
-    NONE
 }

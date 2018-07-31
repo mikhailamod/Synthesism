@@ -12,9 +12,7 @@ public class CarMovement
     public float maxSteeringAngle; // maximum steer angle the wheel can have
     public float boostSpeed;
     public float brakeTorque;
-
     public float brakeSpeed;
-
 
     /// <summary>
     /// Adds force in either the left or right direction using the speed variable to determine how fast the car should move
@@ -23,13 +21,13 @@ public class CarMovement
     public void MoveHorizontal(float delta) {
 
         float steering = maxSteeringAngle * delta;
-
+        
         foreach (AxleInfo axleInfo in axleInfos)
         {       
             if (axleInfo.steering)
             {
-                axleInfo.leftWheel.steerAngle = steering;
-                axleInfo.rightWheel.steerAngle = steering;
+                axleInfo.leftWheel.wheelCollider.steerAngle = steering;
+                axleInfo.rightWheel.wheelCollider.steerAngle = steering;
             }
         }
     }
@@ -39,44 +37,68 @@ public class CarMovement
     /// Adds force in either the up or down direction using the speed variable to determine how fast the car should move
     /// </summary>
     public void MoveVertical(float delta) {
-
         float speed = delta * maxMotorTorque;
+        setMotorTorque(speed);
+        setBrakeTorque(0);
+    }
 
-        foreach (AxleInfo axleInfo in axleInfos)
+    //Rotates wheels vertically and horrizontally 
+    public void RotateWheels() {
+        foreach (AxleInfo info in axleInfos)
         {
-            if (axleInfo.motor)
-            {
-                axleInfo.leftWheel.motorTorque = speed;
-                axleInfo.rightWheel.motorTorque = speed;
-            }
+            ChangeWheelPosition(info.leftWheel.wheelCollider, info.leftWheel.wheel);
+            ChangeWheelPosition(info.rightWheel.wheelCollider, info.rightWheel.wheel);
         }
     }
 
-    public void brake(Rigidbody rigid)
+    //Modifies a single wheels rotation - helper function
+	private void ChangeWheelPosition(WheelCollider collider, Transform transform)
+	{
+        Quaternion quaternion = transform.rotation;
+		Vector3 position = transform.position;
+		collider.GetWorldPose(out position, out quaternion);
+		transform.position = position;
+		transform.rotation = quaternion;
+	}
+
+    //increases the braketorque to halt the vehicle and reduces motortorque to 0
+    public void brake()
     {
         setBrakeTorque(brakeTorque);
-        //MoveVertical(0);
-        //rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, brakeSpeed * Time.deltaTime);
+        setMotorTorque(0);
     }
 
+    //sets the brake torque on each wheel for each axle
     public void setBrakeTorque(float val)
     {
         foreach (AxleInfo info in axleInfos)
         {
-            info.leftWheel.brakeTorque = val;
-            info.rightWheel.brakeTorque = val;
+            info.leftWheel.wheelCollider.brakeTorque = val;
+            info.rightWheel.wheelCollider.brakeTorque = val;
         }
     }
 
+    //sets the motor torque on each wheel for each axle
+    public void setMotorTorque(float val)
+    {
+        foreach (AxleInfo info in axleInfos)
+        {
+            info.leftWheel.wheelCollider.motorTorque = val;
+            info.rightWheel.wheelCollider.motorTorque = val;
+        }
+    }
+
+    //gets the current speed of the car based on the circumference
+    public float GetSpeed() {
+        return (float) (2 * Mathf.PI * axleInfos[0].leftWheel.wheelCollider.radius * axleInfos[0].leftWheel.wheelCollider.rpm * 0.06);
+    }
+
+    //applies additional boost force to vehicle
     public void boost(Rigidbody rigid, Vector3 dir)
     {
         rigid.AddForce(dir * boostSpeed, ForceMode.Impulse);
     }
 
-	//Direction (vertical/horizontal) the force needs to be applied
-	int GetAxisMovement(float axis) {
-		return axis>0?1:-1;
-	}
 }
 
 public abstract class CarController : MonoBehaviour
@@ -87,8 +109,15 @@ public abstract class CarController : MonoBehaviour
 [System.Serializable]
 public class AxleInfo
 {
-    public WheelCollider leftWheel;
-    public WheelCollider rightWheel;
+    public WheelInfo leftWheel;
+    public WheelInfo rightWheel;
     public bool motor;
     public bool steering;
+}
+
+[System.Serializable]
+public class WheelInfo
+{
+    public Transform wheel;
+    public WheelCollider wheelCollider;
 }
