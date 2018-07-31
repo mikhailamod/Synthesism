@@ -6,18 +6,18 @@ using UnityEngine;
 public class RoadPath
 {
     [SerializeField, HideInInspector]
-    List<Vector3> points;
+    List<Point> points;
     [SerializeField, HideInInspector]
     bool closed;
 
     public RoadPath(Vector3 centre)
     {
-        points = new List<Vector3>
+        points = new List<Point>
         {
-            centre + Vector3.left,
-            centre + Vector3.left + Vector3.forward,
-            centre + Vector3.right,
-            centre + Vector3.right + Vector3.forward
+            new Point(centre + Vector3.left,Quaternion.identity),
+            new Point(centre + Vector3.left + Vector3.forward,Quaternion.identity),
+            new Point(centre + Vector3.right, Quaternion.identity),
+            new Point(centre + Vector3.right + Vector3.forward,Quaternion.identity)
         };
     }
 
@@ -59,8 +59,8 @@ public class RoadPath
             closed = value;
             if(closed)
             {
-                points.Add(points[points.Count - 1] * 2 - points[points.Count - 2]);
-                points.Add(points[0] * 2 - points[1]);
+                points.Add(new Point(points[points.Count - 1].Position * 2 - points[points.Count - 2].Position,Quaternion.identity));
+                points.Add(new Point(points[0].Position * 2 - points[1].Position,Quaternion.identity));
             }
             else
             {
@@ -74,47 +74,48 @@ public class RoadPath
     /// </summary>
     /// <param name="index">The index of the point that will be returned</param>
     /// <returns></returns>
-    public Vector3 this[int index]
+    public Point this[int index]
     {
         get
         {
             return points[index];
         }
-        set
+        private set { } 
+    }
+
+
+    public void movePosition(int index, Vector3 newPos)
+    {
+        Vector3 deltaMove = newPos - points[index].Position;
+        points[index].Position = newPos;
+
+        //Is point an anchor
+        if (index % 3 == 0)
         {
-
-            Vector3 deltaMove = value - points[index];
-            points[index] = value;
-
-            //Is point an anchor
-            if (index % 3 == 0)
+            if (index + 1 < points.Count || closed)
             {
-                if(index + 1 < points.Count || closed)
-                {
-                    points[wrapIndex(index + 1)] += deltaMove;
-                }
-
-                if(index - 1 >= 0 || closed)
-                {
-                    points[wrapIndex(index - 1)] += deltaMove;
-                }
+                points[wrapIndex(index + 1)].Position += deltaMove;
             }
-            else //Handle Point
+
+            if (index - 1 >= 0 || closed)
             {
-                bool nextPointIsAnchor = (index + 1) % 3 == 0;
-
-                int coupleControlPoint = (nextPointIsAnchor)? index + 2 : index - 2;
-                int coupleAnchorPoint = (nextPointIsAnchor) ? index + 1 : index - 1;
-
-                if(coupleControlPoint >= 0 && coupleControlPoint < points.Count || closed)
-                {
-                    float distance = (points[wrapIndex(coupleAnchorPoint)] - points[wrapIndex(coupleControlPoint)]).magnitude;
-                    Vector3 direction = (points[wrapIndex(coupleAnchorPoint)] - points[index]).normalized;
-                    points[wrapIndex(coupleControlPoint)] = points[wrapIndex(coupleAnchorPoint)] + direction * distance;
-                }
-
+                points[wrapIndex(index - 1)].Position += deltaMove;
             }
-            
+        }
+        else //Handle Point
+        {
+            bool nextPointIsAnchor = (index + 1) % 3 == 0;
+
+            int coupleControlPoint = (nextPointIsAnchor) ? index + 2 : index - 2;
+            int coupleAnchorPoint = (nextPointIsAnchor) ? index + 1 : index - 1;
+
+            if (coupleControlPoint >= 0 && coupleControlPoint < points.Count || closed)
+            {
+                float distance = (points[wrapIndex(coupleAnchorPoint)].Position - points[wrapIndex(coupleControlPoint)].Position).magnitude;
+                Vector3 direction = (points[wrapIndex(coupleAnchorPoint)].Position - points[index].Position).normalized;
+                points[wrapIndex(coupleControlPoint)].Position = points[wrapIndex(coupleAnchorPoint)].Position + direction * distance;
+            }
+
         }
     }
 
@@ -124,9 +125,9 @@ public class RoadPath
     /// <param name="targetPos">The position at which a user would like there new road segment to end</param>
     public void addSegment(Vector3 targetPos)
     {
-        points.Add(points[points.Count - 1] * 2 - points[points.Count - 2]);
-        points.Add(targetPos + Vector3.up);
-        points.Add(targetPos);
+        points.Add(new Point(points[points.Count - 1].Position * 2 - points[points.Count - 2].Position,Quaternion.identity));
+        points.Add(new Point(targetPos + Vector3.up,Quaternion.identity));
+        points.Add(new Point(targetPos,Quaternion.identity));
     }
 
     /// <summary>
@@ -135,10 +136,10 @@ public class RoadPath
     /// <param name="index">Index of the segment that will be split</param>
     public void divideSegment(int index)
     {
-        Vector3[] selectedSegment = getSegment(index);
-        Vector3 newAnchorPos = (selectedSegment[0] + selectedSegment[3]) * 0.5f;
+        Point[] selectedSegment = getSegment(index);
+        Vector3 newAnchorPos = (selectedSegment[0].Position + selectedSegment[3].Position) * 0.5f;
 
-        points.InsertRange(index * 3 + 2, new Vector3[] { newAnchorPos + Vector3.forward, newAnchorPos, newAnchorPos, newAnchorPos + Vector3.back });
+        points.InsertRange(index * 3 + 2, new Point[] { new Point(newAnchorPos + Vector3.forward,Quaternion.identity), new Point(newAnchorPos,Quaternion.identity),new Point(newAnchorPos,Quaternion.identity), new Point(newAnchorPos + Vector3.back,Quaternion.identity) });
 
     }
 
@@ -174,9 +175,9 @@ public class RoadPath
     /// </summary>
     /// <param name="i">The segment returned.</param>
     /// <returns></returns>
-    public Vector3[] getSegment(int i)
+    public Point[] getSegment(int i)
     {
-        return new Vector3[] { points[i * 3], points[i * 3 + 1], points[i * 3 + 2], points[wrapIndex(i * 3 + 3)] };
+        return new Point[] { points[i * 3], points[i * 3 + 1], points[i * 3 + 2], points[wrapIndex(i * 3 + 3)] };
     }
 
     /// <summary>
@@ -187,22 +188,22 @@ public class RoadPath
     /// <returns></returns>
     public Vector3 getPoint(int segmentIndex, float t)
     {
-        Vector3[] pts = getSegment(segmentIndex);
+        Point[] pts = getSegment(segmentIndex);
 
         float omt = 1f - t;
         float omt2 = omt * omt;
         float t2 = t * t;
-        return pts[0] * (omt2 * omt) +
-                pts[1] * (3f * omt2 * t) +
-                pts[2] * (3f * omt * t2) +
-                pts[3] * (t2 * t);
+        return pts[0].Position * (omt2 * omt) +
+                pts[1].Position * (3f * omt2 * t) +
+                pts[2].Position * (3f * omt * t2) +
+                pts[3].Position * (t2 * t);
     }
 
-    public Vector3[] getRoadPathPoints(float spacing, float resolution = 1)
+    public Point[] getRoadPathPoints(float spacing, float resolution = 1)
     {
-        List<Vector3> pointsToReturn = new List<Vector3>();
+        List<Point> pointsToReturn = new List<Point>();
         pointsToReturn.Add(points[0]);
-        Vector3 previousPoint = points[0];
+        Point previousPoint = points[0];
 
         float dstFromLastPoint = 0;
 
@@ -214,18 +215,19 @@ public class RoadPath
             {
                 t += 0.1f;
                 Vector3 calcPoint = getPoint(i, t);
-                dstFromLastPoint += Vector3.Distance(previousPoint, calcPoint);
+                dstFromLastPoint += Vector3.Distance(previousPoint.Position, calcPoint);
 
                 while(dstFromLastPoint > spacing)
                 {
                     float fixDistance = dstFromLastPoint - spacing;
-                    Vector3 fixPos = calcPoint + (previousPoint - calcPoint).normalized * fixDistance;
-                    pointsToReturn.Add(fixPos);
+                    Vector3 fixPos = calcPoint + (previousPoint.Position - calcPoint).normalized * fixDistance;
+                    Point fixPoint = new Point(fixPos, Quaternion.identity); //Fix Here
+                    pointsToReturn.Add(fixPoint); 
                     dstFromLastPoint = fixDistance;
-                    previousPoint = fixPos;
+                    previousPoint = fixPoint;
                 }
 
-                previousPoint = calcPoint;
+                previousPoint = new Point(calcPoint,Quaternion.identity); //Fix Here
             }
              
         }
@@ -239,3 +241,41 @@ public class RoadPath
     }
 
 }
+
+public class Point
+{
+    private Vector3 position;
+    private Quaternion rotation;
+
+    public Point(Vector3 pos, Quaternion rot)
+    {
+        position = pos;
+        rotation = rot;
+    }
+
+    public Vector3 Position
+    {
+        get
+        {
+            return position;
+        }
+        set
+        {
+            position = value;
+        }
+    }
+
+    public Quaternion Rotation
+    {
+        get
+        {
+            return rotation;
+        }
+        set
+        {
+            rotation = value;
+        }
+    }
+
+}
+

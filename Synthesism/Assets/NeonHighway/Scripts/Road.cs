@@ -6,6 +6,8 @@ public class Road : MonoBehaviour {
 
     [HideInInspector]
     public RoadPath roadPath;
+    [HideInInspector]
+    public RoadMeshCreator meshCreator;
 
     public void createPath()
     {

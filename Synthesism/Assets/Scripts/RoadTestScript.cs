@@ -11,10 +11,10 @@ public class RoadTestScript : MonoBehaviour {
 
 	void Start ()
     {
-        foreach(Vector3 pos in r.roadPath.getRoadPathPoints(spacing))
+        foreach(Point pos in r.roadPath.getRoadPathPoints(spacing))
         {
             GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            go.transform.position = pos;
+            go.transform.position = pos.Position;
             go.transform.localScale = Vector3.one * spacing * size * 0.5f;
             go.transform.SetParent(transform);
         }
