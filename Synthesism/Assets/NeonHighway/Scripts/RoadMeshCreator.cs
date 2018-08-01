@@ -8,6 +8,8 @@ public class RoadMeshCreator
 {
     public float roadWidth;
 
+    public Material roadMaterial;
+
     public Vector3[] getPointsForward(Point[] points, bool closed = false)
     {
         List<Vector3> forwardDirs = new List<Vector3>();

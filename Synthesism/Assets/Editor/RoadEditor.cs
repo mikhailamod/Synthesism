@@ -294,6 +294,9 @@ public class RoadEditor : Editor
             SceneView.RepaintAll();
         }
 
+
+        road.meshCreator.roadMaterial = EditorGUILayout.ObjectField("Road Material",road.meshCreator.roadMaterial, typeof(Material),false) as Material;
+
         bool tempShowVertices = EditorGUILayout.Toggle("Show Vertices", showVertices);
         if (showVertices != tempShowVertices)
         {
