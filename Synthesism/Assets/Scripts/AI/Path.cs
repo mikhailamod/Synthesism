@@ -10,7 +10,7 @@ public class Path : MonoBehaviour {
 
     private List<Transform> nodes = new List<Transform>();
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if(showLines)
         {

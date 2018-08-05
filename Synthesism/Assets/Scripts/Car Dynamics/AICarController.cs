@@ -14,12 +14,18 @@ public class AICarController : MonoBehaviour, ICarController {
     public float minNodeDistance = 0.5f;
     public float currentSpeed;
     public float maxSpeed = 100f;
+    public float maxCornerSpeed = 50f;
+
+    public bool isBraking = false;
+
+    public Vector3 centreOfMass;
  
     // Use this for initialization
     void Start () {
         currentNode = 0;
         currentSpeed = 0f;
         initializePath(path);
+        GetComponent<Rigidbody>().centerOfMass = centreOfMass;
 	}
 	
 	void FixedUpdate () {
@@ -33,6 +39,7 @@ public class AICarController : MonoBehaviour, ICarController {
         float driveAmount = Drive();
         carMovement.MoveHorizontal(steerAmount);
         carMovement.MoveVertical(driveAmount);
+        Brake();
         carMovement.RotateWheels();
     }
 
@@ -63,13 +70,25 @@ public class AICarController : MonoBehaviour, ICarController {
     {
         float amount;
         currentSpeed = carMovement.GetSpeed();
-        if(currentSpeed < maxSpeed)
+        if(currentSpeed < maxSpeed && !isBraking)
         {
             amount = 1.0f;
         } else {
             amount = 0.0f;
         }
         return amount;
+    }
+
+    private void Brake()
+    {
+        if(isBraking)
+        {
+            carMovement.brake();
+        }
+        else
+        {
+            carMovement.setBrakeTorque(0);
+        }
     }
 
     private void initializePath(Transform path)
