@@ -10,6 +10,13 @@ public class RoadMeshCreator
 
     public Material roadMaterial;
 
+    public List<DrawableShape> shapesToRender;
+
+    public RoadMeshCreator()
+    {
+        shapesToRender = new List<DrawableShape>();
+    }
+
     public Vector3[] getPointsForward(Point[] points, bool closed = false)
     {
         List<Vector3> forwardDirs = new List<Vector3>();
@@ -88,76 +95,30 @@ public class RoadMeshCreator
         return Vector3.Cross(forward, binormal);
     }
 
-    public Vector3[] getMeshVertices(Point[] points, Vector3 up, bool closed = false)
+    public Vector3[] getMeshVertices(Point[] points, Shape shape, Vector3 offset, Vector3 up, bool closed = false)
     {
-        List<Vector3> vertices = new List<Vector3>();
-
         Vector3[] binormals = getPointsBinormal(points, up, closed);
-        for(int i = 0; i < binormals.Length; i++)
-        {
-            Vector3 rightVertex = points[i].Position + binormals[i] * roadWidth * 0.5f;
-            Vector3 leftVertex = points[i].Position - binormals[i] * roadWidth * 0.5f;
-
-            vertices.Add(leftVertex); vertices.Add(rightVertex);
-
-        }
-        return vertices.ToArray();
+        return shape.getMeshVertices(points, binormals, offset, up, closed);
     }
 
-    public int[] getMeshTris(int vertexCount, bool closed = false)
+    public int[] getMeshTris(int vertexCount, Shape shape, bool closed = false)
     {
-        List<int> tris = new List<int>();
-
-        for(int i = 0; i < vertexCount/2; i++)
-        {
-            if (i != vertexCount/2 - 1 || closed)
-            {
-                //First Triangle
-                tris.Add(i * 2);
-                tris.Add(loopIndex((i+1) * 2, vertexCount));
-                tris.Add((i * 2) + 1);
-                //Second Triangle
-                tris.Add((i * 2) + 1);
-                tris.Add(loopIndex((i + 1) * 2, vertexCount));
-                tris.Add(loopIndex(((i + 1) * 2) + 1, vertexCount));
-            }
-        }
-
-        return tris.ToArray();
-
+        return shape.getMeshTris(vertexCount, closed);
     }
 
-    public Vector3[] pointToMeshNormals(Point[] points, Vector3 up, bool closed = false)
+    public Vector3[] pointToMeshNormals(Point[] points, Shape shape, Vector3 up, bool invertNormals, bool closed = false)
     {
         Vector3[] normals = getPointsNormal(points, up, closed);
-
-        Vector3[] meshNormals = new Vector3[normals.Length * 2];
-        for(int i = 0; i < meshNormals.Length; i++)
-        {
-            meshNormals[i] = normals[i / 2];
-        }
-
-        return meshNormals;
+        return shape.getNormals(points, normals, up,invertNormals, closed);
     }
 
     //Will have a bug
-    public Vector2[] getMeshUV(int vertexCount)
+    public Vector2[] getMeshUV(int vertexCount, Shape shape)
     {
-        Vector2[] uvs = new Vector2[vertexCount];
-
-        for(int i = 0; i < vertexCount/2; i++)
-        {
-            int index = i * 2;
-            float percentageComplete = i / (float)vertexCount * 2;
-            uvs[index] = new Vector2(0, percentageComplete);
-            uvs[index + 1] = new Vector2(1, percentageComplete);
-        }
-
-        return uvs;
-
+        return shape.getMeshUV(vertexCount);
     }
 
-    public void generateRoadMesh(Point[] points, Vector3 up, bool closed = false)
+    public void generateRoadMesh(Point[] points, Shape shape, Vector3 offset, Vector3 up, bool invertNormals, bool closed = false)
     {
         GameObject meshObj = new GameObject("Generate Road Mesh");
         MeshFilter mf = meshObj.AddComponent<MeshFilter>();
@@ -168,10 +129,10 @@ public class RoadMeshCreator
 
         Mesh mesh = mf.sharedMesh;
 
-        Vector3[] vertices = getMeshVertices(points, up, closed);
-        Vector3[] normals = pointToMeshNormals(points, up, closed);
-        Vector2[] UVs = getMeshUV(vertices.Length);
-        int[] tris = getMeshTris(vertices.Length, closed);
+        Vector3[] vertices = getMeshVertices(points,shape, offset, up, closed);
+        Vector3[] normals = pointToMeshNormals(points, shape, up, invertNormals,closed);
+        Vector2[] UVs = getMeshUV(vertices.Length, shape);
+        int[] tris = getMeshTris(vertices.Length, shape, closed);
 
         mesh.Clear();
         mesh.vertices = vertices;
@@ -186,4 +147,16 @@ public class RoadMeshCreator
     {
         return (index + totalSize) % totalSize;
     }
+}
+
+[System.Serializable]
+public class DrawableShape
+{
+    public bool showShape;
+    public string name;
+    public ShapeToDraw shape;
+    public float size;
+    public bool invertNormals;
+    public Vector3 offset;
+    public Material meshMaterial;
 }

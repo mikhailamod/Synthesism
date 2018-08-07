@@ -9,6 +9,8 @@ public class RoadPath
     List<Point> points;
     [SerializeField, HideInInspector]
     bool closed;
+    [SerializeField, HideInInspector]
+    public float deltaOffset;
 
     public RoadPath(Vector3 centre)
     {
@@ -28,6 +30,8 @@ public class RoadPath
     {
         get
         {
+            if (points == null) return 0;
+
             return points.Count;
         }
         private set { }
@@ -40,6 +44,8 @@ public class RoadPath
     {
         get
         {
+            if (points == null) return 0;
+
             return points.Count / 3;
         }
         private set { }
@@ -199,7 +205,7 @@ public class RoadPath
                 pts[3].Position * (t2 * t);
     }
 
-    public Point[] getRoadPathPoints(float spacing, float resolution = 1)
+    public Point[] getRoadPathPoints(float spacing)
     {
         List<Point> pointsToReturn = new List<Point>();
         pointsToReturn.Add(points[0]);
@@ -213,7 +219,7 @@ public class RoadPath
             
             while (t <= 1)
             {
-                t += 0.1f;
+                t += deltaOffset;
                 Vector3 calcPoint = getPoint(i, t);
                 dstFromLastPoint += Vector3.Distance(previousPoint.Position, calcPoint);
 

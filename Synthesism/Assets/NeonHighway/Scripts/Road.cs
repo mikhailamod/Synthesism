@@ -8,10 +8,15 @@ public class Road : MonoBehaviour {
     public RoadPath roadPath;
     [HideInInspector]
     public RoadMeshCreator meshCreator;
+    [HideInInspector]
+    public RoadSettings roadSettings;
 
     public void createPath()
     {
         roadPath = new RoadPath(transform.position);
-    }
 
+        roadSettings = new RoadSettings();
+
+        meshCreator = new RoadMeshCreator();
+    }
 }
