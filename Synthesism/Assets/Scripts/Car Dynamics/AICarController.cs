@@ -88,7 +88,7 @@ public class AICarController : MonoBehaviour, ICarController {
         }
 
         //front left angled
-        else if (Physics.Raycast(frontLeftSensorPos, Quaternion.AngleAxis(-frontSensorAngle, transform.up)*transform.forward, out raycastHit, sensorLength))
+        if (Physics.Raycast(frontLeftSensorPos, Quaternion.AngleAxis(-frontSensorAngle, transform.up)*transform.forward, out raycastHit, sensorLength))
         {
             if (!raycastHit.collider.CompareTag("Track"))
             {
@@ -110,7 +110,7 @@ public class AICarController : MonoBehaviour, ICarController {
         }
 
         //front right angled
-        else if (Physics.Raycast(frontRightSensorPos, Quaternion.AngleAxis(frontSensorAngle, transform.up) * transform.forward, out raycastHit, sensorLength))
+        if (Physics.Raycast(frontRightSensorPos, Quaternion.AngleAxis(frontSensorAngle, transform.up) * transform.forward, out raycastHit, sensorLength))
         {
             if (!raycastHit.collider.CompareTag("Track"))
             {
