@@ -247,7 +247,7 @@ public class RoadPath
     }
 
 }
-
+[System.Serializable]
 public class Point
 {
     private Vector3 position;

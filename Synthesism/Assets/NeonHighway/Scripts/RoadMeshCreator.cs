@@ -118,11 +118,11 @@ public class RoadMeshCreator
         return shape.getMeshUV(vertexCount);
     }
 
-    public void generateRoadMesh(Point[] points, Shape shape, Vector3 offset, Vector3 up, bool invertNormals, bool closed = false)
+    public void generateRoadMesh(Point[] points, Shape shape, Vector3 offset, Vector3 up, Material meshMat, bool invertNormals = false, bool closed = false)
     {
         GameObject meshObj = new GameObject("Generate Road Mesh");
         MeshFilter mf = meshObj.AddComponent<MeshFilter>();
-        meshObj.AddComponent<MeshRenderer>();
+        MeshRenderer mr = meshObj.AddComponent<MeshRenderer>();
 
         if (mf.sharedMesh == null)
             mf.sharedMesh = new Mesh();
@@ -139,6 +139,8 @@ public class RoadMeshCreator
         mesh.normals = normals;
         mesh.uv = UVs;
         mesh.triangles = tris;
+
+        mr.material = meshMat;
 
 
     }

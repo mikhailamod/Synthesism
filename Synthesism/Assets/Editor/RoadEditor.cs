@@ -9,14 +9,17 @@ public class RoadEditor : Editor
 
     private Road road;
 
+
     void OnEnable()
     {
+
+
+
+
         road = target as Road;
 
         if (road.roadPath == null)
             road.createPath();
-        else
-            Debug.Log(road.roadPath.PointsCount);
     }
 
     private void drawScene()
@@ -405,7 +408,7 @@ public class RoadEditor : Editor
     void generateMesh(DrawableShape shapeToDraw)
     {
         
-        road.meshCreator.generateRoadMesh(road.roadPath.getRoadPathPoints(road.roadSettings.spacing), enumToShape(shapeToDraw), shapeToDraw.offset, Vector3.up, shapeToDraw.invertNormals, road.roadPath.Closed);  
+        road.meshCreator.generateRoadMesh(road.roadPath.getRoadPathPoints(road.roadSettings.spacing), enumToShape(shapeToDraw), shapeToDraw.offset, Vector3.up, shapeToDraw.meshMaterial, shapeToDraw.invertNormals, road.roadPath.Closed);  
     }
 
     Shape enumToShape(DrawableShape shape)

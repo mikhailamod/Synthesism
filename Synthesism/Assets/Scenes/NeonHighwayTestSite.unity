@@ -209,8 +209,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 254090552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.09651, y: 25.02249, z: 43.82003}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 56, y: 25.02249, z: 43.82003}
+  m_LocalScale: {x: 2.4085, y: 2.4085, z: 2.4085}
   m_Children: []
   m_Father: {fileID: 1141242286}
   m_RootOrder: 4
@@ -382,7 +382,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 298850360}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.843487, y: 25.02249, z: 42.00003}
+  m_LocalPosition: {x: 98, y: 25.02249, z: 42.00003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1141242286}
@@ -496,7 +496,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 348557792}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.556513, y: 76.52249, z: 112.69003}
+  m_LocalPosition: {x: 88.2, y: 76.52249, z: 112.69003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1141242286}
@@ -795,8 +795,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 621566531}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 89.7, y: 0, z: 49.8}
+  m_LocalScale: {x: 3.9857, y: 1, z: 9.2941}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -964,7 +964,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 916934148}
-  - component: {fileID: 916934149}
   m_Layer: 0
   m_Name: RoadMeshGenerator
   m_TagString: Untagged
@@ -985,67 +984,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &916934149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 916934147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40ec4327c2efe564fb423be1ba03c0c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roadPath:
-    closed: 0
-    deltaOffset: 0.01
-  meshCreator:
-    roadWidth: 0
-    roadMaterial: {fileID: 0}
-    shapesToRender:
-    - showShape: 1
-      name: Road
-      shape: 0
-      size: 1.06
-      invertNormals: 0
-      offset: {x: 0, y: 0, z: 0}
-      meshMaterial: {fileID: 0}
-    - showShape: 1
-      name: Wall
-      shape: 1
-      size: 0.69
-      invertNormals: 0
-      offset: {x: 0.51, y: 0, z: 0}
-      meshMaterial: {fileID: 0}
-  roadSettings:
-    nodeColor: {r: 0, g: 1, b: 0, a: 1}
-    lineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    curveColor: {r: 1, g: 0, b: 0, a: 1}
-    pathColor: {r: 0, g: 0, b: 1, a: 1}
-    nodeForwardColor: {r: 1, g: 1, b: 1, a: 1}
-    nodeBinormalColor: {r: 0, g: 1, b: 1, a: 1}
-    nodeNormalColor: {r: 0, g: 0, b: 0, a: 1}
-    vertexColor: {r: 1, g: 1, b: 1, a: 1}
-    curveWidth: 4
-    nodeSize: 1
-    nodeArrowSize: 1
-    spacing: 0.5
-    size: 0.1
-    showCurveProperties: 0
-    showNodeProperties: 0
-    showPathProperties: 0
-    showPathArrowProperties: 0
-    showPathColorProperties: 0
-    showMeshProperties: 1
-    showCurve: 1
-    showPoints: 0
-    showPointForwards: 0
-    showPointBinormals: 0
-    showPointNormals: 0
-    showVertices: 1
-    showTris: 1
-    showMeshNormals: 0
-    showUVs: 0
 --- !u!1 &1010590353
 GameObject:
   m_ObjectHideFlags: 0

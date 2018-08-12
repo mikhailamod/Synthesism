@@ -42,8 +42,9 @@ public class RoadMesh : Shape
         {
             int index = i * 2;
             float percentageComplete = i / (float)vertexCount * 2;
-            uvs[index] = new Vector2(0, percentageComplete);
-            uvs[index + 1] = new Vector2(1, percentageComplete);
+            float dampingPercent = 1 - Mathf.Abs(2 * percentageComplete - 1);
+            uvs[index] = new Vector2(0, dampingPercent);
+            uvs[index + 1] = new Vector2(1, dampingPercent);
         }
 
         return uvs;
