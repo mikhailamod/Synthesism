@@ -12,10 +12,6 @@ public class RoadEditor : Editor
 
     void OnEnable()
     {
-
-
-
-
         road = target as Road;
 
         if (road.roadPath == null)
@@ -54,13 +50,19 @@ public class RoadEditor : Editor
 
 
         if(road.roadSettings.showPoints || road.roadSettings.showPointForwards || road.roadSettings.showPointBinormals
-            || road.roadSettings.showPointNormals || road.roadSettings.showVertices || road.roadSettings.showTris || road.roadSettings.showMeshNormals || road.roadSettings.showUVs)
+            || road.roadSettings.showPointNormals || road.roadSettings.showVertices || road.roadSettings.showTris 
+            || road.roadSettings.showMeshNormals || road.roadSettings.showUVs || road.roadSettings.showPathCenter)
         {
             Point[] roadPoints = road.roadPath.getRoadPathPoints(road.roadSettings.spacing);
             Vector3[] forwardDir = road.meshCreator.getPointsForward(roadPoints, road.roadPath.Closed);
             Vector3[] binormals = road.meshCreator.getPointsBinormal(forwardDir, Vector3.up);
             Vector3[] normals = road.meshCreator.getPointsNormal(forwardDir, binormals);
 
+            if(road.roadSettings.showPathCenter)
+            {
+                Vector3 pathCenter = RoadPath.getCenter(roadPoints);
+                Handles.Label(pathCenter,"Center:\n" + pathCenter.ToString());
+            }
             if (road.roadSettings.showPoints)
             {
                 Handles.color = road.roadSettings.pathColor;
@@ -104,7 +106,7 @@ public class RoadEditor : Editor
             foreach (DrawableShape shape in road.meshCreator.shapesToRender)
             {
 
-                Shape renderShape = enumToShape(shape);
+                Shape renderShape = RoadMeshCreator.enumToShape(shape);
                 if (road.roadSettings.showVertices || road.roadSettings.showTris || road.roadSettings.showPointNormals || road.roadSettings.showUVs)
                 {
                     Vector3[] vertices = road.meshCreator.getMeshVertices(roadPoints, renderShape, shape.offset,Vector3.up, road.roadPath.Closed);
@@ -222,7 +224,6 @@ public class RoadEditor : Editor
         
 
         road.roadSettings.showPathProperties = EditorGUILayout.Foldout(road.roadSettings.showPathProperties,"Path Properties", EditorStyles.foldout);
-
         if(road.roadSettings.showPathProperties)
         {
             bool isClosed = EditorGUILayout.Toggle("Close road", road.roadPath.Closed);
@@ -236,6 +237,13 @@ public class RoadEditor : Editor
             if (road.roadSettings.showPoints != showPath)
             {
                 road.roadSettings.showPoints = showPath;
+                SceneView.RepaintAll();
+            }
+
+            bool showCenter = EditorGUILayout.Toggle("Show Path Centre", road.roadSettings.showPathCenter);
+            if (road.roadSettings.showPathCenter != showCenter)
+            {
+                road.roadSettings.showPathCenter = showCenter;
                 SceneView.RepaintAll();
             }
 
@@ -354,6 +362,13 @@ public class RoadEditor : Editor
                                 SceneView.RepaintAll();
                             }
 
+                            float tempTiling = EditorGUILayout.FloatField("Tiling:", shape.tiling);
+                            if (tempTiling != shape.tiling)
+                            {
+                                shape.tiling = tempTiling;
+                                SceneView.RepaintAll();
+                            }
+
                             bool tempInvertNormals = EditorGUILayout.Toggle("Invert Normals: ", shape.invertNormals);
                             if(tempInvertNormals != shape.invertNormals)
                             {
@@ -392,10 +407,7 @@ public class RoadEditor : Editor
 
         if (GUILayout.Button("Generate Mesh"))
         {
-            foreach (DrawableShape shape in road.meshCreator.shapesToRender)
-            {
-                generateMesh(shape);
-            }
+            road.meshCreator.generateMeshes("GeneratedMesh", road.roadPath.getRoadPathPoints(road.roadSettings.spacing),Vector3.up, road.roadSettings.spacing, road.roadPath.Closed);
         }
     }
 
@@ -403,24 +415,6 @@ public class RoadEditor : Editor
     {
         manageInput();
         drawScene();
-    }
-
-    void generateMesh(DrawableShape shapeToDraw)
-    {
-        
-        road.meshCreator.generateRoadMesh(road.roadPath.getRoadPathPoints(road.roadSettings.spacing), enumToShape(shapeToDraw), shapeToDraw.offset, Vector3.up, shapeToDraw.meshMaterial, shapeToDraw.invertNormals, road.roadPath.Closed);  
-    }
-
-    Shape enumToShape(DrawableShape shape)
-    {
-        switch(shape.shape)
-        {
-
-            case ShapeToDraw.WALL:
-                return new Wall(shape.size);
-            default:
-                return new RoadMesh(shape.size);
-        }
     }
 
 }

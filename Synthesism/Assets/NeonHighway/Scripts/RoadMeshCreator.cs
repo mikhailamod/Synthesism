@@ -118,9 +118,20 @@ public class RoadMeshCreator
         return shape.getMeshUV(vertexCount);
     }
 
-    public void generateRoadMesh(Point[] points, Shape shape, Vector3 offset, Vector3 up, Material meshMat, bool invertNormals = false, bool closed = false)
+
+    public void generateMeshes(string parentName, Point[] points, Vector3 up,float spacing, bool isClosed = false)
     {
-        GameObject meshObj = new GameObject("Generate Road Mesh");
+        GameObject parent = new GameObject(parentName);
+        foreach(DrawableShape shape in shapesToRender)
+        {
+            generateMesh(shape, parent.transform,points, up, spacing, isClosed);
+        }
+    }
+
+    public void generateMesh(DrawableShape drawShape, Transform parent, Point[] points, Vector3 up, float spacing, bool closed = false)
+    {
+        GameObject meshObj = new GameObject(drawShape.name);
+        meshObj.transform.parent = parent;
         MeshFilter mf = meshObj.AddComponent<MeshFilter>();
         MeshRenderer mr = meshObj.AddComponent<MeshRenderer>();
 
@@ -129,8 +140,10 @@ public class RoadMeshCreator
 
         Mesh mesh = mf.sharedMesh;
 
-        Vector3[] vertices = getMeshVertices(points,shape, offset, up, closed);
-        Vector3[] normals = pointToMeshNormals(points, shape, up, invertNormals,closed);
+        Shape shape = enumToShape(drawShape);
+
+        Vector3[] vertices = getMeshVertices(points,shape, drawShape.offset, up, closed);
+        Vector3[] normals = pointToMeshNormals(points, shape, up, drawShape.invertNormals,closed);
         Vector2[] UVs = getMeshUV(vertices.Length, shape);
         int[] tris = getMeshTris(vertices.Length, shape, closed);
 
@@ -140,7 +153,9 @@ public class RoadMeshCreator
         mesh.uv = UVs;
         mesh.triangles = tris;
 
-        mr.material = meshMat;
+        mr.material = drawShape.meshMaterial;
+        float tileVal = drawShape.tiling * points.Length * spacing * 0.05f;
+        mr.sharedMaterial.mainTextureScale = new Vector2(1, tileVal);
 
 
     }
@@ -148,6 +163,18 @@ public class RoadMeshCreator
     private int loopIndex(int index, int totalSize)
     {
         return (index + totalSize) % totalSize;
+    }
+
+    public static Shape enumToShape(DrawableShape shape)
+    {
+        switch (shape.shape)
+        {
+
+            case ShapeToDraw.WALL:
+                return new Wall(shape.size);
+            default:
+                return new RoadMesh(shape.size);
+        }
     }
 }
 
@@ -158,6 +185,7 @@ public class DrawableShape
     public string name;
     public ShapeToDraw shape;
     public float size;
+    public float tiling;
     public bool invertNormals;
     public Vector3 offset;
     public Material meshMaterial;

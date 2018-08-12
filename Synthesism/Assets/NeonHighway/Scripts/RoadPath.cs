@@ -240,6 +240,19 @@ public class RoadPath
 
         return pointsToReturn.ToArray();
     }
+    
+    public static Vector3 getCenter(Point[] points)
+    {
+        Vector3 center = Vector3.zero;
+
+        foreach(Point p in points)
+        {
+            center += p.Position;
+        }
+
+        return center/points.Length;
+
+    }
 
     private int wrapIndex(int index)
     {

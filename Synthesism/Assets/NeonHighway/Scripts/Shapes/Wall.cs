@@ -39,8 +39,9 @@ public class Wall : Shape
         {
             int index = i * 2;
             float percentageComplete = i / (float)vertexCount * 2;
-            uvs[index] = new Vector2(0, percentageComplete);
-            uvs[index + 1] = new Vector2(1, percentageComplete);
+            float dampingPercent = 1 - Mathf.Abs(2 * percentageComplete - 1);
+            uvs[index] = new Vector2(0, dampingPercent);
+            uvs[index + 1] = new Vector2(1, dampingPercent);
         }
 
         return uvs;
@@ -49,13 +50,16 @@ public class Wall : Shape
     public override Vector3[] getMeshVertices(Point[] points, Vector3[] binormals, Vector3 offset, Vector3 up, bool closed = false)
     {
         List<Vector3> vertices = new List<Vector3>();
+        Vector3 center = RoadPath.getCenter(points);
 
         for (int i = 0; i < binormals.Length; i++)
         {
             Vector3 bottomVertex = points[i].Position;
-            bottomVertex += offset;
+            bottomVertex = new Vector3(bottomVertex.x, bottomVertex.y + offset.y, bottomVertex.z + offset.z);
+            bottomVertex += (center - bottomVertex) * offset.x;
             Vector3 topVertex = points[i].Position + up * height;
-            topVertex += offset;
+            topVertex = new Vector3(topVertex.x, topVertex.y + offset.y, topVertex.z + offset.z);
+            topVertex += (center - topVertex) * offset.x;
 
             vertices.Add(bottomVertex); vertices.Add(topVertex);
         }
