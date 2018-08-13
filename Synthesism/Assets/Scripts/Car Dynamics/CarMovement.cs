@@ -93,17 +93,17 @@ public class CarMovement
         return (float) (2 * Mathf.PI * axleInfos[0].leftWheel.wheelCollider.radius * axleInfos[0].leftWheel.wheelCollider.rpm * 0.06);
     }
 
+    public float GetRpm()
+    {
+        return axleInfos[0].leftWheel.wheelCollider.rpm;
+    }
+
     //applies additional boost force to vehicle
     public void boost(Rigidbody rigid, Vector3 dir)
     {
         rigid.AddForce(dir * boostSpeed, ForceMode.Impulse);
     }
 
-}
-
-public abstract class CarController : MonoBehaviour
-{
-    public CarMovement carMovement;
 }
 
 [System.Serializable]
