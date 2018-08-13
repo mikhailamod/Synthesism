@@ -101,11 +101,6 @@ public class CarMovement
 
 }
 
-public abstract class CarController : MonoBehaviour
-{
-    public CarMovement carMovement;
-}
-
 [System.Serializable]
 public class AxleInfo
 {
