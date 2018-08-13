@@ -8,7 +8,7 @@ public class Path : MonoBehaviour {
     public bool showLines = true;
     public float pointRadius = 0.3f;
 
-    private List<Transform> nodes = new List<Transform>();
+    public List<Transform> nodes = new List<Transform>();
 
     private void OnDrawGizmos()
     {

@@ -2,35 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AICarController : MonoBehaviour, ICarController {
+public class AICarController : CarController {
 
-    public Transform path;
+    public GameObject path;
 
-    [Header("Movement Properties")]
+    [Header("Car Movement Properties")]
     public CarMovement carMovement;
+    public Vector3 centreOfMass;
 
-    private List<Transform> nodes;
-    private int currentNode;
+    [Header("AI Movement Properties")]
     public float minNodeDistance = 0.5f;
     public float currentSpeed;
     public float maxSpeed = 100f;
+    public float minSpeed = 40f;
     public float maxCornerSpeed = 50f;
+    public bool isBraking = false;
 
-    [Header("Sensors")]
+    [Header("Sensor Properties")]
     public float sensorLength = 5f;
     public Vector3 frontSensorOffset = Vector3.zero;
     public Vector3 sideSensorOffset = Vector3.zero;
     public float frontSensorAngle = 30f;
 
-    public bool isBraking = false;
-
-    public Vector3 centreOfMass;
+    //Private
+    private List<Node> nodes;
+    private int currentNode;
 
     // Use this for initialization
     void Start() {
         currentNode = 0;
         currentSpeed = 0f;
         initializePath(path);
+       
         GetComponent<Rigidbody>().centerOfMass = centreOfMass;
     }
 
@@ -39,15 +42,19 @@ public class AICarController : MonoBehaviour, ICarController {
         UpdateWaypoint();
     }
 
-    public void MoveVehicle()
+    protected override void MoveVehicle()
     {
         float turnOffset = UseSensors();
         float steerAmount = SteerCar();
         float driveAmount = Drive();
-        carMovement.MoveHorizontal(steerAmount*turnOffset);
+        carMovement.MoveHorizontal(steerAmount+turnOffset);
         carMovement.MoveVertical(driveAmount);
         Brake();
         carMovement.RotateWheels();
+        if(isBraking && currentSpeed < (maxSpeed * driveAmount))
+        {
+            isBraking = false;
+        }
     }
 
     private float UseSensors()
@@ -65,76 +72,75 @@ public class AICarController : MonoBehaviour, ICarController {
         Vector3 frontLeftSensorPos = Vector3.Scale(frontSensorPos, new Vector3(1, 1, 1));
         frontLeftSensorPos -= (transform.right * sideSensorOffset.x);
 
-        //front
-        if (Physics.Raycast(frontSensorPos, transform.forward, out raycastHit, sensorLength))
-        {
-            if (!raycastHit.collider.CompareTag("Track"))
-            {
-                oneHit = true;
-                turnOffset += 0f;
-            }
-            Debug.DrawLine(frontSensorPos, raycastHit.point, Color.red);
-        }
-
         //front left
         if (Physics.Raycast(frontLeftSensorPos, transform.forward, out raycastHit, sensorLength))
         {
-            if (!raycastHit.collider.CompareTag("Track"))
+            if (raycastHit.collider.CompareTag("Obstacle"))
             {
                 oneHit = true;
                 turnOffset += 1f;
+                Debug.DrawLine(frontLeftSensorPos, raycastHit.point, Color.red);
             }
-            Debug.DrawLine(frontLeftSensorPos, raycastHit.point, Color.red);
         }
 
         //front left angled
         else if (Physics.Raycast(frontLeftSensorPos, Quaternion.AngleAxis(-frontSensorAngle, transform.up)*transform.forward, out raycastHit, sensorLength))
         {
-            if (!raycastHit.collider.CompareTag("Track"))
+            if (raycastHit.collider.CompareTag("Obstacle"))
             {
                 oneHit = true;
-                turnOffset += 0.5f;
+                turnOffset += 0.75f;
+                Debug.DrawLine(frontLeftSensorPos, raycastHit.point, Color.red);
             }
-            Debug.DrawLine(frontLeftSensorPos, raycastHit.point, Color.red);
+            
         }
 
         //front right
         if (Physics.Raycast(frontRightSensorPos, transform.forward, out raycastHit, sensorLength))
         {
-            if (!raycastHit.collider.CompareTag("Track"))
+            if (raycastHit.collider.CompareTag("Obstacle"))
             {
                 oneHit = true;
                 turnOffset -= 1f;
+                Debug.DrawLine(frontRightSensorPos, raycastHit.point, Color.red);
             }
-            Debug.DrawLine(frontRightSensorPos, raycastHit.point, Color.red);
+            
         }
 
         //front right angled
         else if (Physics.Raycast(frontRightSensorPos, Quaternion.AngleAxis(frontSensorAngle, transform.up) * transform.forward, out raycastHit, sensorLength))
         {
-            if (!raycastHit.collider.CompareTag("Track"))
+            if (raycastHit.collider.CompareTag("Obstacle"))
             {
                 oneHit = true;
-                turnOffset -= 0.5f;
+                turnOffset -= 0.75f;
+                Debug.DrawLine(frontRightSensorPos, raycastHit.point, Color.red);
             }
-            Debug.DrawLine(frontRightSensorPos, raycastHit.point, Color.red);
+            
         }
 
         if (oneHit == true && turnOffset == 0)
         {
-            isBraking = true;
+            //front
+            if (Physics.Raycast(frontSensorPos, transform.forward, out raycastHit, sensorLength))
+            {
+                if (raycastHit.collider.CompareTag("Obstacle"))
+                {
+                    oneHit = true;
+                    if (raycastHit.normal.x < 0) { turnOffset = -1f; }
+                    else { turnOffset = 1f; }
+                    Debug.DrawLine(frontSensorPos, raycastHit.point, Color.red);
+                }
+                
+            }
             return turnOffset;
         }
-        else
-        {
-            isBraking = false;
-            return turnOffset;
-        }
+        return turnOffset;
     }
 
     private void UpdateWaypoint()
     {
-        float distance = Vector3.Distance(transform.position, nodes[currentNode].position);
+        float distance = Vector3.Distance(transform.position, nodes[currentNode].transform.position);
         if (distance < minNodeDistance)
         {
             if(currentNode == nodes.Count-1)
@@ -150,22 +156,33 @@ public class AICarController : MonoBehaviour, ICarController {
 
     private float SteerCar()
     {
-        Vector3 relativeVector = transform.InverseTransformPoint(nodes[currentNode].position);
-        relativeVector = relativeVector/relativeVector.magnitude;//Vector3.Normalize return positive number
+        Vector3 relativeVector = transform.InverseTransformPoint(nodes[currentNode].transform.position);
+        relativeVector = relativeVector/relativeVector.magnitude;//Vector3.Normalize returns positive number only
         return relativeVector.x;
     }
 
     private float Drive()
     {
-        float amount;
         currentSpeed = carMovement.GetSpeed();
-        if(currentSpeed < maxSpeed && !isBraking)
+        Node nodeInfo = nodes[currentNode];
+
+        //check current Node if we should break and what speed we should be going at
+        if(nodeInfo != null)
         {
-            amount = 1.0f;
-        } else {
-            amount = 0.0f;
+            if (nodeInfo.isABreakingZone && currentSpeed > minSpeed) { isBraking = true; }
+            else { isBraking = false; }
+
+            if (currentSpeed < maxSpeed) { return nodeInfo.speedFactor; }
+            else { return 0.0f; }
         }
-        return amount;
+
+        //should there be no Node info for some reason, go full speed/brake
+        else if(currentSpeed < maxSpeed && !isBraking)
+        {
+            return 1.0f;
+        } else {
+            return 0.0f;
+        }
     }
 
     private void Brake()
@@ -180,10 +197,11 @@ public class AICarController : MonoBehaviour, ICarController {
         }
     }
 
-    private void initializePath(Transform path)
+    //populate nodes list with nodes from Path
+    private void initializePath(GameObject path)
     {
-        Transform[] transforms = path.GetComponentsInChildren<Transform>();
-        nodes = new List<Transform>();
+        Node[] transforms = path.GetComponentsInChildren<Node>();
+        nodes = new List<Node>();
 
         for (int i = 0; i < transforms.Length; i++)
         {
@@ -194,12 +212,12 @@ public class AICarController : MonoBehaviour, ICarController {
         }
     }//end method
 
-    public float getCurrentSpeed()
+    public override float getCurrentSpeed()
     {
         return currentSpeed;
     }
 
-    public float getRpm()
+    public override float getRpm()
     {
         return carMovement.GetRpm();
     }
