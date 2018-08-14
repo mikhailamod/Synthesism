@@ -122,7 +122,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4907631021006634, guid: 667bbfc9c30303a458513fc1d823fbdf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4907631021006634, guid: 667bbfc9c30303a458513fc1d823fbdf, type: 2}
       propertyPath: m_LocalPosition.y
@@ -430,7 +430,7 @@ Transform:
   m_PrefabInternal: {fileID: 124695044}
   m_GameObject: {fileID: 1012548496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 30, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1212207336}
@@ -1010,6 +1010,93 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -49.328003, z: 0}
+--- !u!1 &1734239143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1734239145}
+  - component: {fileID: 1734239144}
+  m_Layer: 0
+  m_Name: Cube Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1734239144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1734239143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ec4327c2efe564fb423be1ba03c0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadPath:
+    points: []
+    closed: 0
+    deltaOffset: 0.05
+  meshCreator:
+    roadWidth: 0
+    roadMaterial: {fileID: 0}
+    shapesToRender:
+    - showShape: 1
+      name: Cube
+      shape: 2
+      size: 2
+      tiling: 10
+      winding: 0
+      offset: {x: 0, y: 0, z: 0}
+      meshMaterial: {fileID: 2100000, guid: 6ab21a577310b9042a3839e1e103b364, type: 2}
+  roadSettings:
+    nodeColor: {r: 0, g: 1, b: 0, a: 1}
+    lineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    curveColor: {r: 1, g: 0, b: 0, a: 1}
+    pathColor: {r: 0, g: 0, b: 1, a: 1}
+    nodeForwardColor: {r: 1, g: 1, b: 1, a: 1}
+    nodeBinormalColor: {r: 0, g: 1, b: 1, a: 1}
+    nodeNormalColor: {r: 0, g: 0, b: 0, a: 1}
+    vertexColor: {r: 1, g: 1, b: 1, a: 1}
+    curveWidth: 4
+    nodeSize: 1
+    nodeArrowSize: 1
+    spacing: 0.43
+    size: 0.1
+    showCurveProperties: 0
+    showNodeProperties: 0
+    showPathProperties: 1
+    showPathArrowProperties: 0
+    showPathColorProperties: 0
+    showPathLabels: 0
+    showMeshProperties: 1
+    showPathCenter: 0
+    showCurve: 1
+    showPoints: 0
+    showPointForwards: 0
+    showPointBinormals: 0
+    showPointNormals: 0
+    showVertices: 0
+    showTris: 1
+    showMeshNormals: 0
+    showUVs: 0
+--- !u!4 &1734239145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1734239143}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.32, y: 1.857226, z: 4.8995943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2018737845
 GameObject:
   m_ObjectHideFlags: 0

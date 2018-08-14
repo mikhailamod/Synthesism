@@ -35,6 +35,7 @@ public class RoadSettings
     public bool showPointNormals = false;
     
     public bool showVertices = false;
+    public bool showVertIndices = false;
     public bool showTris = false;
     public bool showMeshNormals = false;
     public bool showUVs = false;
@@ -43,5 +44,6 @@ public class RoadSettings
 public enum ShapeToDraw
 {
     ROAD,
-    WALL
+    WALL,
+    CUBE
 }

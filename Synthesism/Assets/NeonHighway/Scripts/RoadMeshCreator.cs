@@ -172,6 +172,8 @@ public class RoadMeshCreator
 
             case ShapeToDraw.WALL:
                 return new Wall(shape.size);
+            case ShapeToDraw.CUBE:
+                return new Cube(shape.size);
             default:
                 return new RoadMesh(shape.size);
         }

@@ -53,15 +53,12 @@ public class RoadMesh : Shape
     public override Vector3[] getMeshVertices(Point[] points, Vector3[] binormals, Vector3 offset, Vector3 up, bool closed = false)
     {
         List<Vector3> vertices = new List<Vector3>();
-        Vector3 center = RoadPath.getCenter(points);
         for (int i = 0; i < binormals.Length; i++)
         {
-            Vector3 rightVertex = points[i].Position + binormals[i] * roadWidth * 0.5f;
+            Vector3 rightVertex = points[i].Position + binormals[i] * roadWidth * 0.5f + binormals[i]* offset.x;
             rightVertex = new Vector3(rightVertex.x, rightVertex.y + offset.y, rightVertex.z + offset.z);
-            rightVertex += (center - rightVertex) * offset.x;
-            Vector3 leftVertex = points[i].Position - binormals[i] * roadWidth * 0.5f;
+            Vector3 leftVertex = points[i].Position - binormals[i] * roadWidth * 0.5f + binormals[i] * offset.x;
             leftVertex = new Vector3(leftVertex.x, leftVertex.y + offset.y, leftVertex.z + offset.z);
-            leftVertex += (center - leftVertex) * offset.x;
 
             vertices.Add(leftVertex); vertices.Add(rightVertex);
 

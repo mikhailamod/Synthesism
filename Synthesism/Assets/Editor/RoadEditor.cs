@@ -116,7 +116,7 @@ public class RoadEditor : Editor
             {
 
                 Shape renderShape = RoadMeshCreator.enumToShape(shape);
-                if (road.roadSettings.showVertices || road.roadSettings.showTris || road.roadSettings.showPointNormals || road.roadSettings.showUVs)
+                if (road.roadSettings.showVertices || road.roadSettings.showTris || road.roadSettings.showPointNormals || road.roadSettings.showUVs || road.roadSettings.showVertIndices)
                 {
                     Vector3[] vertices = road.meshCreator.getMeshVertices(roadPoints, renderShape, shape.offset,Vector3.up, road.roadPath.Closed);
                     int[] tris = road.meshCreator.getMeshTris(vertices.Length, renderShape, shape.winding, road.roadPath.Closed);
@@ -130,6 +130,13 @@ public class RoadEditor : Editor
                         }
                     }
 
+                    if(road.roadSettings.showVertIndices)
+                    {
+                        for(int i = 0; i < vertices.Length; i++)
+                        {
+                            Handles.Label(vertices[i],i.ToString());
+                        }
+                    }
                     if (road.roadSettings.showTris)
                     {
                         Handles.color = Color.green;
@@ -332,6 +339,13 @@ public class RoadEditor : Editor
             if (road.roadSettings.showVertices != tempShowVertices)
             {
                 road.roadSettings.showVertices = tempShowVertices;
+                SceneView.RepaintAll();
+            }
+
+            bool tempShowVertIndices = EditorGUILayout.Toggle("Show Vertex Indices", road.roadSettings.showVertIndices);
+            if (road.roadSettings.showVertIndices != tempShowVertIndices)
+            {
+                road.roadSettings.showVertIndices = tempShowVertIndices;
                 SceneView.RepaintAll();
             }
 
