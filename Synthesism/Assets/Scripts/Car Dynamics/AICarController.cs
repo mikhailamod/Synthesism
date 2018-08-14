@@ -200,16 +200,8 @@ public class AICarController : CarController {
     //populate nodes list with nodes from Path
     private void initializePath(GameObject path)
     {
-        Node[] transforms = path.GetComponentsInChildren<Node>();
-        nodes = new List<Node>();
-
-        for (int i = 0; i < transforms.Length; i++)
-        {
-            if (transforms[i] != path.transform)
-            {
-                nodes.Add(transforms[i]);
-            }
-        }
+        Path p = path.GetComponent<Path>();
+        nodes = p.getNodeList();
     }//end method
 
     public override float getCurrentSpeed()
