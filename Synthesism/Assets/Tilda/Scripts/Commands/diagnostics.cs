@@ -11,7 +11,7 @@ public class diagnostics : ICommand
         "-stats The stats of the current machine.";
 
 
-    public object executeCommand(string[] args)
+    public override object executeCommand(string[] args)
     {
         //Diagnose all case
         if(args.Length == 1)
@@ -109,7 +109,7 @@ public class diagnostics : ICommand
         return to_return;
     }
 
-    public string help()
+    public override string help()
     {
         return help_string;
     }

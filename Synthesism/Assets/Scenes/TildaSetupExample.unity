@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -432,7 +432,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1193396489}
   - component: {fileID: 1193396488}
-  - component: {fileID: 1193396487}
   m_Layer: 0
   m_Name: CommandLineEmpty
   m_TagString: Untagged
@@ -440,17 +439,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1193396487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1193396486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bae2174c93389448445d5a717e96b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1193396488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commandHistoryCapacity: 0
-  customCommands: {fileID: 1193396487}
+  customCommands: {fileID: 11400000, guid: 75713695de3a2a140bef8056412cbc70, type: 2}
   command_history: []
   UIController: {fileID: 1462088255}
 --- !u!4 &1193396489
