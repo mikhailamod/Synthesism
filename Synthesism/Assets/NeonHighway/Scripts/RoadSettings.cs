@@ -24,6 +24,7 @@ public class RoadSettings
     public bool showPathProperties = false;
     public bool showPathArrowProperties = false;
     public bool showPathColorProperties = false;
+    public bool showPathLabels = false;
     public bool showMeshProperties = false;
     public bool showPathCenter = false;
 
@@ -32,6 +33,7 @@ public class RoadSettings
     public bool showPointForwards = false;
     public bool showPointBinormals = false;
     public bool showPointNormals = false;
+    
     public bool showVertices = false;
     public bool showTris = false;
     public bool showMeshNormals = false;

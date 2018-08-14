@@ -52,7 +52,7 @@ public class RoadPath
     }
 
     /// <summary>
-    /// Whether the raod is closed or not
+    /// Whether the road is closed or not
     /// </summary>
     public bool Closed
     {
@@ -131,9 +131,10 @@ public class RoadPath
     /// <param name="targetPos">The position at which a user would like there new road segment to end</param>
     public void addSegment(Vector3 targetPos)
     {
+        Vector3 posToPlace = new Vector3(targetPos.x, points[points.Count - 1].Position.y, targetPos.z);
         points.Add(new Point(points[points.Count - 1].Position * 2 - points[points.Count - 2].Position,Quaternion.identity));
-        points.Add(new Point(targetPos + Vector3.up,Quaternion.identity));
-        points.Add(new Point(targetPos,Quaternion.identity));
+        points.Add(new Point(posToPlace + Vector3.up,Quaternion.identity));
+        points.Add(new Point(posToPlace, Quaternion.identity));
     }
 
     /// <summary>

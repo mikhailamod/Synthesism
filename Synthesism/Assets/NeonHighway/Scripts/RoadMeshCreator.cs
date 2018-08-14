@@ -101,15 +101,15 @@ public class RoadMeshCreator
         return shape.getMeshVertices(points, binormals, offset, up, closed);
     }
 
-    public int[] getMeshTris(int vertexCount, Shape shape, bool closed = false)
+    public int[] getMeshTris(int vertexCount, Shape shape, Winding winding, bool closed)
     {
-        return shape.getMeshTris(vertexCount, closed);
+        return shape.getMeshTris(vertexCount, winding, closed);
     }
 
-    public Vector3[] pointToMeshNormals(Point[] points, Shape shape, Vector3 up, bool invertNormals, bool closed = false)
+    public Vector3[] pointToMeshNormals(Point[] points, Shape shape, Vector3 up, Winding winding, bool closed = false)
     {
         Vector3[] normals = getPointsNormal(points, up, closed);
-        return shape.getNormals(points, normals, up,invertNormals, closed);
+        return shape.getNormals(points, normals, up, winding, closed);
     }
 
     //Will have a bug
@@ -143,9 +143,9 @@ public class RoadMeshCreator
         Shape shape = enumToShape(drawShape);
 
         Vector3[] vertices = getMeshVertices(points,shape, drawShape.offset, up, closed);
-        Vector3[] normals = pointToMeshNormals(points, shape, up, drawShape.invertNormals,closed);
+        Vector3[] normals = pointToMeshNormals(points, shape, up, drawShape.winding,closed);
         Vector2[] UVs = getMeshUV(vertices.Length, shape);
-        int[] tris = getMeshTris(vertices.Length, shape, closed);
+        int[] tris = getMeshTris(vertices.Length, shape,drawShape.winding, closed);
 
         mesh.Clear();
         mesh.vertices = vertices;
@@ -186,7 +186,7 @@ public class DrawableShape
     public ShapeToDraw shape;
     public float size;
     public float tiling;
-    public bool invertNormals;
+    public Winding winding;
     public Vector3 offset;
     public Material meshMaterial;
 }

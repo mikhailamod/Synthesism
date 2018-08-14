@@ -12,7 +12,7 @@ public class RoadMesh : Shape
         this.roadWidth = roadWidth;
     }
 
-    public override int[] getMeshTris(int vertexCount, bool closed = false)
+    public override int[] getMeshTris(int vertexCount, Winding winding, bool closed = false)
     {
         List<int> tris = new List<int>();
 
@@ -30,7 +30,7 @@ public class RoadMesh : Shape
                 tris.Add(((i + 1) * 2 + 1) % vertexCount);
             }
         }
-
+        if (winding == Winding.INVERTED) tris.Reverse();
         return tris.ToArray();
     }
 
@@ -69,13 +69,13 @@ public class RoadMesh : Shape
         return vertices.ToArray();
     }
 
-    public override Vector3[] getNormals(Point[] points, Vector3[] normals, Vector3 up, bool invertNormals, bool closed = false)
+    public override Vector3[] getNormals(Point[] points, Vector3[] normals, Vector3 up, Winding winding, bool closed = false)
     {
         Vector3[] meshNormals = new Vector3[normals.Length * 2];
         for (int i = 0; i < meshNormals.Length; i++)
         {
             meshNormals[i] = normals[i / 2];
-            if (invertNormals)
+            if (winding == Winding.INVERTED)
                 meshNormals[i] *= -1;
         }
 

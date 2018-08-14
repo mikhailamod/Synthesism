@@ -71,6 +71,15 @@ public class RoadEditor : Editor
                     Handles.SphereHandleCap(1, node.Position, Quaternion.identity, road.roadSettings.size, EventType.Repaint);
                 }
             }
+
+            if (road.roadSettings.showPathLabels)
+            {
+                for(int i = 0; i < roadPoints.Length; i++)
+                {
+                    Handles.Label(roadPoints[i].Position, i.ToString());
+                }
+            }
+
             if (road.roadSettings.showPointForwards)
             {
                 Handles.color = road.roadSettings.nodeForwardColor;
@@ -110,7 +119,7 @@ public class RoadEditor : Editor
                 if (road.roadSettings.showVertices || road.roadSettings.showTris || road.roadSettings.showPointNormals || road.roadSettings.showUVs)
                 {
                     Vector3[] vertices = road.meshCreator.getMeshVertices(roadPoints, renderShape, shape.offset,Vector3.up, road.roadPath.Closed);
-                    int[] tris = road.meshCreator.getMeshTris(vertices.Length, renderShape, road.roadPath.Closed);
+                    int[] tris = road.meshCreator.getMeshTris(vertices.Length, renderShape, shape.winding, road.roadPath.Closed);
 
                     if (road.roadSettings.showVertices)
                     {
@@ -136,7 +145,7 @@ public class RoadEditor : Editor
                     if (road.roadSettings.showMeshNormals)
                     {
                         Handles.color = Color.white;
-                        Vector3[] vertexNormals = road.meshCreator.pointToMeshNormals(roadPoints, renderShape, Vector3.up, shape.invertNormals, road.roadPath.Closed);
+                        Vector3[] vertexNormals = road.meshCreator.pointToMeshNormals(roadPoints, renderShape, Vector3.up, shape.winding, road.roadPath.Closed);
 
                         for (int i = 0; i < vertexNormals.Length; i++)
                         {
@@ -244,6 +253,13 @@ public class RoadEditor : Editor
             if (road.roadSettings.showPathCenter != showCenter)
             {
                 road.roadSettings.showPathCenter = showCenter;
+                SceneView.RepaintAll();
+            }
+
+            bool showLabel = EditorGUILayout.Toggle("Show Path Labels", road.roadSettings.showPathLabels);
+            if (road.roadSettings.showPathLabels != showLabel)
+            {
+                road.roadSettings.showPathLabels = showLabel;
                 SceneView.RepaintAll();
             }
 
@@ -369,10 +385,10 @@ public class RoadEditor : Editor
                                 SceneView.RepaintAll();
                             }
 
-                            bool tempInvertNormals = EditorGUILayout.Toggle("Invert Normals: ", shape.invertNormals);
-                            if(tempInvertNormals != shape.invertNormals)
+                            Winding tempWinding = (Winding)EditorGUILayout.EnumPopup("Winding: ", shape.winding);
+                            if(tempWinding != shape.winding)
                             {
-                                shape.invertNormals = tempInvertNormals;
+                                shape.winding = tempWinding;
                                 SceneView.RepaintAll();
                             }
 
