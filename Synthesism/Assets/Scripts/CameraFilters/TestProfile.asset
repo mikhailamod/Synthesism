@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2067fadcca839f4ba7eafeae60b1ec5, type: 3}
+  m_Name: TestProfile
+  m_EditorClassIdentifier: 
+  noise:
+    intensity: 0
+    noise: {fileID: 2800000, guid: fc752ae8ec3f66c4fa4a4eb0c1f30618, type: 3}
+  lines:
+    tiling: 0.05
+    contrast: 0.1
+  chromo:
+    rOffset: 0
+    gOffset: 0
+    bOffset: 0
+    factor: 300

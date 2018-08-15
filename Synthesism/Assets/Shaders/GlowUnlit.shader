@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-	_GlowColor("Color", Color) = (1,0,0,1)
+		_GlowColor("Color", Color) = (1,0,0,1)
 		_GlowIntensity("Glow Intensity", Range(0,3)) = 1.0
 	}
 		SubShader
