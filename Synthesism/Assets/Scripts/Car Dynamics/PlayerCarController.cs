@@ -5,12 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCarController : CarController {
 
-    float playerCarSpeed;
-
-    void Start() {
-        playerCarSpeed = carMovementProperties.GetSpeed();
-    }
-
     void FixedUpdate () {
 		MoveVehicle();
 	}
@@ -24,7 +18,7 @@ public class PlayerCarController : CarController {
         carMovementProperties.MoveHorizontal(Input.GetAxis("Horizontal"));      
 
         //looks for appropriate case to move the car otherwise the brake is applied
-        if((inputSpeed > 0 && playerCarSpeed >= 0) || (inputSpeed < 0 && playerCarSpeed <= 0)) {
+        if((inputSpeed > 0 && carMovementProperties.GetSpeed() >= 0) || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0)) {
             carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
         }
         else {
