@@ -350,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedText: {fileID: 2117873644}
   rpmText: {fileID: 440296110}
-  car: {fileID: 0}
+  car: {fileID: 1914772612}
   delta: 0.5
 --- !u!224 &425469694
 RectTransform:
@@ -650,6 +650,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8671ffdba9f1d074287f16bd87ae6e4f, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1914772612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 294924519}
+  m_Script: {fileID: 11500000, guid: f4391326670acb448b588a3b7e65f5d9, type: 3}
 --- !u!1001 &1927288514
 Prefab:
   m_ObjectHideFlags: 0
