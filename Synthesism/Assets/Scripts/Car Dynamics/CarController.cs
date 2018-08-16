@@ -1,10 +1,13 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CarController : MonoBehaviour
-{
+public abstract class CarController : MonoBehaviour {
+	
+	//Get Access to CarMovement Script
+    [Header("Movement Properties")]
+	public CarMovement carMovementProperties;
 
-    protected abstract void MoveVehicle();
-    public abstract float getCurrentSpeed();
-    public abstract float getRpm();
+	//Method which moves the vehicle 
+	public abstract void MoveVehicle();
 }

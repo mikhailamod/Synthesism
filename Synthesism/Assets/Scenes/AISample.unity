@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -208,6 +208,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &146552754 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4188954329240618, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 331442997}
+--- !u!146 &146552755 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 146733750268305658, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 331442997}
+--- !u!146 &191591750 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 146796832050068396, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 331442997}
 --- !u!1 &330125178
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +292,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -314,6 +334,76 @@ Prefab:
       propertyPath: path
       value: 
       objectReference: {fileID: 1847279616}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.maxMotorTorque
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.maxSteeringAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.brakeTorque
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[0].leftWheel.wheelCollider
+      value: 
+      objectReference: {fileID: 1523244983}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[0].rightWheel.wheelCollider
+      value: 
+      objectReference: {fileID: 146552755}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[0].leftWheel.wheel
+      value: 
+      objectReference: {fileID: 650149556}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[0].rightWheel.wheel
+      value: 
+      objectReference: {fileID: 146552754}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[0].steering
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[0].motor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[1].rightWheel.wheelCollider
+      value: 
+      objectReference: {fileID: 191591750}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[1].leftWheel.wheelCollider
+      value: 
+      objectReference: {fileID: 474313077}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[1].rightWheel.wheel
+      value: 
+      objectReference: {fileID: 1422577543}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[1].leftWheel.wheel
+      value: 
+      objectReference: {fileID: 1492223454}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.axleInfos.Array.data[1].motor
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
   m_IsPrefabAsset: 0
@@ -441,6 +531,16 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 440296108}
   m_CullTransparentMesh: 0
+--- !u!146 &474313077 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 146285899666684420, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 331442997}
+--- !u!4 &650149556 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4825793540409726, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 331442997}
 --- !u!1 &741024397
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +618,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 48.036003, y: -60.329002, z: 13.621}
+--- !u!4 &1422577543 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4951028719740090, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 331442997}
+--- !u!4 &1492223454 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4028223219924496, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 331442997}
+--- !u!146 &1523244983 stripped
+WheelCollider:
+  m_CorrespondingSourceObject: {fileID: 146883518744837536, guid: 6fcc6240419583f42aba31c47a853dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 331442997}
 --- !u!114 &1657768229 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
