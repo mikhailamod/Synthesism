@@ -48,9 +48,10 @@ public class CommandLine : MonoBehaviour {
         registerCommand("exists", new exists());
         registerCommand("history", new history(command_history));
 
-        foreach(string commandKey in customCommands.custom_commands.Keys)
+        foreach(CustomCommand command in customCommands.commandList)
         {
-            registerCommand(commandKey,customCommands.custom_commands[commandKey]);
+            ICommand _command = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(command.commandClass) as ICommand;
+            registerCommand(command.alias, _command);
         }
 
     }

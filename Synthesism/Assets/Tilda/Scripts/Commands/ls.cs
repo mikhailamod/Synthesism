@@ -10,7 +10,7 @@ public class ls : ICommand
         "-tag <tag_name> lists all the games tags\n"+
         "-objects <optional: tag_name> lists all the gameobjects";
 
-    public object executeCommand(string[] args)
+    public override object executeCommand(string[] args)
     {
         
         if (args.Length == 1)
@@ -167,7 +167,7 @@ public class ls : ICommand
         return toReturn.Substring(0, toReturn.Length - 1);
     }
 
-    public string help()
+    public override string help()
     {
         return help_string;
     }
