@@ -6,6 +6,6 @@ using UnityEngine;
 public class RetroProfile : ScriptableObject
 {
     public Noise noise;
-    public Lines lines;
+    public ScanLines scanLines;
     public ChromaticAbberation chromo;
 }

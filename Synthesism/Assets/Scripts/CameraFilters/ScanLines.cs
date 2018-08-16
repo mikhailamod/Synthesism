@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
-public class Lines : RetroShader
+public class ScanLines : RetroShader
 {
 
     public float tiling = 1.0f;
@@ -18,6 +18,6 @@ public class Lines : RetroShader
 
     protected override Shader GetShader()
     {
-        return AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/Lines.shader");
+        return AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/ScanLines.shader");
     }
 }
