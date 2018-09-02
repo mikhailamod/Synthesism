@@ -33,4 +33,8 @@ public class PlayerCarController : CarController {
 
         carMovementProperties.RotateWheels();
     }
+
+    public void boost() {
+       carMovementProperties.boost(carMovementProperties.carRigidBody, transform.forward);
+    }
 }
