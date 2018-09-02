@@ -230,7 +230,7 @@ Prefab:
     - target: {fileID: 54218119526862096, guid: a2b23064db5c53849aba2d938965f5eb,
         type: 2}
       propertyPath: m_AngularDrag
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
         type: 2}
@@ -275,7 +275,7 @@ Prefab:
     - target: {fileID: 54218119526862096, guid: a2b23064db5c53849aba2d938965f5eb,
         type: 2}
       propertyPath: m_Drag
-      value: 0.035
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 114854873335016296, guid: a2b23064db5c53849aba2d938965f5eb,
         type: 2}
