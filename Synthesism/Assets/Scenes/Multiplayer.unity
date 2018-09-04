@@ -457,8 +457,8 @@ MonoBehaviour:
       rightWheel:
         wheel: {fileID: 920735445}
         wheelCollider: {fileID: 544112721}
-      motor: 1
-      steering: 1
+      motor: 0
+      steering: 0
     maxMotorTorque: 600
     maxSteeringAngle: 45
     boostSpeed: 0
