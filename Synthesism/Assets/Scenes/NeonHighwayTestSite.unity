@@ -1946,237 +1946,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -187.44699
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_ExtremumSlip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_ExtremumSlip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_ExtremumSlip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_ExtremumSlip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_ExtremumSlip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_ExtremumSlip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_ExtremumSlip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_ExtremumSlip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114854873335016296, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: carMovementProperties.axleInfos.Array.data[1].motor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_ExtremumValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 2.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_ExtremumValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_ExtremumValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_ExtremumValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_ExtremumValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_ExtremumValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_ExtremumValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_ExtremumValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 2.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 2.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 2.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_Mass
-      value: 16.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_Mass
-      value: 16.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_Mass
-      value: 16.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_Mass
-      value: 16.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SuspensionDistance
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SuspensionDistance
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SuspensionDistance
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SuspensionDistance
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_AsymptoteValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_AsymptoteValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_AsymptoteValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_SidewaysFriction.m_AsymptoteValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 54218119526862096, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_Mass
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 114854873335016296, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: carMovementProperties.axleInfos.Array.data[0].motor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114854873335016296, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: carMovementProperties.brakeTorque
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 114854873335016296, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: carMovementProperties.maxMotorTorque
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 146926222659385620, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_AsymptoteValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146213351447072334, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_AsymptoteValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146497528466459514, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_AsymptoteValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 146234968942776316, guid: a2b23064db5c53849aba2d938965f5eb,
-        type: 2}
-      propertyPath: m_ForwardFriction.m_AsymptoteValue
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1215650549347758, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81014287254106404, guid: a2b23064db5c53849aba2d938965f5eb,
+        type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2314,6 +2090,87 @@ Transform:
   m_Father: {fileID: 546403170}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1508397236
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -44.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -44.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.172047
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.98508877
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: path
+      value: 
+      objectReference: {fileID: 546403168}
+    - target: {fileID: 1457128910711814, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_Name
+      value: AI Fast Car (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448982087068564, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448982087068564, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448982087068564, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457128910711814, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114814466948946640, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: carMovementProperties.maxMotorTorque
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238393177898758, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81676695336595410, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1738866474
 Prefab:
   m_ObjectHideFlags: 0
@@ -2323,15 +2180,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -42.73
+      value: -47.24
       objectReference: {fileID: 0}
     - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.2
+      value: 2.72
       objectReference: {fileID: 0}
     - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -30.86
+      value: -34.75
       objectReference: {fileID: 0}
     - target: {fileID: 4882984827701238, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2358,6 +2215,19 @@ Prefab:
       propertyPath: path
       value: 
       objectReference: {fileID: 546403168}
+    - target: {fileID: 81518693689763922, guid: 6fcc6240419583f42aba31c47a853dac,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529402812071460, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457128910711814, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fcc6240419583f42aba31c47a853dac, type: 2}
   m_IsPrefabAsset: 0
@@ -2448,23 +2318,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 1349204084}
---- !u!1 &1789512661 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1017768836140900, guid: a2b23064db5c53849aba2d938965f5eb,
-    type: 2}
-  m_PrefabInternal: {fileID: 1363319747}
---- !u!114 &1789512665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1789512661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 37ddc98422d16834c8bf4c2d7d25aee8, type: 2}
 --- !u!1 &1814253487
 GameObject:
   m_ObjectHideFlags: 0
