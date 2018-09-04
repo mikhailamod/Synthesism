@@ -5,9 +5,6 @@ using UnityEngine;
 public class AICarController : CarController {
 
     public GameObject path;
-
-    [Header("Car Movement Properties")]
-    public CarMovement carMovement;
     public Vector3 centreOfMass;
 
     [Header("AI Movement Properties")]
@@ -42,15 +39,15 @@ public class AICarController : CarController {
         UpdateWaypoint();
     }
 
-    protected override void MoveVehicle()
+    public override void MoveVehicle()
     {
         float turnOffset = UseSensors();
         float steerAmount = SteerCar();
         float driveAmount = Drive();
-        carMovement.MoveHorizontal(steerAmount+turnOffset);
-        carMovement.MoveVertical(driveAmount);
+        carMovementProperties.MoveHorizontal(steerAmount+turnOffset);
+        carMovementProperties.MoveVertical(driveAmount);
         Brake();
-        carMovement.RotateWheels();
+        carMovementProperties.RotateWheels();
         if(isBraking && currentSpeed < (maxSpeed * driveAmount))
         {
             isBraking = false;
@@ -84,7 +81,7 @@ public class AICarController : CarController {
         }
 
         //front left angled
-        else if (Physics.Raycast(frontLeftSensorPos, Quaternion.AngleAxis(-frontSensorAngle, transform.up)*transform.forward, out raycastHit, sensorLength))
+        if (Physics.Raycast(frontLeftSensorPos, Quaternion.AngleAxis(-frontSensorAngle, transform.up)*transform.forward, out raycastHit, sensorLength))
         {
             if (raycastHit.collider.CompareTag("Obstacle"))
             {
@@ -108,7 +105,7 @@ public class AICarController : CarController {
         }
 
         //front right angled
-        else if (Physics.Raycast(frontRightSensorPos, Quaternion.AngleAxis(frontSensorAngle, transform.up) * transform.forward, out raycastHit, sensorLength))
+        if (Physics.Raycast(frontRightSensorPos, Quaternion.AngleAxis(frontSensorAngle, transform.up) * transform.forward, out raycastHit, sensorLength))
         {
             if (raycastHit.collider.CompareTag("Obstacle"))
             {
@@ -163,7 +160,7 @@ public class AICarController : CarController {
 
     private float Drive()
     {
-        currentSpeed = carMovement.GetSpeed();
+        currentSpeed = carMovementProperties.GetSpeed();
         Node nodeInfo = nodes[currentNode];
 
         //check current Node if we should break and what speed we should be going at
@@ -189,36 +186,28 @@ public class AICarController : CarController {
     {
         if(isBraking)
         {
-            carMovement.brake();
+            carMovementProperties.brake();
         }
         else
         {
-            carMovement.setBrakeTorque(0);
+            carMovementProperties.setBrakeTorque(0);
         }
     }
 
     //populate nodes list with nodes from Path
     private void initializePath(GameObject path)
     {
-        Node[] transforms = path.GetComponentsInChildren<Node>();
-        nodes = new List<Node>();
-
-        for (int i = 0; i < transforms.Length; i++)
-        {
-            if (transforms[i] != path.transform)
-            {
-                nodes.Add(transforms[i]);
-            }
-        }
+        Path p = path.GetComponent<Path>();
+        nodes = p.getNodeList();
     }//end method
 
-    public override float getCurrentSpeed()
+    public float getCurrentSpeed()
     {
         return currentSpeed;
     }
 
-    public override float getRpm()
+    public float getRpm()
     {
-        return carMovement.GetRpm();
+        return carMovementProperties.GetRpm();
     }
 }
