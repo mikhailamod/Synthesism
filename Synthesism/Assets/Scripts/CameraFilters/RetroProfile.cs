@@ -8,4 +8,5 @@ public class RetroProfile : ScriptableObject
     public Noise noise;
     public ScanLines scanLines;
     public ChromaticAbberation chromo;
+    public Distortion distortion;
 }

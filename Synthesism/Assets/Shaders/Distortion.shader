@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Distortion"
+﻿Shader "RetroFilters/Distortion"
 {
 	Properties
 	{
@@ -38,12 +38,14 @@
 			}
 			
 			sampler2D _MainTex;
+			float _scale;
+			float _offset;
+			float _AnimationSpeed;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, i.uv);
-				// just invert the colors
-				col.rgb = 1 - col.rgb;
+				float xOffset = i.uv.y * (_scale * cos(_Time.x * _AnimationSpeed) + _offset);
+				fixed4 col = tex2D(_MainTex, float2(i.uv.x,xOffset));
 				return col;
 			}
 			ENDCG

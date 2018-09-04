@@ -20,6 +20,7 @@ public class RetroFilter : MonoBehaviour
     {
         Graphics.Blit(src, src, profile.noise.Material);
         Graphics.Blit(src, src, profile.scanLines.Material);
+        Graphics.Blit(src, src, profile.distortion.Material);
         Graphics.Blit(src, dst, profile.chromo.Material);
     }
 }
