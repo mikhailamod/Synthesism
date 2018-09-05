@@ -24,13 +24,13 @@ public class RaceEntity : MonoBehaviour {
     public void StartRace()
     {
         startLapTime = Time.time;
-        lapCountLabel.text = RaceManager.instance.getLap(this) + "/" + RaceManager.instance.numLaps;
+        if(!isAi) lapCountLabel.text = RaceManager.instance.getLap(this) + "/" + RaceManager.instance.numLaps;
         bestLapTime = float.MaxValue;
     }
 
     private void Update()
     {
-        if(RaceManager.instance.raceStarted)
+        if(RaceManager.instance.raceStarted && !isAi)
         {
             lapTime = Time.time - startLapTime;
             lapTimeLabel.text = milliTimeToString(lapTime);
@@ -51,11 +51,11 @@ public class RaceEntity : MonoBehaviour {
             if(RaceManager.instance.checkpoint(this, checkPointNum))
             {
                 Debug.Log("Lap Completed");
-                lapCountLabel.text = RaceManager.instance.getLap(this) + "/" + RaceManager.instance.numLaps;
+                if(!isAi) lapCountLabel.text = RaceManager.instance.getLap(this) + "/" + RaceManager.instance.numLaps;
                 if (lapTime < bestLapTime)
                 {
                     bestLapTime = lapTime;
-                    bestTimeLabel.text = milliTimeToString(bestLapTime);
+                    if(!isAi) bestTimeLabel.text = milliTimeToString(bestLapTime);
                 }
                 startLapTime = Time.time;
             }

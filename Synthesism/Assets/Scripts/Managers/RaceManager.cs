@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RaceManager : MonoSingleton<RaceManager>
 {
@@ -10,6 +11,10 @@ public class RaceManager : MonoSingleton<RaceManager>
     public Dictionary<RaceEntity, List<int>> racers = new Dictionary<RaceEntity, List<int>>();
 
     public bool raceStarted = false;
+    public bool raceFinished = false;
+
+    public GameObject winnerPanel;
+    public Text winnerText;
 
     public void registerCheckpoint()
     {
@@ -32,6 +37,12 @@ public class RaceManager : MonoSingleton<RaceManager>
                 racers[car][1] = checkpointID;
                 bool lapCompleted =  (racers[car][1] % numCheckpoints == 0) ? true : false;
                 racers[car][0] += (lapCompleted) ? 1 : 0;
+                if (lapCompleted && !raceFinished && isFinished(car))
+                {
+                    raceFinished = true;
+                    winnerPanel.SetActive(true);
+                    winnerText.text = car.name + " Wins!!!";
+                }         
                 return lapCompleted;
             }
             return false;
