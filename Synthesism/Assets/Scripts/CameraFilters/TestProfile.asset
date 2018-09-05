@@ -15,8 +15,8 @@ MonoBehaviour:
     intensity: 0.02
     noise: {fileID: 2800000, guid: fc752ae8ec3f66c4fa4a4eb0c1f30618, type: 3}
   scanLines:
-    tiling: 0.78
-    contrast: 0.5
+    tiling: 0.45
+    contrast: 0.25
   chromo:
     rOffset: 0.2
     gOffset: 0
