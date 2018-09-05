@@ -13,6 +13,7 @@ public class CarMovement
     public float boostSpeed;
     public float brakeTorque;
     public float brakeSpeed;
+    public float maxSpeed = 80f;
 
     /// <summary>
     /// Adds force in either the left or right direction using the speed variable to determine how fast the car should move
