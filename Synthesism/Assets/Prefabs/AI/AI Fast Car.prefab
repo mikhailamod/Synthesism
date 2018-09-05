@@ -74,7 +74,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1457128910711814
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 54403599476987406}
   - component: {fileID: 114814466948946640}
   - component: {fileID: 114138617155993222}
+  - component: {fileID: 114607894426236044}
   m_Layer: 0
   m_Name: AI Fast Car
   m_TagString: AI
@@ -161,7 +162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1702863332551702
 GameObject:
   m_ObjectHideFlags: 1
@@ -439,8 +440,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457128910711814}
-  m_LocalRotation: {x: -0, y: 0.172047, z: -0, w: 0.98508877}
-  m_LocalPosition: {x: -47.24, y: 2.72, z: -34.75}
+  m_LocalRotation: {x: 0.01906805, y: -0.3837701, z: -0.09407079, w: 0.9184267}
+  m_LocalPosition: {x: -53.602005, y: 3.2003443, z: 16.599781}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4825793540409726}
@@ -454,7 +455,7 @@ Transform:
   - {fileID: 4653843060533970}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 19.814001, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.131, y: -45.154003, z: -10.81}
 --- !u!4 &4951028719740090
 Transform:
   m_ObjectHideFlags: 1
@@ -765,7 +766,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457128910711814}
   serializedVersion: 2
-  m_Mass: 750
+  m_Mass: 550
   m_Drag: 0.1
   m_AngularDrag: 0.5
   m_UseGravity: 1
@@ -811,7 +812,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bedc3175cc7922342ac711d511771790, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -902,14 +903,30 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457128910711814}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c6f19c3fa3d2dd44883eb0d4c749f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   engineLoop:
   - {fileID: 82120284969385836}
-  intervalLength: 2
+--- !u!114 &114607894426236044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1457128910711814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27df7211608c1774889e04908f98bc92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAi: 1
+  lapCountLabel: {fileID: 0}
+  lapTimeLabel: {fileID: 0}
+  bestTimeLabel: {fileID: 0}
+  lapTime: 0
+  bestLapTime: 0
 --- !u!114 &114814466948946640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -939,19 +956,20 @@ MonoBehaviour:
         wheelCollider: {fileID: 146796832050068396}
       motor: 1
       steering: 0
-    maxMotorTorque: 300
+    maxMotorTorque: 600
     maxSteeringAngle: 45
     boostSpeed: 0
-    brakeTorque: 300
+    brakeTorque: 600
     brakeSpeed: 0
     maxSpeed: 80
+    carRigidBody: {fileID: 0}
   path: {fileID: 0}
   centreOfMass: {x: 0, y: -0.2, z: 0}
-  minNodeDistance: 15
+  minNodeDistance: 20
   currentSpeed: 0
-  maxSpeed: 80
-  minSpeed: 40
-  maxCornerSpeed: 50
+  maxSpeed: 200
+  minSpeed: 60
+  maxCornerSpeed: 60
   isBraking: 0
   sensorLength: 3
   frontSensorOffset: {x: 0, y: 0, z: 3.75}

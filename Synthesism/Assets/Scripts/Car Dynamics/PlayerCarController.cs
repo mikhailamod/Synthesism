@@ -6,7 +6,11 @@ using UnityEngine;
 public class PlayerCarController : CarController {
 
     void FixedUpdate () {
-		MoveVehicle();
+        if (RaceManager.instance.raceStarted)
+        {
+            MoveVehicle();
+        }
+		
 	}
 
 	public override void MoveVehicle()
