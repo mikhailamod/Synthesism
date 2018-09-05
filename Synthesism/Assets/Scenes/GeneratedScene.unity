@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -221,70 +221,48 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46c697ca7d971734cb8cfd4aac77262a, type: 2}
   m_IsPrefabAsset: 0
---- !u!4 &403411872 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb,
-    type: 2}
-  m_PrefabInternal: {fileID: 1207548576}
---- !u!1001 &1207548576
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 3.8799465
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.1113877
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 1.8098849
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.97629607
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: -0.2164395
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020727957071822, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
-  m_IsPrefabAsset: 0
---- !u!1 &2025981151 stripped
+--- !u!1 &2040872943
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1017768836140900, guid: a2b23064db5c53849aba2d938965f5eb,
-    type: 2}
-  m_PrefabInternal: {fileID: 1207548576}
---- !u!114 &2025981155
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2040872945}
+  - component: {fileID: 2040872944}
+  m_Layer: 0
+  m_Name: SceneLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2040872944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2025981151}
+  m_GameObject: {fileID: 2040872943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6fad267bf070844b4b4ef475c0f4b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 69b39cfea2ae3f6458cc6f09d6bca59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 10
-  lookSpeed: 10
-  targetObject: {fileID: 403411872}
-  offset: {x: 0, y: 3, z: -8}
+  isMultiplayer: 1
+  cars:
+  - {fileID: 1208655997827866, guid: 5038994651499fb4689fc81cdc42f103, type: 2}
+  - {fileID: 1517262709736650, guid: 4aabd8e0327be9b4a897b2a8401fa73f, type: 2}
+  divider: {fileID: 1272933819725872, guid: 83353592d9c4ff34195cdec4164670b0, type: 2}
+--- !u!4 &2040872945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040872943}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 512, y: 423, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
