@@ -1,0 +1,78 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RaceManager : MonoSingleton<RaceManager>
+{
+
+    public int numLaps = 1;
+    public int numCheckpoints = 0;
+    public Dictionary<RaceEntity, List<int>> racers = new Dictionary<RaceEntity, List<int>>();
+
+    public bool raceStarted = false;
+
+    public void registerCheckpoint()
+    {
+        numCheckpoints++;
+    }
+
+    public void registerCar(RaceEntity car)
+    {
+        if(!racers.ContainsKey(car))
+            racers[car] = new List<int> { 0, 0 };
+    }
+
+    public bool checkpoint(RaceEntity car, int checkpointID)
+    {
+        if(racers.ContainsKey(car))
+        {
+            
+            if((racers[car][1] + 1) % numCheckpoints == checkpointID)
+            {
+                racers[car][1] = checkpointID;
+                bool lapCompleted =  (racers[car][1] % numCheckpoints == 0) ? true : false;
+                racers[car][0] += (lapCompleted) ? 1 : 0;
+                return lapCompleted;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public bool isFinished(RaceEntity car)
+    {
+        if(racers.ContainsKey(car))
+        {
+            if (racers[car][0] >= numLaps)
+                return true;
+            else
+                return false;
+        }
+        return false;
+    }
+
+    public int getLap(RaceEntity car)
+    {
+        if (racers.ContainsKey(car))
+            return racers[car][0];
+        else
+            return -1;
+    }
+
+    public float getCheckpointPercentage(RaceEntity car)
+    {
+        if (racers.ContainsKey(car))
+            return (racers[car][1]*100)/numCheckpoints;
+        else
+            return -1;
+    }
+
+    public void StartRace()
+    {
+        raceStarted = true;
+        foreach(RaceEntity e in racers.Keys)
+        {
+            e.StartRace();
+        }
+    }
+}
