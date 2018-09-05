@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuController : MonoBehaviour {
+public class MenuController : MonoBehaviour
+{
 
     private void Start()
     {
         MusicManager.instance.PlaySong();
     }
 
-    public void Play()
+    public void SinglePlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void TwoPlayer()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 }

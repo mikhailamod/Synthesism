@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NeonHighwayTestSite.unity
     guid: 4caa4a328dbc83f43914a68505cf5db5
+  - enabled: 1
+    path: Assets/Scenes/AISample.unity
+    guid: a1fb2eb9f5202e2468f1a5a0aa0903b8
   m_configObjects: {}
