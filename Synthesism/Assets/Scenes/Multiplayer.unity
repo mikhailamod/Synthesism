@@ -438,7 +438,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 819934583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c13c18b1e34c4ee40a6a86c56e7eaa83, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a20aed6fff26564e8cda36f87d48a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   carMovementProperties:
@@ -464,6 +464,7 @@ MonoBehaviour:
     boostSpeed: 0
     brakeTorque: 1200
     brakeSpeed: 0
+  playerInput: {fileID: 11400000, guid: c3c550c2a21023246b5dc3a2e54d1a03, type: 2}
 --- !u!4 &920735445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4205104537990668, guid: a2b23064db5c53849aba2d938965f5eb,
@@ -660,6 +661,12 @@ Prefab:
       propertyPath: m_NormalizedViewPortRect.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114854873335016296, guid: a2b23064db5c53849aba2d938965f5eb,
+        type: 2}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 11400000, guid: b53e25a080fe46745b8567fcc0cdd605,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
   m_IsPrefabAsset: 0
