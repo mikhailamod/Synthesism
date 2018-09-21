@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoostController : MonoBehaviour {
+
+	public float boostSpeed;
+
 	void OnTriggerEnter(Collider other) {
-		Debug.Log("Collided with boost!");
-		Destroy(this.gameObject);
-		other.gameObject.GetComponent<PlayerCarController>().boost();
+		other.gameObject.GetComponent<Rigidbody>().AddForce(other.transform.forward * boostSpeed, ForceMode.Impulse);
 	}
+
+
 }

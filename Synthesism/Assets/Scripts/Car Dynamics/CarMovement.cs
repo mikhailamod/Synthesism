@@ -99,12 +99,6 @@ public class CarMovement
         return axleInfos[0].leftWheel.wheelCollider.rpm;
     }
 
-    //applies additional boost force to vehicle
-    public void boost(Rigidbody rigid, Vector3 dir)
-    {
-        rigid.AddForce(dir * boostSpeed, ForceMode.Impulse);
-    }
-
 }
 
 [System.Serializable]
