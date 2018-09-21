@@ -5,8 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCarController : CarController {
 
+    public bool debugMode = false;
+
     void FixedUpdate () {
-        if (RaceManager.instance.raceStarted)
+        if (!debugMode)
+        {
+            if (RaceManager.instance.raceStarted)
+            {
+                MoveVehicle();
+            }
+        }
+        else
         {
             MoveVehicle();
         }

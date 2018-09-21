@@ -10,4 +10,5 @@ public abstract class CarController : MonoBehaviour {
 
 	//Method which moves the vehicle 
 	public abstract void MoveVehicle();
+
 }
