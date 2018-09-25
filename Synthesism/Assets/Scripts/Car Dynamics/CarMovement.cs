@@ -99,28 +99,33 @@ public class CarMovement
         }
     }
 
-    //gets the current speed of the car based on the circumference
+    //get the average current speed of all wheels based on the circumference
     public float GetSpeed() {
         float fl =  (float)(2 * Mathf.PI *
             axleInfos[0].leftWheel.wheelCollider.radius *
             axleInfos[0].leftWheel.wheelCollider.rpm * 0.06);
+
         float fr = (float)(2 * Mathf.PI *
             axleInfos[0].rightWheel.wheelCollider.radius *
             axleInfos[0].rightWheel.wheelCollider.rpm * 0.06);
+
         float bl = (float)(2 * Mathf.PI *
             axleInfos[1].leftWheel.wheelCollider.radius *
             axleInfos[1].leftWheel.wheelCollider.rpm * 0.06);
+
         float br = (float)(2 * Mathf.PI *
             axleInfos[1].rightWheel.wheelCollider.radius *
             axleInfos[1].rightWheel.wheelCollider.rpm * 0.06);
 
         float x = (fl + fr + bl + br) / 4;
-        if (x > maxSpeed) { x = maxSpeed; }
+        if (x > maxSpeed) { x = maxSpeed; }//this is a hack for engine sound at the moment
         return x;
     }
 
+    //get the average rpm of all four wheels
     public float GetRpm()
     {
+        
         float fl = axleInfos[0].leftWheel.wheelCollider.rpm;
         float fr = axleInfos[0].rightWheel.wheelCollider.rpm;
         float bl = axleInfos[1].leftWheel.wheelCollider.rpm;

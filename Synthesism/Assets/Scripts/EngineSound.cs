@@ -20,8 +20,9 @@ public class EngineSound : MonoBehaviour {
 
     private void Update()
     {
-        float x = (carController.carMovementProperties.GetSpeed() / (carController.carMovementProperties.maxSpeed*2)) + 0.5f;
-        if(x > 1f) { x = 1f; }
-        engineLoop[currentSound].pitch = x;
+        float tempPitch = (carController.carMovementProperties.GetSpeed() /
+            (carController.carMovementProperties.maxSpeed*2)) + 0.5f;
+        if(tempPitch > 1f) { tempPitch = 1f; }//limit pitch just in case it goes over
+        engineLoop[currentSound].pitch = tempPitch;
     }
 }
