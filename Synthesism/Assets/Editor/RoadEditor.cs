@@ -439,6 +439,11 @@ public class RoadEditor : Editor
         {
             road.meshCreator.generateMeshes("GeneratedMesh", road.roadPath.getRoadPathPoints(road.roadSettings.spacing),Vector3.up, road.roadSettings.spacing, road.roadPath.Closed);
         }
+
+        if(GUILayout.Button("Flatten Mesh"))
+        {
+            road.roadPath.Flatten(0.0f);
+        }
     }
 
     void OnSceneGUI()

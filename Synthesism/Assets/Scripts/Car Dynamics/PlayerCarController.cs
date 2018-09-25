@@ -6,7 +6,11 @@ using UnityEngine;
 public class PlayerCarController : CarController {
 
     void FixedUpdate () {
-		MoveVehicle();
+        if (RaceManager.instance.raceStarted)
+        {
+            MoveVehicle();
+        }
+		
 	}
 
 	public override void MoveVehicle()
@@ -32,5 +36,9 @@ public class PlayerCarController : CarController {
         }
 
         carMovementProperties.RotateWheels();
+    }
+
+    public void boost() {
+       carMovementProperties.boost(carMovementProperties.carRigidBody, transform.forward);
     }
 }

@@ -242,6 +242,15 @@ public class RoadPath
         return pointsToReturn.ToArray();
     }
     
+
+    public void Flatten(float height)
+    {
+        foreach(Point p in points)
+        {
+            p.position = new Vector3(p.position.x, height, p.position.z);
+        }
+    }
+
     public static Vector3 getCenter(Point[] points)
     {
         Vector3 center = Vector3.zero;
@@ -264,8 +273,10 @@ public class RoadPath
 [System.Serializable]
 public class Point
 {
-    private Vector3 position;
-    private Quaternion rotation;
+    [SerializeField]
+    public Vector3 position;
+    [SerializeField]
+    public Quaternion rotation;
 
     public Point(Vector3 pos, Quaternion rot)
     {

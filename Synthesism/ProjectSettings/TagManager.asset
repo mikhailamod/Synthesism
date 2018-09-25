@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Track
   - Obstacle
+  - Checkpoint
+  - AI
   layers:
   - Default
   - TransparentFX

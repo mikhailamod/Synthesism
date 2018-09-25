@@ -21,6 +21,8 @@ public class AICarController : CarController {
     public Vector3 sideSensorOffset = Vector3.zero;
     public float frontSensorAngle = 30f;
 
+    public List<string> listOfTags;
+
     //Private
     private List<Node> nodes;
     private int currentNode;
@@ -35,8 +37,12 @@ public class AICarController : CarController {
     }
 
     void FixedUpdate() {
-        MoveVehicle();
-        UpdateWaypoint();
+        if (RaceManager.instance.raceStarted)
+        {
+            MoveVehicle();
+            UpdateWaypoint();
+        }
+        
     }
 
     public override void MoveVehicle()
@@ -72,7 +78,8 @@ public class AICarController : CarController {
         //front left
         if (Physics.Raycast(frontLeftSensorPos, transform.forward, out raycastHit, sensorLength))
         {
-            if (raycastHit.collider.CompareTag("Obstacle"))
+            string theTag = raycastHit.collider.tag;
+            if (listOfTags.Contains(theTag))
             {
                 oneHit = true;
                 turnOffset += 1f;
@@ -83,7 +90,8 @@ public class AICarController : CarController {
         //front left angled
         if (Physics.Raycast(frontLeftSensorPos, Quaternion.AngleAxis(-frontSensorAngle, transform.up)*transform.forward, out raycastHit, sensorLength))
         {
-            if (raycastHit.collider.CompareTag("Obstacle"))
+            string theTag = raycastHit.collider.tag;
+            if (listOfTags.Contains(theTag))
             {
                 oneHit = true;
                 turnOffset += 0.75f;
@@ -95,7 +103,8 @@ public class AICarController : CarController {
         //front right
         if (Physics.Raycast(frontRightSensorPos, transform.forward, out raycastHit, sensorLength))
         {
-            if (raycastHit.collider.CompareTag("Obstacle"))
+            string theTag = raycastHit.collider.tag;
+            if (listOfTags.Contains(theTag))
             {
                 oneHit = true;
                 turnOffset -= 1f;
@@ -107,7 +116,8 @@ public class AICarController : CarController {
         //front right angled
         if (Physics.Raycast(frontRightSensorPos, Quaternion.AngleAxis(frontSensorAngle, transform.up) * transform.forward, out raycastHit, sensorLength))
         {
-            if (raycastHit.collider.CompareTag("Obstacle"))
+            string theTag = raycastHit.collider.tag;
+            if (listOfTags.Contains(theTag))
             {
                 oneHit = true;
                 turnOffset -= 0.75f;
@@ -121,7 +131,8 @@ public class AICarController : CarController {
             //front
             if (Physics.Raycast(frontSensorPos, transform.forward, out raycastHit, sensorLength))
             {
-                if (raycastHit.collider.CompareTag("Obstacle"))
+                string theTag = raycastHit.collider.tag;
+                if (listOfTags.Contains(theTag))
                 {
                     oneHit = true;
                     if (raycastHit.normal.x < 0) { turnOffset = -1f; }
