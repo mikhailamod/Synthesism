@@ -14,6 +14,9 @@ public class CarMovement
     public float brakeTorque;
     public float brakeSpeed;
     public Rigidbody carRigidBody;
+
+    public bool hasSpike; //powerup
+    public bool hasOil; //powerip
     
     /// <summary>
     /// Adds force in either the left or right direction using the speed variable to determine how fast the car should move

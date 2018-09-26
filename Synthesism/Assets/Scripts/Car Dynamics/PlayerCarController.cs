@@ -5,8 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCarController : CarController {
 
+    public ActivatePickup pickupHandler;
+
     void FixedUpdate () {
 		MoveVehicle();
+        pickupHandler = GetComponent<ActivatePickup>();
 	}
 
 	public override void MoveVehicle()
@@ -29,6 +32,12 @@ public class PlayerCarController : CarController {
         if(Input.GetButton("Handbrake"))
         {
             carMovementProperties.brake();
+        }
+
+        //Force break
+        if(Input.GetButton("FireSpike") && carMovementProperties.hasSpike)
+        {
+            pickupHandler.FireSpike(transform.forward);
         }
 
         carMovementProperties.RotateWheels();
