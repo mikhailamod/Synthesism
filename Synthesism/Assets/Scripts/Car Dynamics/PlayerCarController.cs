@@ -38,7 +38,9 @@ public class PlayerCarController : CarController {
         if(Input.GetButton("FireSpike") && carMovementProperties.hasSpike)
         {
             pickupHandler.FireSpike(transform.forward);
+            carMovementProperties.hasSpike = false;
         }
+
 
         carMovementProperties.RotateWheels();
     }

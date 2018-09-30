@@ -5,10 +5,15 @@ using UnityEngine;
 public class ActivatePickup : MonoBehaviour {
 
 	public float heightOffset;
+	public float spikeSpeed;
+	
+	public Transform spikePosition;
 	public GameObject spike;
 
 	// Use this for initialization
 	public void FireSpike(Vector3 dir) {
-		Instantiate(spike);
+		GameObject moveSpike = Instantiate(spike);
+		moveSpike.transform.position = (spikePosition.position);
+		moveSpike.GetComponent<Rigidbody>().AddForce(spikePosition.transform.forward * spikeSpeed);
 	}
 }
