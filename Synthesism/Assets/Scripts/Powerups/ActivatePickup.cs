@@ -14,6 +14,7 @@ public class ActivatePickup : MonoBehaviour {
 	public void FireSpike(Vector3 dir) {
 		GameObject moveSpike = Instantiate(spike);
 		moveSpike.transform.position = (spikePosition.position);
+		moveSpike.transform.rotation = spikePosition.rotation;
 		moveSpike.GetComponent<Rigidbody>().AddForce(spikePosition.transform.forward * spikeSpeed);
 	}
 }
