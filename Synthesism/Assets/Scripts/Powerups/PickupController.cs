@@ -19,7 +19,7 @@ public class PickupController : MonoBehaviour {
 
 		//true for testing
 		
-		if(true) {
+		if(false) {
 			other.gameObject.GetComponent<PlayerCarController>().carMovementProperties.hasSpike = true;
 		}
 		else {

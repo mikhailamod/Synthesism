@@ -16,7 +16,11 @@ public class CarMovement
     public Rigidbody carRigidBody;
 
     public bool hasSpike; //powerup
-    public bool hasOil; //powerip
+    public bool hasOil; //powerup
+
+	public float stiffnessValue; // original stiffness
+	public float slipValue; // new stiffness
+	public float slipTime; // how long the new stiffness should last
     
     /// <summary>
     /// Adds force in either the left or right direction using the speed variable to determine how fast the car should move
@@ -82,6 +86,19 @@ public class CarMovement
         }
     }
 
+    public void setAxelStiffness(float val) {
+        foreach (AxleInfo info in axleInfos)
+        {
+            WheelFrictionCurve leftFriction = info.leftWheel.wheelCollider.sidewaysFriction;
+            leftFriction.stiffness = val;
+            info.leftWheel.wheelCollider.sidewaysFriction = leftFriction;
+
+            WheelFrictionCurve rightFriction = info.rightWheel.wheelCollider.sidewaysFriction;
+            rightFriction.stiffness = val;
+            info.rightWheel.wheelCollider.sidewaysFriction = rightFriction;
+        }
+    }
+
     //sets the motor torque on each wheel for each axle
     public void setMotorTorque(float val)
     {
@@ -101,6 +118,14 @@ public class CarMovement
     {
         return axleInfos[0].leftWheel.wheelCollider.rpm;
     }
+
+    //changes stiffness for time period sliptime
+	public IEnumerator slip() {
+		setAxelStiffness(slipValue);
+		yield return new WaitForSeconds(slipTime);
+		setAxelStiffness(stiffnessValue);
+	}
+
 
 }
 

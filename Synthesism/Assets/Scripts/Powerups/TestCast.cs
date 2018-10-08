@@ -8,6 +8,6 @@ public class TestCast : MonoBehaviour {
     {
         RaycastHit hit;
 		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-		Debug.Log("Did not Hit");
+		//Debug.Log("Did not Hit");
     }
 }
