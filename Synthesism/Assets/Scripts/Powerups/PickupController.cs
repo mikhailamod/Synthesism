@@ -18,7 +18,6 @@ public class PickupController : MonoBehaviour {
 		isSpike = Random.value>0.5;
 
 		//true for testing
-		
 		if(true) {
 			other.gameObject.GetComponent<PlayerCarController>().carMovementProperties.hasSpike = true;
 		}

@@ -9,6 +9,7 @@ public class ActivatePickup : MonoBehaviour {
 	
 	public Transform spikePosition;
 	public GameObject spike;
+	public ParticleSystem smoke;
 
 	// Use this for initialization
 	public void FireSpike(Vector3 dir) {
