@@ -8,10 +8,10 @@ public class SpikeController : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		StartCoroutine(destroySpike(other));
-		explosion.Play();
 	}
 
 	private IEnumerator destroySpike(Collider other) {
+		explosion.Play();
 		yield return new WaitForSeconds(1);
 		Destroy(gameObject);
 		if(other.gameObject.tag=="Player") {
