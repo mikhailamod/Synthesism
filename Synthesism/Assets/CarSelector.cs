@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 public class CarSelector : MonoBehaviour {
 
@@ -12,24 +13,36 @@ public class CarSelector : MonoBehaviour {
 
     public float liftAmount = 0.5f;
 
+    bool active = false;
     bool fastCarSelected = true;
 
-    private void Start()
+    // Update is called once per frame
+    void Update () {
+        if(active)
+        {
+            if (Input.GetButtonDown("Horizontal"))
+            {
+                SwitchSelection();
+            }
+            if (Input.GetButtonDown("Handbrake"))
+            {
+                ConfirmSelection();
+            }
+        }
+	}
+
+    public void setToActive()
     {
+        active = true;
         Vector3 v = fastCar.transform.position;
         v.y += liftAmount;
         fastCar.transform.position = v;
         selectText.text = "Sports Car Selected";
         infoText.text = sportsInfo;
-    }
 
-    // Update is called once per frame
-    void Update () {
-        if(Input.GetButtonDown("Horizontal"))
-        {
-            SwitchSelection();
-        }
-	}
+        selectText.gameObject.SetActive(true);
+        infoText.gameObject.SetActive(true);
+    }
 
     void SwitchSelection()
     {
@@ -59,5 +72,17 @@ public class CarSelector : MonoBehaviour {
 
         oldV.y -= liftAmount;
         oldCar.transform.position = oldV;
+    }
+
+    void ConfirmSelection()
+    {
+        if(fastCarSelected)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        }
     }
 }

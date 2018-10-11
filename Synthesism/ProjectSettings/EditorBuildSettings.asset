@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d47f96e672748c8478fc53a5460ed363
   - enabled: 1
+    path: Assets/Scenes/ChooseCar.unity
+    guid: c7556d9be052b444bb5b5073b25144f3
+  - enabled: 1
     path: Assets/Scenes/Emerald City.unity
     guid: 64649f9c837b9c741ad9efd91eee2827
   - enabled: 1
     path: Assets/Scenes/NeonHighwayTestSite.unity
     guid: 4caa4a328dbc83f43914a68505cf5db5
-  - enabled: 0
-    path: Assets/Scenes/AISample.unity
-    guid: a1fb2eb9f5202e2468f1a5a0aa0903b8
   m_configObjects: {}
