@@ -20,4 +20,9 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
