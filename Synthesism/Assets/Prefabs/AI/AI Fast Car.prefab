@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 114814466948946640}
   - component: {fileID: 114138617155993222}
   - component: {fileID: 114607894426236044}
+  - component: {fileID: 114931077247909678}
   m_Layer: 0
   m_Name: AI Fast Car
   m_TagString: AI
@@ -441,7 +442,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457128910711814}
   m_LocalRotation: {x: 0.01906805, y: -0.3837701, z: -0.09407079, w: 0.9184267}
-  m_LocalPosition: {x: -53.602005, y: 3.2003443, z: 16.599781}
+  m_LocalPosition: {x: -53.84, y: 1.72, z: 16.44}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4825793540409726}
@@ -916,7 +917,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457128910711814}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27df7211608c1774889e04908f98bc92, type: 3}
   m_Name: 
@@ -965,6 +966,7 @@ MonoBehaviour:
     carRigidBody: {fileID: 0}
   path: {fileID: 0}
   centreOfMass: {x: 0, y: -0.2, z: 0}
+  debugMode: 1
   minNodeDistance: 20
   currentSpeed: 0
   maxSpeed: 200
@@ -979,6 +981,24 @@ MonoBehaviour:
   - Track
   - Obstacle
   - AI
+  - Player
+--- !u!114 &114931077247909678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1457128910711814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2535ecadcdf56604caac69d2f2435da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decreaseSpeedFactor: 0.75
+  decreaseTorqueFactor: 0.5
+  increaseSpeedFactor: 1.25
+  increaseTorqueFactor: 1.5
+  nodeLimit: 3
+  player: {fileID: 0}
 --- !u!146 &146285899666684420
 WheelCollider:
   m_ObjectHideFlags: 1

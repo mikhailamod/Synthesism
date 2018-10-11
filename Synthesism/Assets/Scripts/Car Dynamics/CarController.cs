@@ -11,4 +11,10 @@ public abstract class CarController : MonoBehaviour {
 	//Method which moves the vehicle 
 	public abstract void MoveVehicle();
 
+    //get the number of nodes the car has passed
+    public abstract int getCurrentNodeCount();
+
+    //if within a certain distance to the next node, mark it
+    //as passed and update currentNode
+    protected abstract void UpdateWaypoint();
 }

@@ -6,6 +6,7 @@ public class AICarController : CarController {
 
     public GameObject path;
     public Vector3 centreOfMass;
+    public bool debugMode = false;
 
     [Header("AI Movement Properties")]
     public float minNodeDistance = 0.5f;
@@ -25,11 +26,13 @@ public class AICarController : CarController {
 
     //Private
     private List<Node> nodes;
-    private int currentNode;
+    private int currentNodeIndex;
+    private int nodeCount;
 
     // Use this for initialization
     void Start() {
-        currentNode = 0;
+        currentNodeIndex = 0;
+        nodeCount = 0;
         currentSpeed = 0f;
         initializePath(path);
        
@@ -37,7 +40,12 @@ public class AICarController : CarController {
     }
 
     void FixedUpdate() {
-        if (RaceManager.instance.raceStarted)
+        if (RaceManager.instance.raceStarted && !debugMode)
+        {
+            MoveVehicle();
+            UpdateWaypoint();
+        }
+        else if (debugMode)
         {
             MoveVehicle();
             UpdateWaypoint();
@@ -146,25 +154,26 @@ public class AICarController : CarController {
         return turnOffset;
     }
 
-    private void UpdateWaypoint()
+    protected override void UpdateWaypoint()
     {
-        float distance = Vector3.Distance(transform.position, nodes[currentNode].transform.position);
+        float distance = Vector3.Distance(transform.position, nodes[currentNodeIndex].transform.position);
         if (distance < minNodeDistance)
         {
-            if(currentNode == nodes.Count-1)
+            nodeCount++;
+            if(currentNodeIndex == nodes.Count-1)
             {
-                currentNode = 0;
+                currentNodeIndex = 0;
             }
             else
             {
-                currentNode++;
+                currentNodeIndex++;
             }
         }
     }
 
     private float SteerCar()
     {
-        Vector3 relativeVector = transform.InverseTransformPoint(nodes[currentNode].transform.position);
+        Vector3 relativeVector = transform.InverseTransformPoint(nodes[currentNodeIndex].transform.position);
         relativeVector = relativeVector/relativeVector.magnitude;//Vector3.Normalize returns positive number only
         return relativeVector.x;
     }
@@ -172,7 +181,7 @@ public class AICarController : CarController {
     private float Drive()
     {
         currentSpeed = carMovementProperties.GetSpeed();
-        Node nodeInfo = nodes[currentNode];
+        Node nodeInfo = nodes[currentNodeIndex];
 
         //check current Node if we should break and what speed we should be going at
         if(nodeInfo != null)
@@ -221,4 +230,6 @@ public class AICarController : CarController {
     {
         return carMovementProperties.GetRpm();
     }
+
+    public override int getCurrentNodeCount() { return nodeCount; }
 }
