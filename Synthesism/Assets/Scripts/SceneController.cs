@@ -8,7 +8,7 @@ public class SceneController : MonoBehaviour {
 
     public Text speedText;
     public Text rpmText;
-    public AICarController car;
+    public CarController car;
 
     public float delta = 0.5f;
     float timePassed = 0f;
@@ -23,8 +23,8 @@ public class SceneController : MonoBehaviour {
 	void Update () {
         if(timePassed > delta)
         {
-            speedText.text = "Speed: " + car.getCurrentSpeed().ToString("0.##");
-            rpmText.text = "RPM: " + car.getRpm().ToString("0.##");
+            speedText.text = "Speed: " + car.carMovementProperties.GetSpeed().ToString("0.##");
+            rpmText.text = "RPM: " + car.carMovementProperties.GetRpm().ToString("0.##");
         }
         else
         {
