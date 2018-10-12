@@ -9,7 +9,6 @@ public class MenuController : MonoBehaviour
     public CarSelector carSelector;
     public GameObject[] children;
 
-    bool isMultiplayer = false;
 
     private void Start()
     {
@@ -18,16 +17,14 @@ public class MenuController : MonoBehaviour
 
     public void SinglePlayer()
     {
-        isMultiplayer = false;
         disableMenu();
-        carSelector.setToActive();
+        carSelector.setToActive(false);
     }
 
     public void TwoPlayer()
     {
-        isMultiplayer = true;
         disableMenu();
-        carSelector.setToActive();
+        carSelector.setToActive(true);
     }
 
     public void Quit()
