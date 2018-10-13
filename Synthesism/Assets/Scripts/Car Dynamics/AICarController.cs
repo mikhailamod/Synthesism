@@ -37,12 +37,8 @@ public class AICarController : CarController {
     }
 
     void FixedUpdate() {
-        if (RaceManager.instance.raceStarted)
-        {
             MoveVehicle();
             UpdateWaypoint();
-        }
-        
     }
 
     public override void MoveVehicle()
