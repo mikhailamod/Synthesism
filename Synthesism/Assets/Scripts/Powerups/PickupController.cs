@@ -12,18 +12,20 @@ public class PickupController : MonoBehaviour {
 
 		//rm cube
 		gameObject.SetActive(false);
-		//need to reposition then set active(true)
 
-		//generate number between 0,1
-		isSpike = Random.value>0.5;
+		if(other.gameObject.tag=="Player") {
+			//need to reposition then set active(true)
+			//generate number between 0,1
+			isSpike = Random.value>0.5;
+			//true for testing
+			if(isSpike) {
+				other.gameObject.GetComponent<PlayerCarController>().carMovementProperties.hasSpike = true;
+			}
+			else {
+				other.gameObject.GetComponent<PlayerCarController>().carMovementProperties.hasOil = true;
+			}			
+		}
 
-		//true for testing
-		if(true) {
-			other.gameObject.GetComponent<PlayerCarController>().carMovementProperties.hasSpike = true;
-		}
-		else {
-			other.gameObject.GetComponent<PlayerCarController>().carMovementProperties.hasOil = true;
-		}
 	}
 
 	void Update() {
