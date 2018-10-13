@@ -13,10 +13,14 @@ public class PlayerCarController : CarController {
     private int currentNodeIndex;
     private int nodeCount;
 
-    private void Start()
+    private void Awake()
     {
         currentNodeIndex = 0;
         nodeCount = 0;
+    }
+
+    public void LoadNodes()
+    {
         nodes = path.getNodeList();
     }
 
@@ -81,4 +85,9 @@ public class PlayerCarController : CarController {
     }
 
     public override int getCurrentNodeCount() { return nodeCount; }
+
+    public override void SetPath(Path p)
+    {
+        path = p;
+    }
 }

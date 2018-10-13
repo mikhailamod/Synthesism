@@ -17,7 +17,7 @@ public class CarSelector : MonoBehaviour {
     public float liftAmount = 0.5f;
 
     bool active = false;
-    bool[] fastCarSelected;
+    int[] carSelections;
 
     int currentPlayer = 0;
 
@@ -46,14 +46,14 @@ public class CarSelector : MonoBehaviour {
     {
         if(multiplayer)
         {
-            fastCarSelected = new bool[2];
-            fastCarSelected[0] = true;
-            fastCarSelected[1] = true;
+            carSelections = new int[2];
+            carSelections[0] = 1;
+            carSelections[1] = 1;
         }
         else
         {
-            fastCarSelected = new bool[1];
-            fastCarSelected[0] = true;
+            carSelections = new int[1];
+            carSelections[0] = 1;
         }
         active = true;
         Vector3 v = fastCar.transform.position;
@@ -68,16 +68,16 @@ public class CarSelector : MonoBehaviour {
 
     void SwitchSelection()
     {
-        if (fastCarSelected[currentPlayer])
+        if (carSelections[currentPlayer] == 1)
         {
-            fastCarSelected[currentPlayer] = false;
+            carSelections[currentPlayer] = 0;
             LiftCar(slowCar, fastCar);
             selectText.text = "Player " + (currentPlayer + 1) + ": Muscle Car Selected";
             infoText.text = muscleInfo;
         }
         else
         {
-            fastCarSelected[currentPlayer] = true;
+            carSelections[currentPlayer] = 1;
             LiftCar(fastCar, slowCar);
             selectText.text = "Player " + (currentPlayer + 1) + ": Sports Car Selected";
             infoText.text = sportsInfo;
@@ -98,18 +98,20 @@ public class CarSelector : MonoBehaviour {
 
     void ConfirmSelection()
     {
-        if(currentPlayer == fastCarSelected.Length-1)//both players have chosen car
+        //all players have chosen a car
+        //tell the race manager which player chose which car 
+        if (currentPlayer == carSelections.Length-1)
         {
-            if(fastCarSelected.Length == 1)//single player
+            if(carSelections.Length == 1)//single player
             {
-                Debug.Log("Player 1 Fast car: " + fastCarSelected[0]);
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                PlayerPrefs.SetInt("P1_choice", carSelections[0]);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else//multiplayer
             {
-                Debug.Log("Player 1 Fast car: " + fastCarSelected[0]);
-                Debug.Log("Player 2 Fast car: " + fastCarSelected[1]);
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+                PlayerPrefs.SetInt("P1_choice", carSelections[0]);
+                PlayerPrefs.SetInt("P2_choice", carSelections[0]);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
             }
         }
         else

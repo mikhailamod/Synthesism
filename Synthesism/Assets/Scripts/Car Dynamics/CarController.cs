@@ -17,4 +17,6 @@ public abstract class CarController : MonoBehaviour {
     //if within a certain distance to the next node, mark it
     //as passed and update currentNode
     protected abstract void UpdateWaypoint();
+
+    public abstract void SetPath(Path p);
 }

@@ -6,30 +6,58 @@ using System;
 
 public class SceneController : MonoBehaviour {
 
-    public Text speedText;
-    public Text rpmText;
-    public CarController car;
+    public List<GameObject> carTypes;
+    public Transform p1StartPos;
+    public Transform p2StartPos;
 
-    public float delta = 0.5f;
-    float timePassed = 0f;
+    public CameraFollowController cameraFollowController;
 
-	// Use this for initialization
-	void Start () {
-        speedText.text = "Speed: 0";
-        rpmText.text = "RPM: 0";
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if(timePassed > delta)
+    public GameObject winnerPanel;
+    public Text winnerText;
+
+    public Text lapCountLabel;
+    public Text lapTimeLabel;
+    public Text bestTimeLabel;
+
+    public Path path;
+
+
+    private void Start()
+    {
+        int p1Choice = PlayerPrefs.GetInt("P1_choice", -1);
+        int p2Choice = PlayerPrefs.GetInt("P2_choice", -1);
+
+        if(p1Choice == -1)
         {
-            speedText.text = "Speed: " + car.carMovementProperties.GetSpeed().ToString("0.##");
-            rpmText.text = "RPM: " + car.carMovementProperties.GetRpm().ToString("0.##");
+            Debug.Log("Serious error, no player 1 choice");
+            Application.Quit();
         }
-        else
+
+        GameObject go1 = Instantiate(carTypes[p1Choice], p1StartPos.position, p1StartPos.rotation);
+        initializeCar(go1);
+        cameraFollowController.targetObject = go1.transform;
+
+        if(p2Choice != -1)
         {
-            timePassed += Time.deltaTime;
+            GameObject go2 = Instantiate(carTypes[p2Choice], p2StartPos.position, p2StartPos.rotation);
+            initializeCar(go2);
         }
-        
-	}
+  
+        RaceManager.instance.setWinnerPanel(winnerPanel);
+        RaceManager.instance.setWinnerText(winnerText);
+    }
+
+    void initializeCar(GameObject go)
+    {
+        go.GetComponent<PlayerCarController>().SetPath(path);
+        go.GetComponent<PlayerCarController>().LoadNodes();
+        go.GetComponent<RaceEntity>().lapCountLabel = lapCountLabel;
+        go.GetComponent<RaceEntity>().bestTimeLabel = bestTimeLabel;
+        go.GetComponent<RaceEntity>().lapTimeLabel = lapTimeLabel;
+    }
+
+    public void StartRace()
+    {
+        RaceManager.instance.StartRace();
+    }
 }

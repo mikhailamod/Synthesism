@@ -45,4 +45,9 @@ public class PlayerTwoCarController : CarController {
     {
         throw new System.NotImplementedException();
     }
+
+    public override void SetPath(Path p)
+    {
+        throw new System.NotImplementedException();
+    }
 }
