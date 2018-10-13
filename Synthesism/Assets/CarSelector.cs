@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 public class CarSelector : MonoBehaviour {
 
     public GameObject slowCar;
@@ -19,6 +20,8 @@ public class CarSelector : MonoBehaviour {
     bool active = false;
     int[] carSelections;
 
+    Button b;
+
     int currentPlayer = 0;
 
     private void Start()
@@ -31,11 +34,13 @@ public class CarSelector : MonoBehaviour {
     void Update () {
         if(active)
         {
-            if (Input.GetButtonDown("Horizontal"))
+            if (Input.GetButtonDown(ControllerInfo.HORIZONTAL_MOVES[0]) ||
+                Input.GetButtonDown(ControllerInfo.HORIZONTAL_MOVES[1]))
             {
                 SwitchSelection();
             }
-            if (Input.GetButtonDown("Handbrake"))
+            if (Input.GetButtonDown(ControllerInfo.HANDBRAKES[0]) ||
+                Input.GetButtonDown(ControllerInfo.HANDBRAKES[1]))
             {
                 ConfirmSelection();
             }

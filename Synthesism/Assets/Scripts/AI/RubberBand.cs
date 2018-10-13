@@ -13,7 +13,7 @@ public class RubberBand : MonoBehaviour {
     public float increaseTorqueFactor = 1.5f;
 
     public int nodeLimit;
-    public PlayerCarController player;
+    public List<PlayerCarController> players;
     AICarController aiCarController;
 
 	// Use this for initialization
@@ -22,6 +22,11 @@ public class RubberBand : MonoBehaviour {
         originalMaxSpeed = aiCarController.maxSpeed;
         originalMaxTorque = aiCarController.carMovementProperties.maxMotorTorque;
 	}
+
+    public void addPlayer(PlayerCarController p)
+    {
+        players.Add(p);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -49,7 +54,14 @@ public class RubberBand : MonoBehaviour {
     //return true if AI is far ahead of Player
     bool isFarAhead()
     {
-        int playerPos = player.getCurrentNodeCount();
+        int playerPos = -1;
+        foreach(PlayerCarController pcc in players)
+        {
+            if(pcc.getCurrentNodeCount() > playerPos)
+            {
+                playerPos = pcc.getCurrentNodeCount();
+            }
+        }
         int aiPos = aiCarController.getCurrentNodeCount();
 
         if(aiPos - playerPos > nodeLimit) { return true; }
@@ -57,7 +69,14 @@ public class RubberBand : MonoBehaviour {
     }
     bool isFarBehind()
     {
-        int playerPos = player.getCurrentNodeCount();
+        int playerPos = 99999;
+        foreach (PlayerCarController pcc in players)
+        {
+            if (pcc.getCurrentNodeCount() < playerPos)
+            {
+                playerPos = pcc.getCurrentNodeCount();
+            }
+        }
         int aiPos = aiCarController.getCurrentNodeCount();
 
         if (playerPos - aiPos > nodeLimit) { return true; }

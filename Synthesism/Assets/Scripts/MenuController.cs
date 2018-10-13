@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
-using TMPro;
-using System.Collections.Generic;
-using System.Collections;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
 
     public CarSelector carSelector;
     public GameObject[] children;
-
 
     private void Start()
     {

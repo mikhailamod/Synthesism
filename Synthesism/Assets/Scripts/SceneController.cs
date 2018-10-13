@@ -7,10 +7,12 @@ using System;
 public class SceneController : MonoBehaviour {
 
     public List<GameObject> carTypes;
+    public List<RubberBand> aiCars;
     public Transform p1StartPos;
     public Transform p2StartPos;
 
     public CameraFollowController cameraFollowController;
+    public CameraFollowController cameraFollowController2;
 
     public GameObject winnerPanel;
     public Text winnerText;
@@ -26,34 +28,43 @@ public class SceneController : MonoBehaviour {
     {
         int p1Choice = PlayerPrefs.GetInt("P1_choice", -1);
         int p2Choice = PlayerPrefs.GetInt("P2_choice", -1);
+        PlayerPrefs.DeleteAll();
 
-        if(p1Choice == -1)
+        if (p1Choice == -1)
         {
             Debug.Log("Serious error, no player 1 choice");
             Application.Quit();
         }
 
         GameObject go1 = Instantiate(carTypes[p1Choice], p1StartPos.position, p1StartPos.rotation);
-        initializeCar(go1);
+        initializeCar(go1, 0);
         cameraFollowController.targetObject = go1.transform;
 
         if(p2Choice != -1)
         {
             GameObject go2 = Instantiate(carTypes[p2Choice], p2StartPos.position, p2StartPos.rotation);
-            initializeCar(go2);
+            initializeCar(go2, 1);
+            cameraFollowController2.targetObject = go2.transform;
         }
   
         RaceManager.instance.setWinnerPanel(winnerPanel);
         RaceManager.instance.setWinnerText(winnerText);
     }
 
-    void initializeCar(GameObject go)
+    void initializeCar(GameObject go, int playerNum)
     {
-        go.GetComponent<PlayerCarController>().SetPath(path);
-        go.GetComponent<PlayerCarController>().LoadNodes();
+        PlayerCarController pcc = go.GetComponent<PlayerCarController>();
+        pcc.SetPath(path);
+        pcc.LoadNodes();
+        pcc.setPlayerNum(playerNum);
         go.GetComponent<RaceEntity>().lapCountLabel = lapCountLabel;
         go.GetComponent<RaceEntity>().bestTimeLabel = bestTimeLabel;
         go.GetComponent<RaceEntity>().lapTimeLabel = lapTimeLabel;
+
+        foreach(RubberBand a in aiCars)
+        {
+            a.addPlayer(pcc);
+        }
     }
 
     public void StartRace()
