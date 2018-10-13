@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.117360525, g: 0.07587927, b: 0.38597268, a: 1}
+  m_IndirectSpecularColor: {r: 0.1226602, g: 0.07911212, b: 0.38821897, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &13687628
 Transform:
   m_ObjectHideFlags: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
     brakeTorque: 600
     brakeSpeed: 0
     maxSpeed: 80
+    carRigidBody: {fileID: 0}
 --- !u!54 &13687631
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -478,6 +479,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -59.967003
       objectReference: {fileID: 0}
+    - target: {fileID: 1257582273571766, guid: 28b7d93291c63ae4d8b6e8daf4e4e608, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28b7d93291c63ae4d8b6e8daf4e4e608, type: 2}
   m_IsPrefabAsset: 0
@@ -575,7 +580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &485063798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +720,107 @@ WheelCollider:
     m_AsymptoteValue: 1
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!1 &645145076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 645145078}
+  - component: {fileID: 645145077}
+  m_Layer: 0
+  m_Name: Road
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &645145077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 645145076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ec4327c2efe564fb423be1ba03c0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadPath:
+    points:
+    - position: {x: 4.856333, y: 0, z: -3.3156414}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+    - position: {x: 22.51699, y: 0, z: -4.8728943}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+    - position: {x: 21.711372, y: 0, z: 15.582705}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+    - position: {x: 3.7565784, y: 0, z: 27.480955}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+    - position: {x: -14.1982155, y: 0, z: 39.379204}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+    - position: {x: -15.041054, y: 0, z: -1.5611624}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+    closed: 1
+    deltaOffset: 0.05
+  meshCreator:
+    roadWidth: 0
+    roadMaterial: {fileID: 0}
+    shapesToRender:
+    - showShape: 1
+      name: Road
+      shape: 2
+      size: 1
+      tiling: 1
+      winding: 0
+      offset: {x: 0, y: 0, z: 0}
+      meshMaterial: {fileID: 2100000, guid: 529c0cfbd00130d47800f21bc08f039e, type: 2}
+      trackCompletion: {x: 0.45671642, y: 1}
+  roadSettings:
+    nodeColor: {r: 0, g: 1, b: 0, a: 1}
+    lineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    curveColor: {r: 1, g: 0, b: 0, a: 1}
+    pathColor: {r: 0, g: 0, b: 1, a: 1}
+    nodeForwardColor: {r: 1, g: 1, b: 1, a: 1}
+    nodeBinormalColor: {r: 0, g: 1, b: 1, a: 1}
+    nodeNormalColor: {r: 0, g: 0, b: 0, a: 1}
+    vertexColor: {r: 1, g: 1, b: 1, a: 1}
+    curveWidth: 4
+    nodeSize: 1
+    nodeArrowSize: 1
+    spacing: 0.581
+    size: 0.1
+    showCurveProperties: 0
+    showNodeProperties: 0
+    showPathProperties: 1
+    showPathArrowProperties: 1
+    showPathColorProperties: 0
+    showPathLabels: 0
+    showMeshProperties: 1
+    showPathCenter: 0
+    showCurve: 1
+    showPoints: 0
+    showPointForwards: 0
+    showPointBinormals: 0
+    showPointNormals: 0
+    showVertices: 0
+    showVertIndices: 0
+    showTris: 1
+    showMeshNormals: 0
+    showUVs: 0
+--- !u!4 &645145078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 645145076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &745184931
 Prefab:
   m_ObjectHideFlags: 0
@@ -795,6 +901,10 @@ Prefab:
       propertyPath: m_Drag
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 1517262709736650, guid: 4aabd8e0327be9b4a897b2a8401fa73f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aabd8e0327be9b4a897b2a8401fa73f, type: 2}
   m_IsPrefabAsset: 0
@@ -837,7 +947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &819425603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,7 +1140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1010590354
 Light:
   m_ObjectHideFlags: 0
@@ -1357,6 +1467,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.70757
       objectReference: {fileID: 0}
+    - target: {fileID: 1627055748260138, guid: cd34dd54ccf8bf540bfabafe92f6315d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd34dd54ccf8bf540bfabafe92f6315d, type: 2}
   m_IsPrefabAsset: 0
@@ -1553,6 +1667,10 @@ Prefab:
     - target: {fileID: 4048460393200048, guid: e596d1eda6110b74a82a4f5f59f733c8, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319687066147650, guid: e596d1eda6110b74a82a4f5f59f733c8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e596d1eda6110b74a82a4f5f59f733c8, type: 2}
@@ -2285,7 +2403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2003566103
 Transform:
   m_ObjectHideFlags: 0

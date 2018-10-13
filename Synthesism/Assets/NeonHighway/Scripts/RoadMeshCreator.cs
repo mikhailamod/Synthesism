@@ -71,23 +71,30 @@ public class RoadMeshCreator
         return Vector3.Cross(up, forward).normalized;
     }
     
-    public Vector3[] getPointsNormal(Vector3[] forwardDirs, Vector3[] binormals)
+    public Vector3[] getPointsNormal(Vector3[] forwardDirs, Vector3[] binormals, Vector2 completion)
     {
         List<Vector3> normals = new List<Vector3>();
 
         for(int i = 0; i < forwardDirs.Length; i++)
         {
+            float percentage = i / (float)forwardDirs.Length;
+
+            if (percentage < completion.x || percentage > completion.y)
+            {
+                continue;
+            }
+
             normals.Add(getPointNormal(forwardDirs[i], binormals[i]));
         }
 
         return normals.ToArray();
     }
 
-    public Vector3[] getPointsNormal(Point[] points, Vector3 up, bool closed = false)
+    public Vector3[] getPointsNormal(Point[] points, Vector3 up, Vector2 completion, bool closed = false)
     {
         Vector3[] dirs = getPointsForward(points, closed);
         Vector3[] binormals = getPointsBinormal(dirs, up);
-        return getPointsNormal(dirs, binormals);
+        return getPointsNormal(dirs, binormals, completion);
     }
 
     public Vector3 getPointNormal(Vector3 forward, Vector3 binormal)
@@ -95,21 +102,21 @@ public class RoadMeshCreator
         return Vector3.Cross(forward, binormal);
     }
 
-    public Vector3[] getMeshVertices(Point[] points, Shape shape, Vector3 offset, Vector3 up, bool closed = false)
+    public Vector3[] getMeshVertices(Point[] points, Shape shape, Vector3 offset, Vector3 up, Vector2 completion, bool closed = false)
     {
         Vector3[] binormals = getPointsBinormal(points, up, closed);
-        return shape.getMeshVertices(points, binormals, offset, up, closed);
+        return shape.getMeshVertices(points, binormals, offset, up, completion, closed);
     }
 
-    public int[] getMeshTris(int vertexCount, Shape shape, Winding winding, bool closed)
+    public int[] getMeshTris(int vertexCount, Shape shape, Winding winding, Vector2 completion,bool closed)
     {
-        return shape.getMeshTris(vertexCount, winding, closed);
+        return shape.getMeshTris(vertexCount, winding, completion,closed);
     }
 
-    public Vector3[] pointToMeshNormals(Point[] points, Shape shape, Vector3 up, Winding winding, bool closed = false)
+    public Vector3[] pointToMeshNormals(Point[] points, Shape shape, Vector3 up, Winding winding, Vector2 completion, bool closed = false)
     {
-        Vector3[] normals = getPointsNormal(points, up, closed);
-        return shape.getNormals(points, normals, up, winding, closed);
+        Vector3[] normals = getPointsNormal(points, up, completion, closed);
+        return shape.getNormals(points, normals, up, winding, completion,closed);
     }
 
     //Will have a bug
@@ -124,11 +131,11 @@ public class RoadMeshCreator
         GameObject parent = new GameObject(parentName);
         foreach(DrawableShape shape in shapesToRender)
         {
-            generateMesh(shape, parent.transform,points, up, spacing, isClosed);
+            generateMesh(shape, parent.transform,points, up, spacing,shape.trackCompletion, isClosed);
         }
     }
 
-    public void generateMesh(DrawableShape drawShape, Transform parent, Point[] points, Vector3 up, float spacing, bool closed = false)
+    public void generateMesh(DrawableShape drawShape, Transform parent, Point[] points, Vector3 up, float spacing, Vector2 completion, bool closed = false)
     {
         GameObject meshObj = new GameObject(drawShape.name);
         meshObj.transform.parent = parent;
@@ -142,10 +149,10 @@ public class RoadMeshCreator
 
         Shape shape = enumToShape(drawShape);
 
-        Vector3[] vertices = getMeshVertices(points,shape, drawShape.offset, up, closed);
-        Vector3[] normals = pointToMeshNormals(points, shape, up, drawShape.winding,closed);
+        Vector3[] vertices = getMeshVertices(points,shape, drawShape.offset, up, completion, closed);
+        Vector3[] normals = pointToMeshNormals(points, shape, up, drawShape.winding,completion,closed);
         Vector2[] UVs = getMeshUV(vertices.Length, shape);
-        int[] tris = getMeshTris(vertices.Length, shape,drawShape.winding, closed);
+        int[] tris = getMeshTris(vertices.Length, shape,drawShape.winding, completion,closed);
 
         mesh.Clear();
         mesh.vertices = vertices;
@@ -191,4 +198,5 @@ public class DrawableShape
     public Winding winding;
     public Vector3 offset;
     public Material meshMaterial;
+    public Vector2 trackCompletion;
 }
