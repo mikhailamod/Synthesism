@@ -64,7 +64,6 @@ public class RoadMesh : Shape
             leftVertex = new Vector3(leftVertex.x, leftVertex.y + offset.y, leftVertex.z + offset.z);
 
             vertices.Add(leftVertex); vertices.Add(rightVertex);
-
         }
         return vertices.ToArray();
     }

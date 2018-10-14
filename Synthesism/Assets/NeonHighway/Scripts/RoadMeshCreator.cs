@@ -181,6 +181,8 @@ public class RoadMeshCreator
                 return new Wall(shape.size);
             case ShapeToDraw.CUBE:
                 return new Cube(shape.size);
+            case ShapeToDraw.TUNNEL:
+                return new Tunnel(shape.size);
             default:
                 return new RoadMesh(shape.size);
         }

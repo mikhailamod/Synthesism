@@ -769,13 +769,13 @@ MonoBehaviour:
     shapesToRender:
     - showShape: 1
       name: Road
-      shape: 2
-      size: 1
+      shape: 3
+      size: 2.14
       tiling: 1
       winding: 0
-      offset: {x: 0, y: 0, z: 0}
+      offset: {x: 0, y: 0, z: 0.17}
       meshMaterial: {fileID: 2100000, guid: 529c0cfbd00130d47800f21bc08f039e, type: 2}
-      trackCompletion: {x: 0.45671642, y: 1}
+      trackCompletion: {x: 0.27761194, y: 0.6238806}
   roadSettings:
     nodeColor: {r: 0, g: 1, b: 0, a: 1}
     lineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
