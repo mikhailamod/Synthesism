@@ -573,6 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: 59eac051f220d66439d620292a755e8d, type: 2}
+  player: {fileID: 662736659}
 --- !u!1 &54780552
 GameObject:
   m_ObjectHideFlags: 0
@@ -6473,7 +6474,7 @@ MonoBehaviour:
       offset: {x: 11, y: 0, z: 0}
       meshMaterial: {fileID: 2100000, guid: a1c6a535561e7704f9e283a3437008e3, type: 2}
       trackCompletion: {x: 0, y: 0.5875}
-    - showShape: 1
+    - showShape: 0
       name: Tunnel
       shape: 3
       size: 20
