@@ -5,8 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCarController : CarController {
 
+    public ActivatePickup pickupHandler;
+
     void FixedUpdate () {
-            MoveVehicle();	
+		MoveVehicle();
+        pickupHandler = GetComponent<ActivatePickup>();
 	}
 
 	public override void MoveVehicle()
@@ -18,17 +21,11 @@ public class PlayerCarController : CarController {
         carMovementProperties.MoveHorizontal(Input.GetAxis("Horizontal"));      
 
         //looks for appropriate case to move the car otherwise the brake is applied
-        if(inputSpeed > 0  || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0))
-        {
+        if((inputSpeed > 0 && carMovementProperties.GetSpeed() >= 0) || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0)) {
             carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
         }
-        else if(inputSpeed < 0 && carMovementProperties.GetSpeed() > 0)
-        {
+        else {
             carMovementProperties.brake();
-        }
-        else
-        {
-            carMovementProperties.setMotorTorque(0);
         }
 		
         //Force break
@@ -37,10 +34,15 @@ public class PlayerCarController : CarController {
             carMovementProperties.brake();
         }
 
+        //Force break
+        if(Input.GetButton("FireSpike") && carMovementProperties.hasSpike)
+        {
+            pickupHandler.FireSpike(transform.forward);
+            carMovementProperties.hasSpike = false;
+        }
+
+
         carMovementProperties.RotateWheels();
     }
 
-    public void boost() {
-       carMovementProperties.boost(carMovementProperties.carRigidBody, transform.forward);
-    }
 }

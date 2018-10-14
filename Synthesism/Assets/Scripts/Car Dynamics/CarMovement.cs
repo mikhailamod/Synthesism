@@ -16,6 +16,9 @@ public class CarMovement
     public float maxSpeed = 80f;
 
     public Rigidbody carRigidBody;
+
+    public bool hasSpike; //powerup
+    public bool hasOil; //powerip
     
     /// <summary>
     /// Adds force in either the left or right direction using the speed variable to determine how fast the car should move
@@ -99,12 +102,6 @@ public class CarMovement
     public float GetRpm()
     {
         return axleInfos[0].leftWheel.wheelCollider.rpm;
-    }
-
-    //applies additional boost force to vehicle
-    public void boost(Rigidbody rigid, Vector3 dir)
-    {
-        rigid.AddForce(dir * boostSpeed, ForceMode.Impulse);
     }
 
 }
