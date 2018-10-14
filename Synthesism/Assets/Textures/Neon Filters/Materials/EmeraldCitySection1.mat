@@ -25,4 +25,4 @@ Material:
     m_Floats:
     - _GlowIntensity: 1.5
     m_Colors:
-    - _GlowColor: {r: 0, g: 1, b: 0.5921569, a: 1}
+    - _GlowColor: {r: 0.0045834924, g: 0.9716981, b: 0.7771446, a: 1}

@@ -7,12 +7,6 @@ using UnityEngine;
 public class RetroFilter : MonoBehaviour
 {
     public RetroProfile profile;
-    public PlayerCarController player;
-
-    private void Start()
-    {
-        profile.chromo.controller = player;
-    }
 
     void OnDisable()
     {
