@@ -18,11 +18,17 @@ public class PlayerCarController : CarController {
         carMovementProperties.MoveHorizontal(Input.GetAxis("Horizontal"));      
 
         //looks for appropriate case to move the car otherwise the brake is applied
-        if((inputSpeed > 0 && carMovementProperties.GetSpeed() >= 0) || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0)) {
+        if(inputSpeed > 0  || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0))
+        {
             carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
         }
-        else {
+        else if(inputSpeed < 0 && carMovementProperties.GetSpeed() > 0)
+        {
             carMovementProperties.brake();
+        }
+        else
+        {
+            carMovementProperties.setMotorTorque(0);
         }
 		
         //Force break
