@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//class of static values which contain values of Input names
 public class ControllerInfo : MonoBehaviour {
 
 

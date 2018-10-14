@@ -2,6 +2,8 @@
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+
+//This class handles the car selection of the player(s)
 public class CarSelector : MonoBehaviour {
 
     public GameObject slowCar;
@@ -18,7 +20,7 @@ public class CarSelector : MonoBehaviour {
     public float liftAmount = 0.5f;
 
     bool active = false;
-    int[] carSelections;
+    int[] carSelections;//what each player has chosen. 0 = muscle car, 1 = fast car
 
     Button b;
 
@@ -47,6 +49,9 @@ public class CarSelector : MonoBehaviour {
         }
 	}
 
+    //called by MenuController, this will initialize everything required by the Car Selection 'sub scene'
+    //Note that the Car Selection 'sub scene' is within the same scene as the main menu, UI elements are
+    //just set to disabled
     public void setToActive(bool multiplayer)
     {
         if(multiplayer)
@@ -61,6 +66,8 @@ public class CarSelector : MonoBehaviour {
             carSelections[0] = 1;
         }
         active = true;
+
+        //default selection is the fast car
         Vector3 v = fastCar.transform.position;
         v.y += liftAmount;
         fastCar.transform.position = v;
@@ -71,6 +78,7 @@ public class CarSelector : MonoBehaviour {
         infoText.gameObject.SetActive(true);
     }
 
+    //change the selection of the current player, and raise that car for visual feedback
     void SwitchSelection()
     {
         if (carSelections[currentPlayer] == 1)
@@ -89,6 +97,7 @@ public class CarSelector : MonoBehaviour {
         }
     }
 
+    //Lift the selected car and lower the old car
     void LiftCar(GameObject selctedCar, GameObject oldCar)
     {
         Vector3 v = selctedCar.transform.position;
@@ -101,6 +110,8 @@ public class CarSelector : MonoBehaviour {
         oldCar.transform.position = oldV;
     }
 
+    //either allow player 2 to select a car, or save the selection of both players
+    //and load next scene
     void ConfirmSelection()
     {
         //all players have chosen a car
