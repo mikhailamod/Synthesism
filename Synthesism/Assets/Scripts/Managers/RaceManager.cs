@@ -90,8 +90,22 @@ public class RaceManager : MonoSingleton<RaceManager>
 
     public void StartRace()
     {
+
+        StartCoroutine(StartCountdown());
+        
+    }
+
+    public IEnumerator StartCountdown(float length = 3f)
+    {
+        while(length > 0)
+        {
+            MusicManager.instance.PlaySoundEffect(MusicManagerInfo.COUNTDOWN_BEEP);
+            Debug.Log("Countdown: " + length);
+            yield return new WaitForSeconds(1.0f);
+            length--;
+        }
         raceStarted = true;
-        foreach(RaceEntity e in racers.Keys)
+        foreach (RaceEntity e in racers.Keys)
         {
             e.StartRace();
         }
