@@ -18,14 +18,10 @@ MonoBehaviour:
     tiling: 1
     contrast: 0.25
   chromo:
-    minROffset: 0
-    maxROffset: 0.5
-    minGOffset: 0
-    maxGOffset: 0.5
-    minBOffset: 0
-    maxBOffset: -0.5
+    rOffset: 0.1
+    gOffset: 0
+    bOffset: -0.1
     factor: 300
-    controller: {fileID: 0}
   distortion:
     scale: 1
     offset: 0

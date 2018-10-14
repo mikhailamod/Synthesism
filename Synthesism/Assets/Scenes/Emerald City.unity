@@ -473,7 +473,7 @@ MonoBehaviour:
   followSpeed: 20
   lookSpeed: 20
   targetObject: {fileID: 662736664}
-  offset: {x: 0, y: 1.2, z: -5}
+  offset: {x: 0, y: 1.2, z: -6}
 --- !u!114 &39642428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,7 +486,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: 59eac051f220d66439d620292a755e8d, type: 2}
-  player: {fileID: 662736659}
 --- !u!1 &54780552
 GameObject:
   m_ObjectHideFlags: 0
@@ -6158,7 +6157,7 @@ MonoBehaviour:
     showPointNormals: 0
     showVertices: 0
     showVertIndices: 0
-    showTris: 1
+    showTris: 0
     showMeshNormals: 0
     showUVs: 0
 --- !u!4 &1946640142
