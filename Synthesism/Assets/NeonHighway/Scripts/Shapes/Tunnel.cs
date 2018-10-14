@@ -235,8 +235,8 @@ public class Tunnel : Shape
 
             
 
-            Vector3 upperRight = bottomVertex + 0.65f * URD;
-            Vector3 upperLeft = bottomVertex + 0.65f * ULD;
+            Vector3 upperRight = bottomVertex + 0.9f * URD;
+            Vector3 upperLeft = bottomVertex + 0.9f * ULD;
 
             vertices.Add(leftVertex); vertices.Add(upperLeft); vertices.Add(topVertex); vertices.Add(upperRight); vertices.Add(rightVertex);
 
@@ -250,8 +250,8 @@ public class Tunnel : Shape
             URD = URC - bottomVertex;
             ULD = ULC - bottomVertex;
 
-            Vector3 FUR = bottomVertex + 0.65f * URD;
-            Vector3 FUL = bottomVertex + 0.65f * ULD;
+            Vector3 FUR = bottomVertex + 0.9f * URD;
+            Vector3 FUL = bottomVertex + 0.9f * ULD;
 
             vertices.Add(FLV); vertices.Add(FUL); vertices.Add(TTV); vertices.Add(FUR); vertices.Add(FRV);
 
