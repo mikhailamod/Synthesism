@@ -39,11 +39,13 @@ public class CarSelector : MonoBehaviour {
             if (Input.GetButtonDown(ControllerInfo.HORIZONTAL_MOVES[0]) ||
                 Input.GetButtonDown(ControllerInfo.HORIZONTAL_MOVES[1]))
             {
+                MusicManager.instance.PlaySoundEffect(MusicManagerInfo.MAIN_MENU_BEEP);
                 SwitchSelection();
             }
             if (Input.GetButtonDown(ControllerInfo.HANDBRAKES[0]) ||
                 Input.GetButtonDown(ControllerInfo.HANDBRAKES[1]))
             {
+                MusicManager.instance.PlaySoundEffect(MusicManagerInfo.CONFIRM_SOUND);
                 ConfirmSelection();
             }
         }

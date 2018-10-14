@@ -118,7 +118,7 @@ public class CarMovement
             axleInfos[1].rightWheel.wheelCollider.rpm * 0.06);
 
         float x = (fl + fr + bl + br) / 4;
-        if (x > maxSpeed) { x = maxSpeed; }//this is a hack for engine sound at the moment
+        //if (x > maxSpeed) { x = maxSpeed; }//this is a hack for engine sound at the moment
         return x;
     }
 

@@ -170,7 +170,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engineLoop:
   - {fileID: 1459845069}
-  gearChange: {fileID: 1116003036}
   timeLimit: 3
 --- !u!114 &13687630
 MonoBehaviour:
@@ -1625,7 +1624,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c9682d6d46e91f74daadf7f9e08e4660, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.634
+  m_Volume: 0.925
   m_Pitch: 1
   Loop: 1
   Mute: 0

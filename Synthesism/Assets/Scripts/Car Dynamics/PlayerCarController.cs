@@ -9,6 +9,8 @@ public class PlayerCarController : CarController {
     public float minNodeDistance = 20f;
     public bool debugMode = false;
 
+    EngineSound engineSound;
+
     private List<Node> nodes;
     private int currentNodeIndex;
     private int nodeCount;
@@ -17,6 +19,7 @@ public class PlayerCarController : CarController {
 
     private void Awake()
     {
+        engineSound = GetComponent<EngineSound>();
         currentNodeIndex = 0;
         nodeCount = 0;
     }
@@ -59,12 +62,14 @@ public class PlayerCarController : CarController {
         }
         else {
             carMovementProperties.brake();
+            engineSound.resetFactor();
         }
 		
         //Force break
         if(Input.GetButton(ControllerInfo.HANDBRAKES[playerNum]))
         {
             carMovementProperties.brake();
+            engineSound.resetFactor();
         }
 
         carMovementProperties.RotateWheels();
