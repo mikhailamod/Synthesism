@@ -16,6 +16,16 @@ public class RaceManager : MonoSingleton<RaceManager>
     public GameObject winnerPanel;
     public Text winnerText;
 
+    public void setWinnerPanel(GameObject WP)
+    {
+        winnerPanel = WP;
+    }
+
+    public void setWinnerText(Text WT)
+    {
+        winnerText = WT;
+    }
+
     public void registerCheckpoint()
     {
         numCheckpoints++;

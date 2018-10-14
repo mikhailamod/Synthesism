@@ -13,11 +13,22 @@ public class PlayerCarController : CarController {
     private int currentNodeIndex;
     private int nodeCount;
 
-    private void Start()
+    private int playerNum = 0;
+
+    private void Awake()
     {
         currentNodeIndex = 0;
         nodeCount = 0;
+    }
+
+    public void LoadNodes()
+    {
         nodes = path.getNodeList();
+    }
+
+    public void setPlayerNum(int num)
+    {
+        playerNum = num;
     }
 
     void FixedUpdate () {
@@ -37,21 +48,21 @@ public class PlayerCarController : CarController {
 	public override void MoveVehicle()
     {
         //gets inital values to determine how the vehicle should move
-        float inputSpeed = Input.GetAxis("Vertical");
+        float inputSpeed = Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]);
         
 		//Retrieve left or right input
-        carMovementProperties.MoveHorizontal(Input.GetAxis("Horizontal"));      
+        carMovementProperties.MoveHorizontal(Input.GetAxis(ControllerInfo.HORIZONTAL_MOVES[playerNum]));      
 
         //looks for appropriate case to move the car otherwise the brake is applied
         if((inputSpeed > 0 && carMovementProperties.GetSpeed() >= 0) || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0)) {
-            carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
+            carMovementProperties.MoveVertical(Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]));
         }
         else {
             carMovementProperties.brake();
         }
 		
         //Force break
-        if(Input.GetButton("Handbrake"))
+        if(Input.GetButton(ControllerInfo.HANDBRAKES[playerNum]))
         {
             carMovementProperties.brake();
         }
@@ -81,4 +92,9 @@ public class PlayerCarController : CarController {
     }
 
     public override int getCurrentNodeCount() { return nodeCount; }
+
+    public override void SetPath(Path p)
+    {
+        path = p;
+    }
 }
