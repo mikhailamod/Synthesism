@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //TODO: Inherit from CarController base class
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCarController : CarController {
@@ -9,6 +10,9 @@ public class PlayerCarController : CarController {
     public float minNodeDistance = 20f;
     public bool debugMode = false;
 
+    public Slider speedSlider;
+    public Slider rpmSlider;
+
     EngineSound engineSound;
 
     private List<Node> nodes;
@@ -16,6 +20,14 @@ public class PlayerCarController : CarController {
     private int nodeCount;
 
     private int playerNum = 0;
+
+    private Rigidbody temprb;
+    private float pitchAmount = 0f;
+
+    private void Start()
+    {
+        temprb = GetComponent<Rigidbody>();
+    }
 
     private void Awake()
     {
@@ -34,6 +46,20 @@ public class PlayerCarController : CarController {
         playerNum = num;
     }
 
+    private void Update()
+    {
+        float n = NormalizeSpeed();
+        speedSlider.value = n;
+        rpmSlider.value = pitchAmount;
+    }
+
+    float NormalizeSpeed()
+    {
+        float normalizedSpeed = temprb.velocity.magnitude;
+        normalizedSpeed = Mathf.Abs(normalizedSpeed / 50f);
+        return normalizedSpeed;
+    }
+
     void FixedUpdate () {
         if (RaceManager.instance.raceStarted && !debugMode)
         {
@@ -47,6 +73,11 @@ public class PlayerCarController : CarController {
         }
 		
 	}
+
+    public void setPitchAmount(float p)
+    {
+        pitchAmount = p;
+    }
 
 	public override void MoveVehicle()
     {

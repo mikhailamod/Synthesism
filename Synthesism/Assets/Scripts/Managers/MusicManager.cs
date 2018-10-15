@@ -22,7 +22,7 @@ public class MusicManager : MonoSingleton<MusicManager> {
 
     private void Start()
     {
-        currentSong = 1;
+        currentSong = 0;
         backgroundSong.clip = songs[currentSong];
 
         soundEffects = new Dictionary<string, AudioClip>();

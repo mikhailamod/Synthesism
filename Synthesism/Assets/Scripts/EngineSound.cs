@@ -6,7 +6,7 @@ public class EngineSound : MonoBehaviour {
 
     public List<AudioSource> engineLoop;
     private int currentSound;
-    private CarController carController;
+    private PlayerCarController carController;
 
     public float timeLimit = 3f;
     float delta = 0f;
@@ -20,7 +20,7 @@ public class EngineSound : MonoBehaviour {
         {
             sound.loop = true;
         }
-        carController = GetComponent<CarController>();
+        carController = GetComponent<PlayerCarController>();
         pitchFactor = carController.carMovementProperties.maxSpeed * 2;
         originalFactor = pitchFactor;
     }
@@ -32,6 +32,7 @@ public class EngineSound : MonoBehaviour {
             tempPitch = 0.5f;
             pitchFactor*=2;
         }//limit pitch just in case it goes over
+        carController.setPitchAmount(tempPitch);
         engineLoop[currentSound].pitch = tempPitch;
 
     }

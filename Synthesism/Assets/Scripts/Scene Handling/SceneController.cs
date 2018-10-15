@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 //This class gets the player(s) car choice and spawns them in the scene at some predetermined
 //starting position, then loads all fields required by various components
@@ -21,9 +21,21 @@ public class SceneController : MonoBehaviour {
     public GameObject winnerPanel;
     public Text winnerText;
 
-    public Text lapCountLabel;
-    public Text lapTimeLabel;
-    public Text bestTimeLabel;
+    [Header("Player 1")]
+    public TextMeshProUGUI lapCountLabel;
+    public TextMeshProUGUI lapTimeLabel;
+    public TextMeshProUGUI bestTimeLabel;
+    public TextMeshProUGUI positionLabel1;
+    public Slider speedSlider1;
+    public Slider rpmSlider1;
+
+    [Header("Player 2")]
+    public TextMeshProUGUI lapCountLabel2;
+    public TextMeshProUGUI lapTimeLabel2;
+    public TextMeshProUGUI bestTimeLabel2;
+    public TextMeshProUGUI positionLabel2;
+    public Slider speedSlider2;
+    public Slider rpmSlider2;
 
     public Path path;
 
@@ -43,12 +55,20 @@ public class SceneController : MonoBehaviour {
         GameObject go1 = Instantiate(carTypes[p1Choice], p1StartPos.position, p1StartPos.rotation);
         initializeCar(go1, 0);
         cameraFollowController.targetObject = go1.transform;
+        PlayerCarController pcc = go1.GetComponent<PlayerCarController>();
+        pcc.speedSlider = speedSlider1;
+        pcc.rpmSlider = rpmSlider1;
+        go1.GetComponent<RaceEntity>().positionLabel = positionLabel1;
 
-        if(p2Choice != -1)
+        if (p2Choice != -1)
         {
             GameObject go2 = Instantiate(carTypes[p2Choice], p2StartPos.position, p2StartPos.rotation);
             initializeCar(go2, 1);
             cameraFollowController2.targetObject = go2.transform;
+            pcc = go2.GetComponent<PlayerCarController>();
+            pcc.speedSlider = speedSlider2;
+            pcc.rpmSlider = rpmSlider2;
+            go2.GetComponent<RaceEntity>().positionLabel = positionLabel2;
         }
   
         RaceManager.instance.setWinnerPanel(winnerPanel);
