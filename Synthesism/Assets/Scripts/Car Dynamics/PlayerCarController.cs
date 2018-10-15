@@ -47,6 +47,11 @@ public class PlayerCarController : CarController {
             pickupHandler.FireSpike(transform.forward);
             carMovementProperties.hasSpike = false;
         }
+        if(Input.GetButton("OilSpill") && carMovementProperties.hasOil)
+        {
+            pickupHandler.SpillOil(transform.forward);
+            carMovementProperties.hasOil = false;
+        }
 
 
         carMovementProperties.RotateWheels();
