@@ -33,4 +33,21 @@ public class PlayerTwoCarController : CarController {
 
         carMovementProperties.RotateWheels();
     }
+
+    //not implement bc assuming we'll only use one PlayerController
+    public override int getCurrentNodeCount()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //not implement bc assuming we'll only use one PlayerController
+    protected override void UpdateWaypoint()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void SetPath(Path p)
+    {
+        throw new System.NotImplementedException();
+    }
 }
