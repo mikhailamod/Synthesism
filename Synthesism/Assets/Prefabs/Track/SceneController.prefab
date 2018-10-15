@@ -53,13 +53,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carTypes:
   - {fileID: 100010, guid: d54b05b01ee47a1428ea97a971c27c14, type: 2}
-  - {fileID: 1215650549347758, guid: a2b23064db5c53849aba2d938965f5eb, type: 2}
+  - {fileID: 0}
+  aiCars: []
   p1StartPos: {fileID: 0}
   p2StartPos: {fileID: 0}
   cameraFollowController: {fileID: 0}
+  cameraFollowController2: {fileID: 0}
   winnerPanel: {fileID: 0}
   winnerText: {fileID: 0}
   lapCountLabel: {fileID: 0}
   lapTimeLabel: {fileID: 0}
   bestTimeLabel: {fileID: 0}
+  positionLabel1: {fileID: 0}
+  speedSlider1: {fileID: 0}
+  rpmSlider1: {fileID: 0}
+  lapCountLabel2: {fileID: 0}
+  lapTimeLabel2: {fileID: 0}
+  bestTimeLabel2: {fileID: 0}
+  positionLabel2: {fileID: 0}
+  speedSlider2: {fileID: 0}
+  rpmSlider2: {fileID: 0}
   path: {fileID: 0}

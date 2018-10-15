@@ -282,7 +282,7 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 61d0a137738680f4781cc46cdaa136f8, type: 3}
   - name: ConfirmSound
     audio: {fileID: 8300000, guid: aaccb9b05d52fe74694ff63781822397, type: 3}
-  - name: Countdown
+  - name: CountdownBeep
     audio: {fileID: 8300000, guid: 5495d7eaf7c28f246b779e7673caaa94, type: 3}
   - name: Brake1
     audio: {fileID: 8300000, guid: 8f77b7e139928c241bec0157ae617518, type: 3}

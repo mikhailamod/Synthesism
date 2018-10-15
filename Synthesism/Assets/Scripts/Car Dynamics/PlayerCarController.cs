@@ -67,7 +67,7 @@ public class PlayerCarController : CarController {
         {
             MoveVehicle();
             UpdateWaypoint();
-            if (Input.GetButtonDown("PowerUp"))
+            if (Input.GetButtonDown(ControllerInfo.POWER_UPS[playerNum]))
             {
                 pickupHandler.UsePowerUp();
             }
@@ -76,7 +76,7 @@ public class PlayerCarController : CarController {
         {
             MoveVehicle();
             UpdateWaypoint();
-            if (Input.GetButtonDown("PowerUp"))
+            if (Input.GetButtonDown(ControllerInfo.POWER_UPS[playerNum]))
             {
                 pickupHandler.UsePowerUp();
             }
@@ -101,7 +101,7 @@ public class PlayerCarController : CarController {
 
         if (inputSpeed > 0 || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0))
         {
-            carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
+            carMovementProperties.MoveVertical(Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]));
         }
         else if (inputSpeed < 0 && carMovementProperties.GetSpeed() > 0)
         {
@@ -114,7 +114,7 @@ public class PlayerCarController : CarController {
         }
 
         //Force break
-        if (Input.GetButton("Handbrake"))
+        if (Input.GetButton(ControllerInfo.HANDBRAKES[playerNum]))
         {
             MusicManager.instance.PlaySoundEffectOnce(MusicManagerInfo.BRAKE_1);
             carMovementProperties.brake();
