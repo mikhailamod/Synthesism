@@ -555,7 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 198599731988449042}
-  timeToDeath: 0.04
+  timeToDeath: 0.4
   speed: 100
   rb: {fileID: 54483111475891458}
 --- !u!198 &198132076760235172

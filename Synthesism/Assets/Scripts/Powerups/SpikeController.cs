@@ -10,6 +10,8 @@ public class SpikeController : MonoBehaviour {
     public float speed;
     public Rigidbody rb;
 
+    private GameObject owner;
+
     private void Start()
     {
         rb.velocity = transform.forward * speed;
@@ -17,12 +19,14 @@ public class SpikeController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         //add player kill here
-		StartCoroutine(destroySpike(other));
+        if(other.gameObject != owner)
+		    StartCoroutine(destroySpike(other));
 	}
 
 	private IEnumerator destroySpike(Collider other) {
 		if(!hasTriggered) {
 			hasTriggered = true;
+            rb.velocity = Vector3.zero;
 			for(int i = 0; i < 2; i++)
 				Destroy(gameObject.transform.GetChild(i).transform.gameObject);
             GetComponent<MeshRenderer>().enabled = false;
@@ -32,5 +36,11 @@ public class SpikeController : MonoBehaviour {
 			Destroy(gameObject);			
 		}
 	}
+
+    public GameObject Owner
+    {
+        get { return owner; }
+        set { owner = value; }
+    }
 
 }

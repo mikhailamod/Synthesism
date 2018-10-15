@@ -4,11 +4,30 @@ using UnityEngine;
 
 public class OilSpillController : MonoBehaviour {
 
-	void OnTriggerEnter(Collider other) {
-		if(other.gameObject.tag=="Player") {
+    public float oilLife;
+
+    private GameObject owner;
+
+    private void Start()
+    {
+        StartCoroutine(destroyOil());
+    }
+
+    void OnTriggerEnter(Collider other) {
+		if((other.gameObject.tag=="Player" || other.gameObject.tag == "AI") && other.gameObject != owner) {
 			other.gameObject.GetComponent<ActivatePickup>().StartSlip();
-			GameObject parent = gameObject.transform.parent.gameObject;
-			Destroy(parent);
 		}
 	}
+
+    private IEnumerator destroyOil()
+    {
+        yield return new WaitForSeconds(oilLife);
+        Destroy(gameObject);
+    }
+
+    public GameObject Owner
+    {
+        get { return owner; }
+        set { owner = value; }
+    }
 }

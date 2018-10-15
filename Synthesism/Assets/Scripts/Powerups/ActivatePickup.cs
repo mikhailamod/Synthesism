@@ -5,7 +5,6 @@ using UnityEngine;
 public class ActivatePickup : MonoBehaviour {
 
 	public float heightOffset;
-	public float spikeSpeed;
 	
 	public Transform spikePosition;
 	public Transform spillPosition;
@@ -16,13 +15,14 @@ public class ActivatePickup : MonoBehaviour {
 	// Use this for initialization
 	public void FireSpike(Vector3 dir) {
 		GameObject moveSpike = Instantiate(spike);
-		moveSpike.transform.position = (spikePosition.position);
+        moveSpike.GetComponent<SpikeController>().Owner = gameObject;
+        moveSpike.transform.position = (spikePosition.position);
 		moveSpike.transform.rotation = spikePosition.rotation;
-		moveSpike.GetComponent<Rigidbody>().AddForce(spikePosition.transform.forward * spikeSpeed);
 	}
 
 	public void SpillOil(Vector3 dir) {
 		GameObject moveSpill = Instantiate(oil);
+        moveSpill.GetComponent<OilSpillController>().Owner = gameObject;
 		moveSpill.transform.position = (spillPosition.position);
 	}
 
