@@ -12,13 +12,13 @@ public class RoadMesh : Shape
         this.roadWidth = roadWidth;
     }
 
-    public override int[] getMeshTris(int vertexCount, Winding winding, bool closed = false)
+    public override int[] getMeshTris(int vertexCount, Winding winding, Vector2 completion, bool closed = false)
     {
         List<int> tris = new List<int>();
 
         for (int i = 0; i < vertexCount / 2; i++)
         {
-            if (i != vertexCount / 2 - 1 || closed)
+            if (i != vertexCount / 2 - 1 || (closed && completion.magnitude == 1.0f))
             {
                 //First Triangle
                 tris.Add(i * 2);
@@ -50,23 +50,25 @@ public class RoadMesh : Shape
         return uvs;
     }
 
-    public override Vector3[] getMeshVertices(Point[] points, Vector3[] binormals, Vector3 offset, Vector3 up, bool closed = false)
+    public override Vector3[] getMeshVertices(Point[] points, Vector3[] binormals, Vector3 offset, Vector3 up, Vector2 completion, bool closed = false)
     {
         List<Vector3> vertices = new List<Vector3>();
         for (int i = 0; i < binormals.Length; i++)
         {
+            float percentage = i /(float)binormals.Length;
+            if (percentage < completion.x || percentage > completion.y) continue;
+
             Vector3 rightVertex = points[i].Position + binormals[i] * roadWidth * 0.5f + binormals[i]* offset.x;
             rightVertex = new Vector3(rightVertex.x, rightVertex.y + offset.y, rightVertex.z + offset.z);
             Vector3 leftVertex = points[i].Position - binormals[i] * roadWidth * 0.5f + binormals[i] * offset.x;
             leftVertex = new Vector3(leftVertex.x, leftVertex.y + offset.y, leftVertex.z + offset.z);
 
             vertices.Add(leftVertex); vertices.Add(rightVertex);
-
         }
         return vertices.ToArray();
     }
 
-    public override Vector3[] getNormals(Point[] points, Vector3[] normals, Vector3 up, Winding winding, bool closed = false)
+    public override Vector3[] getNormals(Point[] points, Vector3[] normals, Vector3 up, Winding winding, Vector2 completion, bool closed = false)
     {
         Vector3[] meshNormals = new Vector3[normals.Length * 2];
         for (int i = 0; i < meshNormals.Length; i++)

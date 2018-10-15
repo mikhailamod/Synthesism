@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCarController : CarController {
 
+    public ActivatePickup pickupHandler;
     public Path path;
     public float minNodeDistance = 20f;
     public bool debugMode = false;
@@ -74,6 +75,21 @@ public class PlayerCarController : CarController {
 		
 	}
 
+    public void Start()
+    {
+        pickupHandler = GetComponent<ActivatePickup>();
+    }
+
+    void FixedUpdate()
+    {
+        MoveVehicle();
+
+        if (Input.GetButtonDown("PowerUp"))
+        {
+            pickupHandler.UsePowerUp();
+        }
+    }
+
     public void setPitchAmount(float p)
     {
         pitchAmount = p;
@@ -82,23 +98,29 @@ public class PlayerCarController : CarController {
 	public override void MoveVehicle()
     {
         //gets inital values to determine how the vehicle should move
-        float inputSpeed = Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]);
-        
-		//Retrieve left or right input
-        carMovementProperties.MoveHorizontal(Input.GetAxis(ControllerInfo.HORIZONTAL_MOVES[playerNum]));      
+
+        //Retrieve left or right input
 
         //looks for appropriate case to move the car otherwise the brake is applied
-        if((inputSpeed > 0 && carMovementProperties.GetSpeed() >= 0) || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0)) {
-            carMovementProperties.MoveVertical(Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]));
+        float inputSpeed = Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]);
+        carMovementProperties.MoveHorizontal(Input.GetAxis(ControllerInfo.HORIZONTAL_MOVES[playerNum]));      
+
+        if (inputSpeed > 0 || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0))
+        {
+            carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
         }
-        else {
-            MusicManager.instance.PlaySoundEffectOnce(MusicManagerInfo.BRAKE_1);
+        else if (inputSpeed < 0 && carMovementProperties.GetSpeed() > 0)
+        {
             carMovementProperties.brake();
             engineSound.resetFactor();
         }
-		
+        else
+        {
+            carMovementProperties.setMotorTorque(0);
+        }
+
         //Force break
-        if(Input.GetButton(ControllerInfo.HANDBRAKES[playerNum]))
+        if (Input.GetButton("Handbrake"))
         {
             MusicManager.instance.PlaySoundEffectOnce(MusicManagerInfo.BRAKE_1);
             carMovementProperties.brake();
@@ -107,6 +129,7 @@ public class PlayerCarController : CarController {
 
         carMovementProperties.RotateWheels();
     }
+
 
     public void boost() {
        carMovementProperties.boost(carMovementProperties.carRigidBody, transform.forward);

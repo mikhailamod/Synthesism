@@ -56,7 +56,7 @@ public class RoadEditor : Editor
             Point[] roadPoints = road.roadPath.getRoadPathPoints(road.roadSettings.spacing);
             Vector3[] forwardDir = road.meshCreator.getPointsForward(roadPoints, road.roadPath.Closed);
             Vector3[] binormals = road.meshCreator.getPointsBinormal(forwardDir, Vector3.up);
-            Vector3[] normals = road.meshCreator.getPointsNormal(forwardDir, binormals);
+            Vector3[] normals = road.meshCreator.getPointsNormal(forwardDir, binormals, new Vector2(0.0f,1.0f));
 
             if(road.roadSettings.showPathCenter)
             {
@@ -118,8 +118,8 @@ public class RoadEditor : Editor
                 Shape renderShape = RoadMeshCreator.enumToShape(shape);
                 if (road.roadSettings.showVertices || road.roadSettings.showTris || road.roadSettings.showPointNormals || road.roadSettings.showUVs || road.roadSettings.showVertIndices)
                 {
-                    Vector3[] vertices = road.meshCreator.getMeshVertices(roadPoints, renderShape, shape.offset,Vector3.up, road.roadPath.Closed);
-                    int[] tris = road.meshCreator.getMeshTris(vertices.Length, renderShape, shape.winding, road.roadPath.Closed);
+                    Vector3[] vertices = road.meshCreator.getMeshVertices(roadPoints, renderShape, shape.offset,Vector3.up, shape.trackCompletion, road.roadPath.Closed);
+                    int[] tris = road.meshCreator.getMeshTris(vertices.Length, renderShape, shape.winding, shape.trackCompletion, road.roadPath.Closed);
 
                     if (road.roadSettings.showVertices)
                     {
@@ -152,7 +152,8 @@ public class RoadEditor : Editor
                     if (road.roadSettings.showMeshNormals)
                     {
                         Handles.color = Color.white;
-                        Vector3[] vertexNormals = road.meshCreator.pointToMeshNormals(roadPoints, renderShape, Vector3.up, shape.winding, road.roadPath.Closed);
+                        Vector3[] vertexNormals = road.meshCreator.pointToMeshNormals(roadPoints, renderShape, Vector3.up, shape.winding, shape.trackCompletion, road.roadPath.Closed);
+
 
                         for (int i = 0; i < vertexNormals.Length; i++)
                         {
@@ -415,11 +416,24 @@ public class RoadEditor : Editor
                                 SceneView.RepaintAll();
                             }
 
+                            Vector2 tempCompletion = new Vector2(shape.trackCompletion.x,shape.trackCompletion.y);
+                            EditorGUILayout.MinMaxSlider(ref tempCompletion.x, ref tempCompletion.y, 0.0f, 1.0f);
+
+                            if(!Vector2.Equals(shape.trackCompletion,tempCompletion))
+                            {
+                                shape.trackCompletion = tempCompletion;
+                                SceneView.RepaintAll();
+                            }
+
+
                             if (GUILayout.Button("Remove"))
                             {
                                 road.meshCreator.shapesToRender.Remove(shape);
                                 SceneView.RepaintAll();
                             }
+
+                            
+
                         }
                     }
                 }

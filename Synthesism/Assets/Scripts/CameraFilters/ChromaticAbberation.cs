@@ -10,6 +10,8 @@ public class ChromaticAbberation : RetroShader
     public float rOffset;
     public float gOffset;
     public float bOffset;
+
+
     public float factor = 1;
 
     protected override void ApplyMaterial()
@@ -17,6 +19,7 @@ public class ChromaticAbberation : RetroShader
         material.SetFloat("_rOffset", rOffset);
         material.SetFloat("_gOffset", gOffset);
         material.SetFloat("_bOffset", bOffset);
+            
         material.SetFloat("_Factor", factor);
     }
 

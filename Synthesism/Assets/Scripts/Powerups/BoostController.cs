@@ -1,11 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BoostController : MonoBehaviour {
-	void OnTriggerEnter(Collider other) {
-		Debug.Log("Collided with boost!");
-		Destroy(this.gameObject);
-		other.gameObject.GetComponent<PlayerCarController>().boost();
-	}
+public class BoostController : MonoBehaviour
+{
+    public Vector3 forceDir;
+    public float boostSpeed;
+
+    void OnTriggerEnter(Collider other)
+    {
+        //other.transform.forward
+        //(forceDir - transform.position).normalized
+        Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+        if(rb != null)
+            rb.AddForce(other.transform.forward * boostSpeed, ForceMode.Impulse);
+    }
+
+
 }

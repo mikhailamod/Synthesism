@@ -45,5 +45,6 @@ public enum ShapeToDraw
 {
     ROAD,
     WALL,
-    CUBE
+    CUBE,
+    TUNNEL
 }
