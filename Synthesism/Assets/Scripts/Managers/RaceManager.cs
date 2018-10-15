@@ -9,12 +9,26 @@ public class RaceManager : MonoSingleton<RaceManager>
     public int numLaps = 1;
     public int numCheckpoints = 0;
     public Dictionary<RaceEntity, List<int>> racers = new Dictionary<RaceEntity, List<int>>();
+    public List<RaceEntity> raceEntityPositions;
 
     public bool raceStarted = false;
     public bool raceFinished = false;
 
     public GameObject winnerPanel;
     public Text winnerText;
+
+    private void Start()
+    {
+        raceEntityPositions = new List<RaceEntity>();
+    }
+
+    private void Update()
+    {
+        if(raceStarted)
+        {
+            raceEntityPositions.Sort(CompareRaceEntities);
+        }
+    }
 
     public void setWinnerPanel(GameObject WP)
     {
@@ -34,7 +48,10 @@ public class RaceManager : MonoSingleton<RaceManager>
     public void registerCar(RaceEntity car)
     {
         if(!racers.ContainsKey(car))
+        {
             racers[car] = new List<int> { 0, 0 };
+            raceEntityPositions.Add(car);
+        }
     }
 
     public bool checkpoint(RaceEntity car, int checkpointID)
@@ -109,6 +126,26 @@ public class RaceManager : MonoSingleton<RaceManager>
         foreach (RaceEntity e in racers.Keys)
         {
             e.StartRace();
+        }
+    }
+
+    int CompareRaceEntities(RaceEntity a, RaceEntity b)
+    {
+        CarController acc = a.GetComponent<CarController>();
+        CarController bcc = b.GetComponent<CarController>();
+        if(acc.getCurrentNodeCount() == bcc.getCurrentNodeCount())
+        {
+            float distance = Vector3.Distance(acc.gameObject.transform.position, bcc.gameObject.transform.position);
+            if(distance > 0){ return 1; }
+            else { return -1; }
+        }
+        else if(acc.getCurrentNodeCount() > bcc.getCurrentNodeCount())
+        {
+            return -1;
+        }
+        else
+        {
+            return 1;
         }
     }
 }

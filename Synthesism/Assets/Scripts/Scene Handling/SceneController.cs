@@ -25,6 +25,7 @@ public class SceneController : MonoBehaviour {
     public TextMeshProUGUI lapCountLabel;
     public TextMeshProUGUI lapTimeLabel;
     public TextMeshProUGUI bestTimeLabel;
+    public TextMeshProUGUI positionLabel1;
     public Slider speedSlider1;
     public Slider rpmSlider1;
 
@@ -56,6 +57,7 @@ public class SceneController : MonoBehaviour {
         PlayerCarController pcc = go1.GetComponent<PlayerCarController>();
         pcc.speedSlider = speedSlider1;
         pcc.rpmSlider = rpmSlider1;
+        go1.GetComponent<RaceEntity>().positionLabel = positionLabel1;
 
         if (p2Choice != -1)
         {
