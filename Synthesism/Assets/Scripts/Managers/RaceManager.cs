@@ -104,6 +104,7 @@ public class RaceManager : MonoSingleton<RaceManager>
             yield return new WaitForSeconds(1.0f);
             length--;
         }
+        MusicManager.instance.PlaySoundEffect(MusicManagerInfo.COUNTDOWN_BEEP, 1.5f);
         raceStarted = true;
         foreach (RaceEntity e in racers.Keys)
         {

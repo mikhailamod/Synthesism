@@ -53,6 +53,8 @@ public class SceneController : MonoBehaviour {
   
         RaceManager.instance.setWinnerPanel(winnerPanel);
         RaceManager.instance.setWinnerText(winnerText);
+
+        RaceManager.instance.StartRace();
     }
 
     void initializeCar(GameObject go, int playerNum)

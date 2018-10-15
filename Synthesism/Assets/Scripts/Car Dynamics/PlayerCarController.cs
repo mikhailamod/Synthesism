@@ -61,6 +61,7 @@ public class PlayerCarController : CarController {
             carMovementProperties.MoveVertical(Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]));
         }
         else {
+            MusicManager.instance.PlaySoundEffectOnce(MusicManagerInfo.BRAKE_1);
             carMovementProperties.brake();
             engineSound.resetFactor();
         }
@@ -68,6 +69,7 @@ public class PlayerCarController : CarController {
         //Force break
         if(Input.GetButton(ControllerInfo.HANDBRAKES[playerNum]))
         {
+            MusicManager.instance.PlaySoundEffectOnce(MusicManagerInfo.BRAKE_1);
             carMovementProperties.brake();
             engineSound.resetFactor();
         }

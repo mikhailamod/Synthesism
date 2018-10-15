@@ -50,8 +50,30 @@ public class MusicManager : MonoSingleton<MusicManager> {
 
     public void PlaySoundEffect(string key)
     {
+        resetEffectPitch();//force pitch of AudioSource to be 1f
         currentSoundEffect.clip = soundEffects[key];
         currentSoundEffect.Play();
+    }
+    public void PlaySoundEffectOnce(string key)
+    {
+        resetEffectPitch();//force pitch of AudioSource to be 1f
+        currentSoundEffect.clip = soundEffects[key];
+        if(!currentSoundEffect.isPlaying)
+        {
+            currentSoundEffect.Play();
+        }
+    }
+
+    public void PlaySoundEffect(string key, float pitch)
+    {
+        currentSoundEffect.clip = soundEffects[key];
+        currentSoundEffect.pitch = pitch;
+        currentSoundEffect.Play();
+    }
+
+    public void resetEffectPitch()
+    {
+        currentSoundEffect.pitch = 1f;
     }
 
     private void nextSongIndex()
