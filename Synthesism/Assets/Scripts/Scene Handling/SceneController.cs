@@ -33,6 +33,7 @@ public class SceneController : MonoBehaviour {
     public TextMeshProUGUI lapCountLabel2;
     public TextMeshProUGUI lapTimeLabel2;
     public TextMeshProUGUI bestTimeLabel2;
+    public TextMeshProUGUI positionLabel2;
     public Slider speedSlider2;
     public Slider rpmSlider2;
 
@@ -67,6 +68,7 @@ public class SceneController : MonoBehaviour {
             pcc = go2.GetComponent<PlayerCarController>();
             pcc.speedSlider = speedSlider2;
             pcc.rpmSlider = rpmSlider2;
+            go2.GetComponent<RaceEntity>().positionLabel = positionLabel2;
         }
   
         RaceManager.instance.setWinnerPanel(winnerPanel);

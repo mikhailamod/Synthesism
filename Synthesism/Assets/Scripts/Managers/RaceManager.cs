@@ -9,18 +9,13 @@ public class RaceManager : MonoSingleton<RaceManager>
     public int numLaps = 1;
     public int numCheckpoints = 0;
     public Dictionary<RaceEntity, List<int>> racers = new Dictionary<RaceEntity, List<int>>();
-    public List<RaceEntity> raceEntityPositions;
+    public List<RaceEntity> raceEntityPositions = new List<RaceEntity>();
 
     public bool raceStarted = false;
     public bool raceFinished = false;
 
     public GameObject winnerPanel;
     public Text winnerText;
-
-    private void Start()
-    {
-        raceEntityPositions = new List<RaceEntity>();
-    }
 
     private void Update()
     {
