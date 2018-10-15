@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AICarController : CarController {
 
-    public GameObject path;
+    public Path path;
     public Vector3 centreOfMass;
     public bool debugMode = false;
 
@@ -215,10 +215,9 @@ public class AICarController : CarController {
     }
 
     //populate nodes list with nodes from Path
-    private void initializePath(GameObject path)
+    private void initializePath(Path path)
     {
-        Path p = path.GetComponent<Path>();
-        nodes = p.getNodeList();
+        nodes = path.getNodeList();
     }//end method
 
     public float getCurrentSpeed()
@@ -232,4 +231,9 @@ public class AICarController : CarController {
     }
 
     public override int getCurrentNodeCount() { return nodeCount; }
+
+    public override void SetPath(Path p)
+    {
+        path = p;
+    }
 }

@@ -16,6 +16,16 @@ public class RaceManager : MonoSingleton<RaceManager>
     public GameObject winnerPanel;
     public Text winnerText;
 
+    public void setWinnerPanel(GameObject WP)
+    {
+        winnerPanel = WP;
+    }
+
+    public void setWinnerText(Text WT)
+    {
+        winnerText = WT;
+    }
+
     public void registerCheckpoint()
     {
         numCheckpoints++;
@@ -80,8 +90,23 @@ public class RaceManager : MonoSingleton<RaceManager>
 
     public void StartRace()
     {
+
+        StartCoroutine(StartCountdown());
+        
+    }
+
+    public IEnumerator StartCountdown(float length = 3f)
+    {
+        while(length > 0)
+        {
+            MusicManager.instance.PlaySoundEffect(MusicManagerInfo.COUNTDOWN_BEEP);
+            Debug.Log("Countdown: " + length);
+            yield return new WaitForSeconds(1.0f);
+            length--;
+        }
+        MusicManager.instance.PlaySoundEffect(MusicManagerInfo.COUNTDOWN_BEEP, 1.5f);
         raceStarted = true;
-        foreach(RaceEntity e in racers.Keys)
+        foreach (RaceEntity e in racers.Keys)
         {
             e.StartRace();
         }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class RaceEntity : MonoBehaviour {
 
     public bool isAi = false;
+    public int carType;//0 is slow car, 1 is fast car
 
     public Text lapCountLabel;
     public Text lapTimeLabel;
