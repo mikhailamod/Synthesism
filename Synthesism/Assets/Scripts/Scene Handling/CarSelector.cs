@@ -28,6 +28,7 @@ public class CarSelector : MonoBehaviour {
 
     private void Start()
     {
+        TrackSelector.instance.setCarSelector(this);
         fastCarStartPos = fastCar.transform.position;
         slowCarStartPos = slowCar.transform.position;
     }
@@ -123,13 +124,31 @@ public class CarSelector : MonoBehaviour {
             if(carSelections.Length == 1)//single player
             {
                 PlayerPrefs.SetInt("P1_choice", carSelections[0]);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                int index = SceneManager.GetActiveScene().buildIndex;
+                if(TrackSelector.instance.getTrackChoice() == 0)
+                {
+                    index += 2;
+                }
+                else
+                {
+                    index += 1;
+                }
+                SceneManager.LoadScene(index);
             }
             else//multiplayer
             {
                 PlayerPrefs.SetInt("P1_choice", carSelections[0]);
                 PlayerPrefs.SetInt("P2_choice", carSelections[0]);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+                int index = SceneManager.GetActiveScene().buildIndex;
+                if (TrackSelector.instance.getTrackChoice() == 0)
+                {
+                    index += 3;
+                }
+                else
+                {
+                    index += 2;
+                }
+                SceneManager.LoadScene(index);
             }
         }
         else

@@ -7,7 +7,7 @@ public class ActivatePickup : MonoBehaviour {
 	public float heightOffset;
 
     //0 for none, 1 for Torpedo and 2 for Oil Spill
-    public int powerUpID;
+    private int powerUpID;
 
 	public Transform spikePosition;
 	public Transform spillPosition;
@@ -19,6 +19,8 @@ public class ActivatePickup : MonoBehaviour {
     {
         powerUpID = 0;
     }
+
+    public int getPickupID() { return powerUpID; }
 
     public void UsePowerUp()
     {      
@@ -49,7 +51,7 @@ public class ActivatePickup : MonoBehaviour {
 
 	//initiates slip procedure
     public void StartSlip() {
-        StartCoroutine(GetComponent<PlayerCarController>().carMovementProperties.slip());
+        StartCoroutine(GetComponent<CarController>().carMovementProperties.slip());
     }
 
     public void SetPowerUp(int id)
