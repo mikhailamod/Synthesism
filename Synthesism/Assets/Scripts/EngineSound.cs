@@ -8,8 +8,6 @@ public class EngineSound : MonoBehaviour {
     private int currentSound;
     private PlayerCarController carController;
 
-    public float timeLimit = 3f;
-    float delta = 0f;
     float pitchFactor;
     float originalFactor;
 

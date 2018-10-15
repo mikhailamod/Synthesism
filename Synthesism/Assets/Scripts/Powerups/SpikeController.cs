@@ -19,8 +19,11 @@ public class SpikeController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         //add player kill here
-        if(other.gameObject != owner)
-		    StartCoroutine(destroySpike(other));
+        if(other.gameObject != owner && other.tag != "Boost" && other.tag != "Checkpoint")
+        {
+            StartCoroutine(destroySpike(other));
+        }
+		    
 	}
 
 	private IEnumerator destroySpike(Collider other) {

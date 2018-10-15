@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour
 {
 
-    public CarSelector carSelector;
+    public CarSelector selectController;
     public GameObject[] children;
 
     private void Start()
@@ -18,14 +18,14 @@ public class MenuController : MonoBehaviour
     {
         MusicManager.instance.PlaySoundEffect(MusicManagerInfo.MAIN_MENU_BEEP);
         disableMenu();
-        carSelector.setToActive(false);
+        selectController.setToActive(false);
     }
 
     public void TwoPlayer()
     {
         MusicManager.instance.PlaySoundEffect(MusicManagerInfo.MAIN_MENU_BEEP);
         disableMenu();
-        carSelector.setToActive(true);
+        selectController.setToActive(true);
     }
 
     public void Quit()

@@ -28,6 +28,7 @@ public class PlayerCarController : CarController {
     private void Start()
     {
         temprb = GetComponent<Rigidbody>();
+        pickupHandler = GetComponent<ActivatePickup>();
     }
 
     private void Awake()
@@ -66,29 +67,22 @@ public class PlayerCarController : CarController {
         {
             MoveVehicle();
             UpdateWaypoint();
+            if (Input.GetButtonDown(ControllerInfo.POWER_UPS[playerNum]))
+            {
+                pickupHandler.UsePowerUp();
+            }
         }
         else if (debugMode)
         {
             MoveVehicle();
             UpdateWaypoint();
+            if (Input.GetButtonDown(ControllerInfo.POWER_UPS[playerNum]))
+            {
+                pickupHandler.UsePowerUp();
+            }
         }
 		
 	}
-
-    public void Start()
-    {
-        pickupHandler = GetComponent<ActivatePickup>();
-    }
-
-    void FixedUpdate()
-    {
-        MoveVehicle();
-
-        if (Input.GetButtonDown("PowerUp"))
-        {
-            pickupHandler.UsePowerUp();
-        }
-    }
 
     public void setPitchAmount(float p)
     {
@@ -107,7 +101,7 @@ public class PlayerCarController : CarController {
 
         if (inputSpeed > 0 || (inputSpeed < 0 && carMovementProperties.GetSpeed() <= 0))
         {
-            carMovementProperties.MoveVertical(Input.GetAxis("Vertical"));
+            carMovementProperties.MoveVertical(Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]));
         }
         else if (inputSpeed < 0 && carMovementProperties.GetSpeed() > 0)
         {
@@ -120,7 +114,7 @@ public class PlayerCarController : CarController {
         }
 
         //Force break
-        if (Input.GetButton("Handbrake"))
+        if (Input.GetButton(ControllerInfo.HANDBRAKES[playerNum]))
         {
             MusicManager.instance.PlaySoundEffectOnce(MusicManagerInfo.BRAKE_1);
             carMovementProperties.brake();
@@ -128,11 +122,6 @@ public class PlayerCarController : CarController {
         }
 
         carMovementProperties.RotateWheels();
-    }
-
-
-    public void boost() {
-       carMovementProperties.boost(carMovementProperties.carRigidBody, transform.forward);
     }
 
     protected override void UpdateWaypoint()
