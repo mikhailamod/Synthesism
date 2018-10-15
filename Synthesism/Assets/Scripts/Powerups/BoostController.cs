@@ -9,7 +9,9 @@ public class BoostController : MonoBehaviour
     {
         //other.transform.forward
         //(forceDir - transform.position).normalized
-        other.gameObject.GetComponent<Rigidbody>().AddForce(other.transform.forward * boostSpeed, ForceMode.Impulse);
+        Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+        if(rb != null)
+            rb.AddForce(other.transform.forward * boostSpeed, ForceMode.Impulse);
     }
 
 
