@@ -7,10 +7,20 @@ public class PlayerCarController : CarController {
 
     public ActivatePickup pickupHandler;
 
-    void FixedUpdate () {
-		MoveVehicle();
+    public void Start()
+    {
         pickupHandler = GetComponent<ActivatePickup>();
-	}
+    }
+
+    void FixedUpdate()
+    {
+        MoveVehicle();
+
+        if (Input.GetButtonDown("PowerUp"))
+        {
+            pickupHandler.UsePowerUp();
+        }
+    }
 
 	public override void MoveVehicle()
     {
@@ -40,19 +50,6 @@ public class PlayerCarController : CarController {
         {
             carMovementProperties.brake();
         }
-
-        //Force break
-        if(Input.GetButton("FireSpike") && carMovementProperties.hasSpike)
-        {
-            pickupHandler.FireSpike(transform.forward);
-            carMovementProperties.hasSpike = false;
-        }
-        if(Input.GetButton("OilSpill") && carMovementProperties.hasOil)
-        {
-            pickupHandler.SpillOil(transform.forward);
-            carMovementProperties.hasOil = false;
-        }
-
 
         carMovementProperties.RotateWheels();
     }

@@ -2218,7 +2218,7 @@ MonoBehaviour:
     brakeSpeed: 0
     maxSpeed: 80
     carRigidBody: {fileID: 0}
-    hasSpike: 0
+    hasSpike: 1
     hasOil: 0
     stiffnessValue: 1
     slipValue: 0.5
