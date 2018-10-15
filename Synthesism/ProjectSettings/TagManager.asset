@@ -8,6 +8,8 @@ TagManager:
   - Obstacle
   - Checkpoint
   - AI
+  - Spawn Manager
+  - Boost
   layers:
   - Default
   - TransparentFX

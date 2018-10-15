@@ -7,7 +7,7 @@ public class ActivatePickup : MonoBehaviour {
 	public float heightOffset;
 
     //0 for none, 1 for Torpedo and 2 for Oil Spill
-    private int powerUpID;
+    public int powerUpID;
 
 	public Transform spikePosition;
 	public Transform spillPosition;

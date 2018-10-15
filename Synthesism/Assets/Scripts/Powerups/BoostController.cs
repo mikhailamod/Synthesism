@@ -7,6 +7,7 @@ public class BoostController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.tag != "Player" || other.tag != "AI") return;
         //other.transform.forward
         //(forceDir - transform.position).normalized
         Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
