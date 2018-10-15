@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(CarController))]
 public class RaceEntity : MonoBehaviour {
@@ -9,9 +10,9 @@ public class RaceEntity : MonoBehaviour {
     public bool isAi = false;
     public int carType;//0 is slow car, 1 is fast car
 
-    public Text lapCountLabel;
-    public Text lapTimeLabel;
-    public Text bestTimeLabel;
+    public TextMeshProUGUI lapCountLabel;
+    public TextMeshProUGUI lapTimeLabel;
+    public TextMeshProUGUI bestTimeLabel;
 
     private void Start()
     {

@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 //This class gets the player(s) car choice and spawns them in the scene at some predetermined
 //starting position, then loads all fields required by various components
@@ -21,9 +21,9 @@ public class SceneController : MonoBehaviour {
     public GameObject winnerPanel;
     public Text winnerText;
 
-    public Text lapCountLabel;
-    public Text lapTimeLabel;
-    public Text bestTimeLabel;
+    public TextMeshProUGUI lapCountLabel;
+    public TextMeshProUGUI lapTimeLabel;
+    public TextMeshProUGUI bestTimeLabel;
 
     public Path path;
 
