@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 114148196833707608}
   - component: {fileID: 114664676001794250}
   - component: {fileID: 114375124118026396}
+  - component: {fileID: 114612030700902822}
   m_Layer: 0
   m_Name: Fast Car
   m_TagString: Player
@@ -1022,6 +1023,22 @@ MonoBehaviour:
   bestLapTime: 0
   position: 0
   posUpdateLimit: 0.1
+--- !u!114 &114612030700902822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345016736622376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264d783333861dc468116db65eb6da28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightOffset: 0
+  spikePosition: {fileID: 4760875193022522}
+  spillPosition: {fileID: 4760875193022522}
+  spike: {fileID: 1853790447478918, guid: a8b0ffbf358ddd943a8a53eb3cddd3ee, type: 2}
+  oil: {fileID: 1933839870562076, guid: b214c0e772a13f347b28eee4bd42974f, type: 2}
 --- !u!114 &114664676001794250
 MonoBehaviour:
   m_ObjectHideFlags: 1

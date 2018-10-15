@@ -8,6 +8,9 @@ public class AICarController : CarController {
     public Vector3 centreOfMass;
     public bool debugMode = false;
 
+    public ActivatePickup pickup;
+    public RaceEntity raceEntity;
+
     [Header("AI Movement Properties")]
     public float minNodeDistance = 0.5f;
     public float currentSpeed;
@@ -37,6 +40,8 @@ public class AICarController : CarController {
         initializePath(path);
        
         GetComponent<Rigidbody>().centerOfMass = centreOfMass;
+        pickup = GetComponent<ActivatePickup>();
+        raceEntity = GetComponent<RaceEntity>();
     }
 
     void FixedUpdate() {
@@ -142,6 +147,7 @@ public class AICarController : CarController {
                 string theTag = raycastHit.collider.tag;
                 if (listOfTags.Contains(theTag))
                 {
+                    UsePickup(theTag);
                     oneHit = true;
                     if (raycastHit.normal.x < 0) { turnOffset = -1f; }
                     else { turnOffset = 1f; }
@@ -236,4 +242,27 @@ public class AICarController : CarController {
     {
         path = p;
     }
+
+    void UsePickup(string theTag="")
+    {
+        //Ai has torpedo
+        if (pickup.getPickupID() == 1)
+        {
+            if (theTag.Equals("AI") || theTag.Equals("Player"))
+            {
+                pickup.UsePowerUp();
+            }
+        }
+
+        //AI has oil spill
+        else if(pickup.getPickupID() == 2)
+        {
+            if(raceEntity.position != 0)
+            {
+                pickup.UsePowerUp();
+            }
+        }
+            
+    }
+
 }

@@ -33,7 +33,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1031324685575256
 GameObject:
   m_ObjectHideFlags: 1
@@ -171,7 +171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1106290448492468
 GameObject:
   m_ObjectHideFlags: 1
@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 114292618168350596}
   - component: {fileID: 114372068257757552}
   - component: {fileID: 114475431340758062}
+  - component: {fileID: 114947193600741208}
   m_Layer: 0
   m_Name: AI Fast Car
   m_TagString: AI
@@ -394,7 +395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1280870966955236
 GameObject:
   m_ObjectHideFlags: 1
@@ -901,7 +902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1692162983552026
 GameObject:
   m_ObjectHideFlags: 1
@@ -2035,7 +2036,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1932935398514366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0, z: 3}
+  m_LocalPosition: {x: 0.45, y: -0, z: -2.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4435275832641042}
@@ -4502,7 +4503,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1257207961900440}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27df7211608c1774889e04908f98bc92, type: 3}
   m_Name: 
@@ -4523,7 +4524,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1007770754132920}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27df7211608c1774889e04908f98bc92, type: 3}
   m_Name: 
@@ -4607,7 +4608,7 @@ MonoBehaviour:
     slipTime: 0
   path: {fileID: 0}
   centreOfMass: {x: 0, y: -0.2, z: 0}
-  debugMode: 1
+  debugMode: 0
   minNodeDistance: 20
   currentSpeed: 0
   maxSpeed: 200
@@ -4629,7 +4630,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1117706960583800}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27df7211608c1774889e04908f98bc92, type: 3}
   m_Name: 
@@ -4687,7 +4688,7 @@ MonoBehaviour:
     slipTime: 0
   path: {fileID: 0}
   centreOfMass: {x: 0, y: -0.2, z: 0}
-  debugMode: 1
+  debugMode: 0
   minNodeDistance: 20
   currentSpeed: 0
   maxSpeed: 200
@@ -4709,7 +4710,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1094598206258652}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27df7211608c1774889e04908f98bc92, type: 3}
   m_Name: 
@@ -4801,7 +4802,7 @@ MonoBehaviour:
     slipTime: 0
   path: {fileID: 0}
   centreOfMass: {x: 0, y: -0.2, z: 0}
-  debugMode: 1
+  debugMode: 0
   minNodeDistance: 20
   currentSpeed: 0
   maxSpeed: 200
@@ -4849,7 +4850,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1685080638578948}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27df7211608c1774889e04908f98bc92, type: 3}
   m_Name: 
@@ -4924,7 +4925,7 @@ MonoBehaviour:
     slipTime: 0
   path: {fileID: 0}
   centreOfMass: {x: 0, y: -0.2, z: 0}
-  debugMode: 1
+  debugMode: 0
   minNodeDistance: 20
   currentSpeed: 0
   maxSpeed: 200
@@ -4953,6 +4954,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engineLoop:
   - {fileID: 82957129568790574}
+--- !u!114 &114947193600741208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117706960583800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264d783333861dc468116db65eb6da28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightOffset: 0
+  powerUpID: 0
+  spikePosition: {fileID: 4739394954554412}
+  spillPosition: {fileID: 4739394954554412}
+  spike: {fileID: 1853790447478918, guid: a8b0ffbf358ddd943a8a53eb3cddd3ee, type: 2}
+  oil: {fileID: 1933839870562076, guid: b214c0e772a13f347b28eee4bd42974f, type: 2}
 --- !u!114 &114962855058506392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4996,7 +5014,7 @@ MonoBehaviour:
     slipTime: 0
   path: {fileID: 0}
   centreOfMass: {x: 0, y: -0.2, z: 0}
-  debugMode: 1
+  debugMode: 0
   minNodeDistance: 20
   currentSpeed: 0
   maxSpeed: 200
