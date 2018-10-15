@@ -92,7 +92,7 @@ public class PlayerCarController : CarController {
             carMovementProperties.MoveVertical(Input.GetAxis(ControllerInfo.VERTICAL_MOVES[playerNum]));
         }
         else {
-            MusicManager.instance.PlaySoundEffectOnce(MusicManagerInfo.BRAKE_1);
+            //MusicManager.instance.PlaySoundEffectOnce(MusicManagerInfo.BRAKE_1);
             carMovementProperties.brake();
             engineSound.resetFactor();
         }

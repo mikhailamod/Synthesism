@@ -131,8 +131,8 @@ public class RaceManager : MonoSingleton<RaceManager>
         if(acc.getCurrentNodeCount() == bcc.getCurrentNodeCount())
         {
             float distance = Vector3.Distance(acc.gameObject.transform.position, bcc.gameObject.transform.position);
-            if(distance > 0){ return 1; }
-            else { return -1; }
+            if(distance > 0){ return -1; }
+            else { return 1; }
         }
         else if(acc.getCurrentNodeCount() > bcc.getCurrentNodeCount())
         {
