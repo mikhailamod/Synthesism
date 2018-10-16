@@ -43,8 +43,8 @@ public class CarSelector : MonoBehaviour {
                 MusicManager.instance.PlaySoundEffect(MusicManagerInfo.MAIN_MENU_BEEP);
                 SwitchSelection();
             }
-            if (Input.GetButtonDown(ControllerInfo.HANDBRAKES[0]) ||
-                Input.GetButtonDown(ControllerInfo.HANDBRAKES[1]))
+            if (Input.GetButtonDown(ControllerInfo.POWER_UPS[0]) ||
+                Input.GetButtonDown(ControllerInfo.POWER_UPS[1]))
             {
                 MusicManager.instance.PlaySoundEffect(MusicManagerInfo.CONFIRM_SOUND);
                 ConfirmSelection();
@@ -138,7 +138,7 @@ public class CarSelector : MonoBehaviour {
             else//multiplayer
             {
                 PlayerPrefs.SetInt("P1_choice", carSelections[0]);
-                PlayerPrefs.SetInt("P2_choice", carSelections[0]);
+                PlayerPrefs.SetInt("P2_choice", carSelections[1]);
                 int index = SceneManager.GetActiveScene().buildIndex;
                 if (TrackSelector.instance.getTrackChoice() == 0)
                 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class RaceManager : MonoSingleton<RaceManager>
 {
@@ -14,9 +15,7 @@ public class RaceManager : MonoSingleton<RaceManager>
 
     public bool raceStarted = false;
     public bool raceFinished = false;
-
-    public GameObject winnerPanel;
-    public Text winnerText;
+    public TextMeshProUGUI winnerText;
 
     private void Update()
     {
@@ -25,13 +24,7 @@ public class RaceManager : MonoSingleton<RaceManager>
             raceEntityPositions.Sort(CompareRaceEntities);
         }
     }
-
-    public void setWinnerPanel(GameObject WP)
-    {
-        winnerPanel = WP;
-    }
-
-    public void setWinnerText(Text WT)
+    public void setWinnerText(TextMeshProUGUI WT)
     {
         winnerText = WT;
     }
@@ -52,19 +45,21 @@ public class RaceManager : MonoSingleton<RaceManager>
 
     public bool checkpoint(RaceEntity car, int checkpointID)
     {
-        if(racers.ContainsKey(car))
+        Debug.Log("Checkpoint: " + checkpointID);
+        if (racers.ContainsKey(car))
         {
-            
-            if((racers[car][1] + 1) % numCheckpoints == checkpointID)
+            Debug.Log("Contains");
+            if ((racers[car][1] + 1) % numCheckpoints == checkpointID)
             {
+                Debug.Log("if state");
                 racers[car][1] = checkpointID;
                 bool lapCompleted =  (racers[car][1] % numCheckpoints == 0) ? true : false;
                 racers[car][0] += (lapCompleted) ? 1 : 0;
                 if (lapCompleted && !raceFinished && isFinished(car))
                 {
                     raceFinished = true;
-                    winnerPanel.SetActive(true);
-                    winnerText.text = car.name + " Wins!!!";
+                    winnerText.text = car.racer_name + " Wins!";
+                    winnerText.gameObject.SetActive(true);
                     StartCoroutine(EndRace());
                 }         
                 return lapCompleted;

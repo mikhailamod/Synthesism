@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 4817574472392088}
   - component: {fileID: 33012503949315222}
   - component: {fileID: 23151951818479662}
-  - component: {fileID: 114200929717805820}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -50,14 +49,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055247481919538}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38, y: -2, z: -31}
-  m_LocalScale: {x: 19, y: 19, z: 19}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -21.6, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4817574472392088}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4817574472392088
 Transform:
   m_ObjectHideFlags: 1
@@ -66,7 +65,7 @@ Transform:
   m_GameObject: {fileID: 1366435137806608}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 19, y: 19, z: 19}
   m_Children: []
   m_Father: {fileID: 4322583802215494}
   m_RootOrder: 0
@@ -112,25 +111,4 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1366435137806608}
-  m_Mesh: {fileID: 4300000, guid: 8ba12c71d38f6ae409ec8df5c0146f1b, type: 3}
---- !u!114 &114200929717805820
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1366435137806608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfddca143541dfb4e987338c251cad14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LightGrid: {fileID: 2800000, guid: ed0a88c8df855e442ab724325f283056, type: 3}
-  ImageDimensions: {x: 256, y: 256}
-  WindowDimensions: {x: 6, y: 6}
-  MaterialID: 0
-  tiling: {x: 1, y: 1}
-  colors:
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 1, g: 0.5719801, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
+  m_Mesh: {fileID: 4300000, guid: 8fdb39d4d82cd8248b244b8eead94d48, type: 3}

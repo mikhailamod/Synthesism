@@ -25,6 +25,6 @@ public class ChromaticAbberation : RetroShader
 
     protected override Shader GetShader()
     {
-        return AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/ChromaticAbberation.shader");
+        return Resources.Load<Shader>("Assets/Shaders/ChromaticAbberation.shader");
     }
 }

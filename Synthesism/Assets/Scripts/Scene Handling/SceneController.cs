@@ -18,8 +18,7 @@ public class SceneController : MonoBehaviour {
     public CameraFollowController cameraFollowController;
     public CameraFollowController cameraFollowController2;
 
-    public GameObject winnerPanel;
-    public Text winnerText;
+    public TextMeshProUGUI winnerText;
 
     [Header("Player 1")]
     public TextMeshProUGUI lapCountLabel;
@@ -71,7 +70,6 @@ public class SceneController : MonoBehaviour {
             go2.GetComponent<RaceEntity>().positionLabel = positionLabel2;
         }
   
-        RaceManager.instance.setWinnerPanel(winnerPanel);
         RaceManager.instance.setWinnerText(winnerText);
 
         RaceManager.instance.StartRace();

@@ -20,6 +20,6 @@ public class Distortion : RetroShader
 
     protected override Shader GetShader()
     {
-        return AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/Distortion.shader");
+        return Resources.Load<Shader>("Assets/Shaders/Distortion.shader");
     }
 }

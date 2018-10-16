@@ -17,6 +17,6 @@ public class Noise : RetroShader
 
     protected override Shader GetShader()
     {
-        return AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/Noise.shader");
+        return Resources.Load<Shader>("Assets/Shaders/Noise.shader");
     }
 }

@@ -160,10 +160,10 @@ public class ls : ICommand
     {
         string toReturn = "";
 
-        foreach(string tag in UnityEditorInternal.InternalEditorUtility.tags)
+        /*foreach(string tag in UnityEditorInternal.InternalEditorUtility.tags)
         {
             toReturn += tag + '\n';
-        }
+        }*/
         return toReturn.Substring(0, toReturn.Length - 1);
     }
 

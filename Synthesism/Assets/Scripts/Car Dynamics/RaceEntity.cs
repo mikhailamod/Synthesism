@@ -18,6 +18,10 @@ public class RaceEntity : MonoBehaviour {
 
     private void Start()
     {
+        if(!isAi)
+        {
+            racer_name = "Player";
+        }
         RaceManager.instance.registerCar(this);
     }
 
@@ -27,6 +31,7 @@ public class RaceEntity : MonoBehaviour {
     public int position;
     public float posUpdateLimit = 0.1f;
     private float delta = 0f;
+    public string racer_name = "AI";
 
     public void StartRace()
     {
@@ -75,6 +80,7 @@ public class RaceEntity : MonoBehaviour {
 
         if(other.CompareTag("Checkpoint"))
         {
+            Debug.Log("Collide with Checkpoint");
             int checkPointNum = other.GetComponent<Checkpoint>().checkPointNum;
             if(RaceManager.instance.checkpoint(this, checkPointNum))
             {
