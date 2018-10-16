@@ -29,8 +29,8 @@ public class TrackSelector : MonoSingleton<TrackSelector> {
                 }
             }//end if
             //confirm
-            else if(Input.GetButtonUp(ControllerInfo.HANDBRAKES[0]) ||
-                Input.GetButtonUp(ControllerInfo.HANDBRAKES[1]))
+            else if(Input.GetButtonUp(ControllerInfo.POWER_UPS[0]) ||
+                Input.GetButtonUp(ControllerInfo.POWER_UPS[1]))
             {
                 canChooseTrack = false;
                 carSelector.setToActive(isMutliplayer);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RaceManager : MonoSingleton<RaceManager>
@@ -64,6 +65,7 @@ public class RaceManager : MonoSingleton<RaceManager>
                     raceFinished = true;
                     winnerPanel.SetActive(true);
                     winnerText.text = car.name + " Wins!!!";
+                    StartCoroutine(EndRace());
                 }         
                 return lapCompleted;
             }
@@ -122,6 +124,12 @@ public class RaceManager : MonoSingleton<RaceManager>
         {
             e.StartRace();
         }
+    }
+
+    private IEnumerator EndRace()
+    {
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene(0);
     }
 
     int CompareRaceEntities(RaceEntity a, RaceEntity b)

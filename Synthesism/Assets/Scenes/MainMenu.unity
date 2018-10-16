@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1906522319}
-  m_IndirectSpecularColor: {r: 0.06865851, g: 0.04715535, b: 0.22252837, a: 1}
+  m_IndirectSpecularColor: {r: 0.06865862, g: 0.047155514, b: 0.22252855, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4010,7 +4010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019af0ff1a991594090d40ffd9751e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLaps: 1
+  numLaps: 5
   numCheckpoints: 0
   raceEntityPositions: []
   raceStarted: 0
@@ -5811,6 +5811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMutliplayer: 0
+  canChooseTrack: 0
 --- !u!4 &1440695946
 Transform:
   m_ObjectHideFlags: 0

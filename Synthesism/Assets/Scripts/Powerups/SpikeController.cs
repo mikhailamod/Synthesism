@@ -22,6 +22,11 @@ public class SpikeController : MonoBehaviour {
         if(other.gameObject != owner && other.tag != "Boost" && other.tag != "Checkpoint")
         {
             StartCoroutine(destroySpike(other));
+            if (other.tag == "Player" || other.tag == "AI")
+            {
+                Destroy(other.gameObject);
+            }
+            
         }
 		    
 	}
