@@ -147,7 +147,7 @@ public class AICarController : CarController {
                 string theTag = raycastHit.collider.tag;
                 if (listOfTags.Contains(theTag))
                 {
-                    UsePickup(theTag);
+                    if (!debugMode) { UsePickup(theTag); }
                     oneHit = true;
                     if (raycastHit.normal.x < 0) { turnOffset = -1f; }
                     else { turnOffset = 1f; }

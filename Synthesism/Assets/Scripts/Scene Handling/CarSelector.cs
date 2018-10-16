@@ -131,7 +131,7 @@ public class CarSelector : MonoBehaviour {
                 }
                 else
                 {
-                    index += 1;
+                    index += 2;
                 }
                 SceneManager.LoadScene(index);
             }
@@ -142,11 +142,11 @@ public class CarSelector : MonoBehaviour {
                 int index = SceneManager.GetActiveScene().buildIndex;
                 if (TrackSelector.instance.getTrackChoice() == 0)
                 {
-                    index += 3;
+                    index += 4;
                 }
                 else
                 {
-                    index += 2;
+                    index += 4;
                 }
                 SceneManager.LoadScene(index);
             }

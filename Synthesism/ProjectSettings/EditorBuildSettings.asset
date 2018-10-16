@@ -9,12 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 5ea50c465d561044fa7a3df7e5aff158
   - enabled: 1
-    path: Assets/Scenes/MainMenu 1.unity
+    path: Assets/Scenes/ChooseTrackEm.unity
     guid: 2bb717d1a32189c48815e46a0fe2b381
+  - enabled: 1
+    path: Assets/Scenes/ChooseCrimson.unity
+    guid: 92b53da6d4c52f84b95336d353f655ec
   - enabled: 1
     path: Assets/Scenes/Emerald City.unity
     guid: 64649f9c837b9c741ad9efd91eee2827
   - enabled: 1
+    path: Assets/Scenes/Crimson Peak.unity
+    guid: 8a13fb6ef168ecd4bb9218af674202c5
+  - enabled: 1
     path: Assets/Scenes/Emerald Multi.unity
     guid: 0bd72eb4917bfd342aa9ce7a623bad61
+  - enabled: 1
+    path: Assets/Scenes/Crimson Peak Multi.unity
+    guid: 5fe5623ffd681d845a584675f99887db
   m_configObjects: {}

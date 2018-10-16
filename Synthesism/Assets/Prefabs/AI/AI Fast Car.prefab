@@ -441,8 +441,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457128910711814}
-  m_LocalRotation: {x: 0.01906805, y: -0.3837701, z: -0.09407079, w: 0.9184267}
-  m_LocalPosition: {x: -53.84, y: 1.72, z: 16.44}
+  m_LocalRotation: {x: 0.08169551, y: 0.9944565, z: 0.050385978, w: 0.042933717}
+  m_LocalPosition: {x: -3.1985984, y: 0.83109003, z: -1.8044732}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4825793540409726}
@@ -456,7 +456,7 @@ Transform:
   - {fileID: 4653843060533970}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -2.131, y: -45.154003, z: -10.81}
+  m_LocalEulerAnglesHint: {x: -5.348, y: 174.604, z: 9.645}
 --- !u!4 &4951028719740090
 Transform:
   m_ObjectHideFlags: 1
@@ -923,11 +923,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAi: 1
+  carType: 0
   lapCountLabel: {fileID: 0}
   lapTimeLabel: {fileID: 0}
   bestTimeLabel: {fileID: 0}
+  positionLabel: {fileID: 0}
   lapTime: 0
   bestLapTime: 0
+  position: 0
+  posUpdateLimit: 0.1
 --- !u!114 &114814466948946640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -964,16 +968,23 @@ MonoBehaviour:
     brakeSpeed: 0
     maxSpeed: 80
     carRigidBody: {fileID: 0}
+    hasSpike: 0
+    hasOil: 0
+    stiffnessValue: 0
+    slipValue: 0
+    slipTime: 0
   path: {fileID: 0}
   centreOfMass: {x: 0, y: -0.2, z: 0}
   debugMode: 1
-  minNodeDistance: 20
+  pickup: {fileID: 0}
+  raceEntity: {fileID: 0}
+  minNodeDistance: 30
   currentSpeed: 0
   maxSpeed: 200
   minSpeed: 60
   maxCornerSpeed: 60
   isBraking: 0
-  sensorLength: 3
+  sensorLength: 5
   frontSensorOffset: {x: 0, y: 0, z: 3.75}
   sideSensorOffset: {x: 1.5, y: 0, z: 3}
   frontSensorAngle: 30
@@ -998,7 +1009,7 @@ MonoBehaviour:
   increaseSpeedFactor: 1.25
   increaseTorqueFactor: 1.5
   nodeLimit: 3
-  player: {fileID: 0}
+  players: []
 --- !u!146 &146285899666684420
 WheelCollider:
   m_ObjectHideFlags: 1
